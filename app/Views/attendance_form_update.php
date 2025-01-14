@@ -77,15 +77,15 @@
                     <tbody>
                     <tr>
                         <td data-label="Nama Lengkap">
-                        <input type="text" class="form-control" required="true">
+                        <input type="text" name="nama_lengkap[]" required="true">
                         </td>
                         <td data-label="Jabatan">
-                        <input type="text" class="form-control" required="true">
+                        <input type="text" name="jabatan[]" required="true">
                         </td>
                         <td data-label="Instansi">
-                        <input type="text" class="form-control" required="true">
+                        <input type="text" name="instansi[]" required="true">
                         </td>
-                        <td data-label="Actions">
+                        <td data-label="action">
                         <button type="button" class="btn btn-outline-danger delete_row">Hapus</button>
                         </td>
                     </tr>
@@ -119,8 +119,10 @@
              $('input[name="is_adding_guests"]').change(function () {
                 if ($(this).val() === 'yes') {
                     $('#guests-form').show();
-                    $('#btn-confirm').show();                                         
+                    $('#btn-confirm').show();   
+                    $('#add_table input').attr('required', true);                                      
                 } else {
+                    $('#add_table input').removeAttr('required');
                     $('#guests-form').hide();  
                     $('#btn-confirm').show();                                          
                 }
@@ -135,9 +137,9 @@
 
                 const row = `
                     <tr>
-                        <td><input type="text" name="guest_name[]" class="form-control" required></td>
-                        <td><input type="text" name="guest_relation[]" class="form-control" required></td>
-                        <td><input type="text" name="guest_contact[]" class="form-control" required></td>
+                        <td><input type="text" name="nama_lengkap[]" class="form-control" required="true"></td>
+                        <td><input type="text" name="jabatan[]" class="form-control" required="true"></td>
+                        <td><input type="text" name="instansi[]" class="form-control" required="true"></td>
                         <td><button type="button" class="btn delete_row">Hapus</button></td>
                     </tr>`;
                 $("tbody").append(row);

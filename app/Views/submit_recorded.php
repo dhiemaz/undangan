@@ -15,7 +15,7 @@
         <p>Empowering the People's Economy: A pillar for Achieving Inclusive & Sustainable Growth</p>
         <br/>
 		<br/>
-		<p>Recorded attendance successfully submitted</p>
+		<p>Terima kasih atas konfirmasi anda.</p>
 		<br/>
 		<br/>		
     </div>

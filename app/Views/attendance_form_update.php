@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Confirmation</title>
+    <title>BRI microfinance outlook 2025 attendance confirmation</title>
     <link type="text/css" rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">    
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">    
@@ -62,35 +62,35 @@
             </div>
         
             <div id="guests-form" style="display: none; margin-top: 20px;">
-                <div class="table-responsive">
-                    <table id="add_table" class="table" data-toggle="table" data-mobile-responsive="true">
-                        <thead>
-                            <tr>
-                                <th>Nama Lengkap</th>
-                                <th>Jabatan</th>
-                                <th>Instansi</th>                                        
-                                <th>
-                                    <button type="button" class="btn btn-outline-success" id="add_row" class="add"> tambah </button>
-                                </th>
-                            </tr>
-                        </thead>
+            <div class="table-container">
+                <table id="add_table" class="table" data-toggle="table" data-mobile-responsive="true">
+                    <thead>
+                    <tr>
+                        <th>Nama Lengkap</th>
+                        <th>Jabatan</th>
+                        <th>Instansi</th>
+                        <th>
+                        <button type="button" class="btn btn-outline-success" id="add_row">Tambah</button>
+                        </th>
+                    </tr>
+                    </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <input type="text" class="form-control" required="true">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" required="true">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" required="true">
-                            </td>                                        
-                            <td>
-                                <button type="button" class="btn btn-outline-danger delete_row">hapus</button>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td data-label="Nama Lengkap">
+                        <input type="text" class="form-control" required="true">
+                        </td>
+                        <td data-label="Jabatan">
+                        <input type="text" class="form-control" required="true">
+                        </td>
+                        <td data-label="Instansi">
+                        <input type="text" class="form-control" required="true">
+                        </td>
+                        <td data-label="Actions">
+                        <button type="button" class="btn btn-outline-danger delete_row">Hapus</button>
+                        </td>
+                    </tr>
                     </tbody>
-                    </table>
+                </table>
                 </div>
                 <div id="warning" style="color: red; display: none;">*maksimal undangan sebanyak 3 orang</div>
             </div>
@@ -129,7 +129,7 @@
             // Add guest row
             $('#add_row').click(function () {
                 if (guestsCount >= 3) {
-                    alert('Maximum 3 guests allowed.');
+                    $('#warning').show(); 
                     return;
                 }
 

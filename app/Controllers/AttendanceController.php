@@ -6,7 +6,7 @@ class AttendanceController extends BaseController
 {
     public function index()
     {
-        return view('attendance_form_update');
+        return view('rsvp_confirmation');
     }
 
     public function confirm()

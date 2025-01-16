@@ -10,7 +10,7 @@
   <meta content="Dimas Yudha Prawira" name="author">
 
   <!-- Favicons -->
-  <link href="<?= base_url('assets/assets/images/favicon.png'); ?>" rel="icon">
+  <link href="<?= base_url('assets/images/favicon.png'); ?>" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">

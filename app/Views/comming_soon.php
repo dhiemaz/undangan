@@ -295,7 +295,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="./assets/js/main.js"></script>
+  <script src="href="<?= base_url('assets/js/main.js"'); ?>"></script>
   <script type="text/javascript">          
         // Set the target date and time for the countdown
         const targetDate = new Date("2025-01-17T23:59:59").getTime();

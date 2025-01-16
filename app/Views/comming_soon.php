@@ -16,11 +16,11 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link  href="./assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link  href="./assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link  href="./assets/lib/animate/animate.min.css" rel="stylesheet">
-  <link  href="./assets/lib/venobox/venobox.css" rel="stylesheet">
-  <link  href="./assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.1/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/venobox/2.0.3/venobox.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
   <link href="./assets/css/style.css" rel="stylesheet">
@@ -287,12 +287,12 @@
   <script src="https://code.jquery.com/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./assets/lib/easing/easing.min.js"></script>
-  <script src="./assets/lib/superfish/hoverIntent.js"></script>
-  <script src="./assets/lib/superfish/superfish.min.js"></script>
-  <script src="./assets/lib/wow/wow.min.js"></script>
-  <script src="./assets/lib/venobox/venobox.min.js"></script>
-  <script src="./assets/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-hoverintent/1.10.1/jquery.hoverIntent.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/superfish/1.7.10/js/superfish.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/venobox/2.0.3/venobox.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
   <!-- Template Main Javascript File -->
   <script src="./assets/js/main.js"></script>

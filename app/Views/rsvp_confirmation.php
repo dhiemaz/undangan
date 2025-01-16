@@ -81,7 +81,7 @@
           </div>
           <div class="col-lg-3">
             <h3>Where</h3>
-            <p>Indonesia Convention Exhibition BSD City</p>
+            <p>Indonesia Convention Exhibition <br>BSD City</p>
           </div>
           <div class="col-lg-3">
             <h3>When</h3>

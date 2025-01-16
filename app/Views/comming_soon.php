@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link  href="./assets/lib/bootstrap/css/bootstrap.min.css')" rel="stylesheet">
+  <link  href="./assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link  href="./assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link  href="./assets/lib/animate/animate.min.css" rel="stylesheet">
   <link  href="./assets/lib/venobox/venobox.css" rel="stylesheet">

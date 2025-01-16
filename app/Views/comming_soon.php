@@ -61,7 +61,7 @@
   <section id="intro">
     <div class="intro-container wow fadeIn">
       <p class="mb-1 pb-0">Cordially invite You to:</p>      
-      <img src="https://182.16.171.91/bri-microfinance-2025/assets/images/BRI_MFO_2025.png" 
+      <img src="<?= base_url('assets/images/BRI_MFO_2025.png'); ?>" 
           alt="BRI Microfinance Outlook 2025" 
           class="img-fluid" 
           style="width: 700px; height: auto;">
@@ -220,7 +220,7 @@
             </div>            
         </div>
         <div class="supporter-logo" style="border:0;">
-            <img src="https://182.16.171.91/bri-microfinance-2025/assets/images/cnbc-2024.png" alt="Media Partner Logo">
+            <img src="<?= base_url('assets/images/cnbc-2024.png'); ?>" alt="Media Partner Logo">            
         </div>
     </section>
 

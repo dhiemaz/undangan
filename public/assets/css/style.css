@@ -655,7 +655,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 
 #about {
-  background: url("../images/about-bg.jpg");
+  background: url("../images/Awan.png");
   background-size: cover;
   overflow: hidden;
   position: relative;
@@ -1523,4 +1523,12 @@ body.mobile-nav-active #mobile-nav-toggle {
   #countdown_dashboard li {
     margin: 5px 0;
   }
+}
+
+/* Container: Center Content */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack content vertically */
 }

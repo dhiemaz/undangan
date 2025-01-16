@@ -286,7 +286,7 @@
 <!-- JavaScript Libraries -->
   <script src="https://code.jquery.com/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+WlMg8fHe8E/8zBsU6F3kKcy+P8thKF7Q2whC5PLU+YI3TQtJmEFOjE9s5UXF5" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./assets/lib/easing/easing.min.js"></script>
   <script src="./assets/lib/superfish/hoverIntent.js"></script>
   <script src="./assets/lib/superfish/superfish.min.js"></script>

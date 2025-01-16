@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'https://182.16.171.91/bri-microfinance-2025/invitation/';
+    public string $baseURL = 'https://182.16.171.91/bri-microfinance-2025/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.

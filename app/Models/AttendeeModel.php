@@ -4,13 +4,13 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class AttendeeModel extends Model {
-    protected $table = 'attendees';
+    protected $table = 'guests';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'hash_id', 'confirmed', 'bring_guests', 'confirmed_at'];
+    protected $allowedFields = ['hash', 'fullname', 'position', 'institution', 'is_attending', 'is_delegate'];
     protected $useTimestamps = false;
 
-    public function isAttendeeRegistered($hash_id)
+    public function getAttendee($hash_id)
     {
-        return $this->where('hash_id', $hash_id)->first();
+        return $this->where('hash', $hash_id)->first();
     }
 }

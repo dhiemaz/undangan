@@ -61,7 +61,10 @@
   <section id="intro">
     <div class="intro-container wow fadeIn">
       <p class="mb-1 pb-0">Cordially invite You to:</p>      
-      <h1 class="mb-4 pb-0">BRI <span>Microfinance</span> <br>Outlook 2025</h1>
+      <img src="<?= base_url('assets/images/LOGO BRI MFO 2025.png'); ?>" 
+          alt="BRI Microfinance Outlook 2025" 
+          class="img-fluid" 
+          style="width: 20px; height: 20px;">
       <p class="mb-4 pb-0">Thursday, January 30th 2025. Indonesia Convention Exhibition BSD City</p>      
       <a href="#about" class="about-btn scrollto">About The Event</a>
     </div>

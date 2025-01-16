@@ -61,7 +61,7 @@
   <section id="intro">
     <div class="intro-container wow fadeIn">
       <p class="mb-1 pb-0">Cordially invite You to:</p>      
-      <img src="./assets/images/BRI_MFO_2025.png" 
+      <img src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/images/BRI_MFO_2025.png" 
           alt="BRI Microfinance Outlook 2025" 
           class="img-fluid" 
           style="width: 700px; height: auto;">

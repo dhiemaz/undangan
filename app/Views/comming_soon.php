@@ -10,7 +10,7 @@
   <meta content="Dimas Yudha Prawira" name="author">
 
   <!-- Favicons -->
-  <link href="./assets/images/favicon.png" rel="icon">
+  <link href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/images/favicon.png" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
@@ -23,8 +23,8 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="./assets/css/style.css" rel="stylesheet">
-  <link href="./assets/css/app.css" rel="stylesheet">
+  <link href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/css/style.css" rel="stylesheet">
+  <link href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/css/app.css" rel="stylesheet">
 
 </head>
 

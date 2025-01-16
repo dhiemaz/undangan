@@ -10,25 +10,21 @@
   <meta content="Dimas Yudha Prawira" name="author">
 
   <!-- Favicons -->
-  <link href="https://182.16.171.91/bri-microfinance-2025/assets/images/favicon.png" rel="icon">
+  <link href="<?= base_url('assets/assets/images/favicon.png'); ?>" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link  href="https://182.16.171.91/bri-microfinance-2025/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link  href="https://182.16.171.91/bri-microfinance-2025/assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link  href="https://182.16.171.91/bri-microfinance-2025/assets/lib/animate/animate.min.css" rel="stylesheet">
-  <link  href="https://182.16.171.91/bri-microfinance-2025/assets/lib/venobox/venobox.css" rel="stylesheet">
-  <link  href="https://182.16.171.91/bri-microfinance-2025/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-
-  <link rel="stylesheet" href="https://182.16.171.91/bri-microfinance-2025/assets/lib/animate/animate.css" rel="stylesheet">      <!-- Responsive Stylesheet -->
-  <link rel="stylesheet" href="https://182.16.171.91/bri-microfinance-2025/assets/lib/responsive.css" rel="stylesheet">
+  <link  href="<?= base_url('assets/lib/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
+  <link  href="<?= base_url('assets/lib/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
+  <link  href="<?= base_url('assets/lib/animate/animate.min.css'); ?>" rel="stylesheet">
+  <link  href="<?= base_url('assets/lib/venobox/venobox.css'); ?>" rel="stylesheet">
+  <link  href="<?= base_url('assets/lib/owlcarousel/assets/owl.carousel.min.css'); ?>" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="https://182.16.171.91/bri-microfinance-2025/assets/css/style.css" rel="stylesheet">
-  <link href="https://182.16.171.91/bri-microfinance-2025/assets/css/app.css" rel="stylesheet">
+  <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/app.css'); ?>" rel="stylesheet">
 
 </head>
 
@@ -287,19 +283,19 @@
 
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-  <!-- JavaScript Libraries -->
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/jquery/jquery.min.js"></script>
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/jquery/jquery-migrate.min.js"></script>
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/easing/easing.min.js"></script>
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/superfish/hoverIntent.js"></script>
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/superfish/superfish.min.js"></script>
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/wow/wow.min.js"></script>
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/venobox/venobox.min.js"></script>
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+<!-- JavaScript Libraries -->
+  <script src="href="<?= base_url('assets/lib/jquery/jquery.min.js"'); ?>"></script>
+  <script src="href="<?= base_url('assets/lib/jquery/jquery-migrate.min.js"'); ?>"></script>
+  <script src="href="<?= base_url('assets/lib/bootstrap/js/bootstrap.bundle.min.js"'); ?>"></script>
+  <script src="href="<?= base_url('assets/lib/easing/easing.min.js"'); ?>"></script>
+  <script src="href="<?= base_url('assets/lib/superfish/hoverIntent.js"'); ?>"></script>
+  <script src="href="<?= base_url('assets/lib/superfish/superfish.min.js"'); ?>"></script>
+  <script src="href="<?= base_url('assets/lib/wow/wow.min.js"'); ?>"></script>
+  <script src="href="<?= base_url('assets/lib/venobox/venobox.min.js"'); ?>"></script>
+  <script src="href="<?= base_url('assets/lib/owlcarousel/owl.carousel.min.js"'); ?>"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="https://182.16.171.91/bri-microfinance-2025/assets/js/main.js"></script>
+  <script src="href="<?= base_url('assets/js/main.js"'); ?>"></script>
   <script type="text/javascript">          
         // Set the target date and time for the countdown
         const targetDate = new Date("2025-01-17T23:59:59").getTime();

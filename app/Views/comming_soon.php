@@ -10,21 +10,21 @@
   <meta content="Dimas Yudha Prawira" name="author">
 
   <!-- Favicons -->
-  <link href="<?= base_url('assets/images/favicon.png'); ?>" rel="icon">
+  <link href="./assets/images/favicon.png" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link  href="<?= base_url('assets/lib/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
-  <link  href="<?= base_url('assets/lib/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
-  <link  href="<?= base_url('assets/lib/animate/animate.min.css'); ?>" rel="stylesheet">
-  <link  href="<?= base_url('assets/lib/venobox/venobox.css'); ?>" rel="stylesheet">
-  <link  href="<?= base_url('assets/lib/owlcarousel/assets/owl.carousel.min.css'); ?>" rel="stylesheet">
+  <link  href="./assets/lib/bootstrap/css/bootstrap.min.css')" rel="stylesheet">
+  <link  href="./assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link  href="./assets/lib/animate/animate.min.css" rel="stylesheet">
+  <link  href="./assets/lib/venobox/venobox.css" rel="stylesheet">
+  <link  href="./assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet">
-  <link href="<?= base_url('assets/css/app.css'); ?>" rel="stylesheet">
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <link href="./assets/css/app.css" rel="stylesheet">
 
 </head>
 
@@ -61,7 +61,7 @@
   <section id="intro">
     <div class="intro-container wow fadeIn">
       <p class="mb-1 pb-0">Cordially invite You to:</p>      
-      <img src="<?= base_url('assets/images/BRI_MFO_2025.png'); ?>" 
+      <img src="./assets/images/BRI_MFO_2025.png" 
           alt="BRI Microfinance Outlook 2025" 
           class="img-fluid" 
           style="width: 700px; height: auto;">
@@ -284,18 +284,18 @@
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 <!-- JavaScript Libraries -->
-  <script src="href="<?= base_url('assets/lib/jquery/jquery.min.js"'); ?>"></script>
-  <script src="href="<?= base_url('assets/lib/jquery/jquery-migrate.min.js"'); ?>"></script>
-  <script src="href="<?= base_url('assets/lib/bootstrap/js/bootstrap.bundle.min.js"'); ?>"></script>
-  <script src="href="<?= base_url('assets/lib/easing/easing.min.js"'); ?>"></script>
-  <script src="href="<?= base_url('assets/lib/superfish/hoverIntent.js"'); ?>"></script>
-  <script src="href="<?= base_url('assets/lib/superfish/superfish.min.js"'); ?>"></script>
-  <script src="href="<?= base_url('assets/lib/wow/wow.min.js"'); ?>"></script>
-  <script src="href="<?= base_url('assets/lib/venobox/venobox.min.js"'); ?>"></script>
-  <script src="href="<?= base_url('assets/lib/owlcarousel/owl.carousel.min.js"'); ?>"></script>
+  <script src="./assets/lib/jquery/jquery.min.js"></script>
+  <script src="./assets/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="./assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/lib/easing/easing.min.js"></script>
+  <script src="./assets/lib/superfish/hoverIntent.js"></script>
+  <script src="./assets/lib/superfish/superfish.min.js"></script>
+  <script src="./assets/lib/wow/wow.min.js"></script>
+  <script src="./assets/lib/venobox/venobox.min.js"></script>
+  <script src="./assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="href="<?= base_url('assets/js/main.js"'); ?>"></script>
+  <script src="./assets/js/main.js"></script>
   <script type="text/javascript">          
         // Set the target date and time for the countdown
         const targetDate = new Date("2025-01-17T23:59:59").getTime();

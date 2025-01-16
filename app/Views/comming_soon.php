@@ -224,7 +224,7 @@
             </div>            
         </div>
         <div class="supporter-logo" style="border:0;">
-            <img src="assets/images/cnbc-2024.png" alt="Media Partner Logo">
+            <img src="https://182.16.171.91/bri-microfinance-2025/assets/images/cnbc-2024.png" alt="Media Partner Logo">
         </div>
     </section>
 

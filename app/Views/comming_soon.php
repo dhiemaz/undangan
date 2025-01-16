@@ -10,7 +10,7 @@
   <meta content="Dimas Yudha Prawira" name="author">
 
   <!-- Favicons -->
-  <link href="assets/images/favicon.png" rel="icon">
+  <link href="https://182.16.171.91/bri-microfinance-2025/assets/images/favicon.png" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
@@ -299,7 +299,7 @@
   <script src="https://182.16.171.91/bri-microfinance-2025/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="assets/js/main.js"></script>
+  <script src="https://182.16.171.91/bri-microfinance-2025/assets/js/main.js"></script>
   <script type="text/javascript">          
         // Set the target date and time for the countdown
         const targetDate = new Date("2025-01-17T23:59:59").getTime();

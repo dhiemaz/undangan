@@ -232,12 +232,12 @@
       Attendee Confirmation Section
     ============================-->
     <section id="buy-tickets" class="section-with-bg wow fadeInUp">
-      <div class="container d-flex justify-content-center align-items-center flex-column">
-        <div class="section-header center">
+    <div class="container d-flex justify-content-center align-items-center flex-column">
+        <div class="section-header">
           <h2>RSVP</h2>
           <p>You can RSVP and confirm your attendance soon</p>
         </div>
-        <div class="col-md-5 wow zoomIn">
+        <div class="wow zoomIn">
           <div class="block">
             <div class="counter text-center">
               <ul id="countdown_dashboard">

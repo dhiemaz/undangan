@@ -469,7 +469,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #intro {
   width: 100%;
   height: 100vh;
-  background: url(../images/intro-bg.png) no-repeat center center;
+  background: url(../images/bg-image.jpg) no-repeat center center;
   background-size: 100% 100%; /* Forces the image to stretch to cover */
   overflow: hidden;
   position: relative;
@@ -655,7 +655,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 
 #about {
-  background: url("../images/bg-image.jpg");
+  background: url("../images/about-bg.jpg");
   background-size: cover;
   overflow: hidden;
   position: relative;

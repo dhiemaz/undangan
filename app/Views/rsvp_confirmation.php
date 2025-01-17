@@ -10,21 +10,21 @@
   <meta content="Dimas Yudha Prawira" name="author">
 
   <!-- Favicons -->
-  <link href="assets/images/favicon.png" rel="icon">
+  <link href="http://localhost:8080/assets/images/favicon.png" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link  href="<?= base_url('assets/lib/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
-  <link  href="<?= base_url('assets/lib/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
-  <link  href="<?= base_url('assets/lib/animate/animate.min.css'); ?>" rel="stylesheet">
-  <link  href="<?= base_url('assets/lib/venobox/venobox.css'); ?>" rel="stylesheet">
-  <link  href="<?= base_url('assets/lib/owlcarousel/assets/owl.carousel.min.css'); ?>" rel="stylesheet">
+  <link  href="http://localhost:8080/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link  href="http://localhost:8080/assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link  href="http://localhost:8080/assets/lib/animate/animate.min.css" rel="stylesheet">
+  <link  href="http://localhost:8080/assets/lib/venobox/venobox.css" rel="stylesheet">
+  <link  href="http://localhost:8080/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet">
-  <link href="<?= base_url('assets/css/app.css'); ?>" rel="stylesheet">
+  <link href="http://localhost:8080/assets/css/style.css" rel="stylesheet">
+  <link href="http://localhost:8080/assets/css/app.css" rel="stylesheet">
 
 </head>
 
@@ -61,10 +61,10 @@
   <section id="intro">
     <div class="intro-container wow fadeIn">
       <p class="mb-1 pb-0">Cordially invite You to:</p>      
-      <img src="<?= base_url('assets/images/LOGO BRI MFO 2025.png'); ?>" 
+      <img src="http://localhost:8080/assets/images/BRI_MFO_2025.png" 
           alt="BRI Microfinance Outlook 2025" 
           class="img-fluid" 
-          style="width: 20px; height: 20px;">
+          style="width: 700px; height: auto;">
       <p class="mb-4 pb-0">Thursday, January 30th 2025. Indonesia Convention Exhibition BSD City</p>      
       <a href="#about" class="about-btn scrollto">About The Event</a>
     </div>
@@ -97,7 +97,7 @@
     <!--==========================
       Schedule Section
     ============================-->
-    <section id="schedule" class="section-with-bg">
+    <!-- <section id="schedule" class="section-with-bg">
       <div class="container wow fadeInUp">
         <div class="section-header">
           <h2>Event Rundown</h2>          
@@ -107,24 +107,24 @@
           <li class="nav-item">
             <a class="nav-link active" role="tab" data-toggle="tab">Day 1</a>
           </li>          
-        </ul>
+        </ul> -->
 
         <!-- <h3 class="sub-heading">Voluptatem nulla veniam soluta et corrupti consequatur neque eveniet officia. Eius
           necessitatibus voluptatem quis labore perspiciatis quia.</h3> -->
 
-        <div class="tab-content row justify-content-center">
+        <!-- <div class="tab-content row justify-content-center"> -->
 
           <!-- Schdule Day 1 -->
-          <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
+          <!-- <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
 
             <div class="row schedule-item">
               <div class="col-md-2"><time>08:00 AM</time></div>
               <div class="col-md-10">
                 <h4>MC Opening.</h4>                
               </div>
-            </div>
+            </div> -->
 
-            <div class="row schedule-item">
+            <!-- <div class="row schedule-item">
               <div class="col-md-2"><time>08:05 AM</time></div>
               <div class="col-md-10">                
                 <h4>Welcoming Speech. <span>CEO & BRI Prospect</span></h4>                
@@ -172,12 +172,12 @@
                 <h4>MC Closing.</h4>                
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- End Schdule Day 1 -->
 
-        </div>
+        <!-- </div>
       </div>
-    </section>
+    </section> -->
 
     <!--==========================
       Venue Section
@@ -220,7 +220,7 @@
             </div>            
         </div>
         <div class="supporter-logo" style="border:0;">
-            <img src="assets/images/cnbc-2024.png" alt="Media Partner Logo">
+            <img src="http://localhost:8080/assets/images/cnbc-2024.png" alt="Media Partner Logo">
         </div>
     </section>
 
@@ -237,89 +237,99 @@
           <p>Please confirm your attendance</p>
         </div>
 
-        <form onsubmit="return false;" method="post" action="attendance/submit" id="form-submit">
-          <input type="hidden" name="_token" value="AeGgGxsuptQpZxOtLMHUoOazbSqPfYaEKK2cT8Sz" autocomplete="off">                        <input type="hidden" name="dress_code" value="Business Attire (Jas/Blazer)">
-          <input type="hidden" name="date" value="2025-01-30">
-          <input type="hidden" name="start_time" value="09:00:00">
-          <input type="hidden" name="end_time" value="21:00:00">
-          <input type="hidden" name="location" value="Auditorium Menara Bank Mega">
-          <input type="hidden" name="max_confirmation_date" value="2025-01-30 20:55:00">
+        <?php if (!isset($attendee['status'])): ?>
+          <form onsubmit="return false;" method="post" action="http://localhost:8080/invitation/confirm" id="form-submit">
+            <input type="hidden" name="_invitationID" value="<?= htmlspecialchars($attendee['hash'], ENT_QUOTES, 'UTF-8'); ?>"   autocomplete="off">                        <input type="hidden" name="dress_code" value="Business Attire (Jas/Blazer)">
+            <input type="hidden" name="date" value="<?= date('Y-m-d'); ?>">                        
+            <input type="hidden" name="max_confirmation_date" value="2025-01-30 20:55:00">
 
-          <div class="grid gap-4 lg:gap-5 px-4 py-6 lg:px-0 lg:py-8 text-left lg:max-w-[800px] lg:mx-auto">
-              <div class="lg:flex lg:items-center lg:justify-between">
-                  <label for="Fullname" class="block mb-2 text-base font-medium text-black-nightblack">Your Name*</label>
+            <div class="grid gap-4 lg:gap-5 px-4 py-6 lg:px-0 lg:py-8 text-left lg:max-w-[800px] lg:mx-auto">
+                <div class="lg:flex lg:items-center lg:justify-between">
+                    <label for="Fullname" class="block mb-2 text-base font-medium text-black-nightblack">Your Name*</label>
+                    <div class="w-full lg:max-w-[512px] font-monserrat">
+                      <input type="text" id="fullname" name="name" 
+                      value="<?= htmlspecialchars($attendee['fullname'], ENT_QUOTES, 'UTF-8'); ?>"  
+                      class="bg-[#F0F0F0] border border-gray-300 text-[#999] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="TES" required="" readonly="">
+                    </div>
+                </div>
+                <div class="lg:flex lg:items-center lg:justify-between">
+                  <label for="position" class="block mb-2 text-base font-medium text-black-nightblack">Job Title*</label>
                   <div class="w-full lg:max-w-[512px] font-monserrat">
-                    <input type="text" id="first_name" name="name" value="TES" class="bg-[#F0F0F0] border border-gray-300 text-[#999] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="TES" required="" readonly="">
+                      <input type="text" id="job_title" name="position" 
+                      value="<?= htmlspecialchars($attendee['position'], ENT_QUOTES, 'UTF-8'); ?>"
+                      class="bg-[#F0F0F0] border border-gray-300 text-[#999] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="PR" required="" readonly="">
                   </div>
-              </div>
-              <div class="lg:flex lg:items-center lg:justify-between">
-                <label for="position" class="block mb-2 text-base font-medium text-black-nightblack">Job Title*</label>
-                <div class="w-full lg:max-w-[512px] font-monserrat">
-                    <input type="text" id="job_title" name="position" value="PR" class="bg-[#F0F0F0] border border-gray-300 text-[#999] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="PR" required="" readonly="">
                 </div>
-              </div>
 
-              <div class="lg:flex lg:items-center lg:justify-between">
-                <label for="position" class="block mb-2 text-base font-medium text-black-nightblack">Company*</label>
-                <div class="w-full lg:max-w-[512px] font-monserrat">
-                    <input type="text" id="company" name="company" value="BRI" class="bg-[#F0F0F0] border border-gray-300 text-[#999] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="BRI" required="" readonly="">
-                </div>
-              </div>   
+                <div class="lg:flex lg:items-center lg:justify-between">
+                  <label for="position" class="block mb-2 text-base font-medium text-black-nightblack">Company*</label>
+                  <div class="w-full lg:max-w-[512px] font-monserrat">
+                      <input type="text" id="institution" name="institution" 
+                      value="<?= htmlspecialchars($attendee['institution'], ENT_QUOTES, 'UTF-8'); ?>"
+                      class="bg-[#F0F0F0] border border-gray-300 text-[#999] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="BRI" required="" readonly="">
+                  </div>
+                </div>   
 
-              <div class="lg:flex lg:items-center lg:justify-between lg:relative">
-                <label for="attend" class="block mb-3 text-base font-medium text-black-nightblack dark:text-white">Will you attend?*</label>
-                <div class="grid gap-2 lg:w-[512px]">
-                  <div class="flex items-center">
-                    <input onclick="showHide(this);" id="radio01" type="radio" name="status" value="attend" class="w-4 h-4 text-black bg-gray-100 border-gray-300  focus:ring-0 " checked="">
-                    <label for="radio1" class="ml-3 text-base font-medium text-black-nightblack dark:text-gray-300">Attend</label>
-                  </div>
+                <div class="lg:flex lg:items-center lg:justify-between lg:relative">
+                  <label for="attend" class="block mb-3 text-base font-medium text-black-nightblack dark:text-white">Will you attend?*</label>
+                  <div class="grid gap-2 lg:w-[512px]">
+                    <div class="flex items-center">
+                      <input onclick="showHide(this);" id="radio01" type="radio" name="status" value="attend" class="w-4 h-4 text-black bg-gray-100 border-gray-300  focus:ring-0 " checked="">
+                      <label for="radio1" class="ml-3 text-base font-medium text-black-nightblack dark:text-gray-300">Attend</label>
+                    </div>
 
-                  <div class="flex items-center">
-                    <input onclick="showHide(this);" id="radio02" type="radio" name="status" value="inattend" class="w-4 h-4 text-black bg-gray-100 border-gray-300  focus:ring-0 ">
-                    <label for="radio1" class="ml-3 text-base font-medium text-black-nightblack dark:text-gray-300">Not Attend</label>
+                    <div class="flex items-center">
+                      <input onclick="showHide(this);" id="radio02" type="radio" name="status" value="inattend" class="w-4 h-4 text-black bg-gray-100 border-gray-300  focus:ring-0 ">
+                      <label for="radio1" class="ml-3 text-base font-medium text-black-nightblack dark:text-gray-300">Not Attend</label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                      <input onclick="showHide(this);" id="radio03" type="radio" name="status" value="delegate" class="w-4 h-4 text-black bg-gray-100 border-gray-300 focus:ring-0 ">
+                      <label for="radio1" class="ml-3 text-base font-medium text-black-nightblack dark:text-gray-300">Delegate</label>
+                    </div>
+                                      
+                    <div class="lg:justify-normal lg:absolute lg:top-0 lg:right-0" id="show-this">
+                      <div class="flex items-center justify-between ">
+                        <label for="guest" class="block mr-3 text-base font-medium text-black-nightblack dark:text-white">Additional Guest</label>
+                        <select id="small-select" name="qty_confirmation" onchange="listConfirmation(this)" class="bg-gray-50 border border-gray-300 text-black-nightblack text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[150px] lg:w-[100px] p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 font-monserrat">
+                          <option selected="">0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                        </select>
+                      </div>
+                    <div class="message text-red text-xs py-2 hidden" id="qty_confirmation"></div>
                   </div>
-                  
-                  <div class="flex items-center">
-                    <input onclick="showHide(this);" id="radio03" type="radio" name="status" value="delegate" class="w-4 h-4 text-black bg-gray-100 border-gray-300 focus:ring-0 ">
-                    <label for="radio1" class="ml-3 text-base font-medium text-black-nightblack dark:text-gray-300">Delegate</label>
-                  </div>
-                                    
-                  <div class="lg:justify-normal lg:absolute lg:top-0 lg:right-0" id="show-this">
+                                      
+                  <div class="lg:justify-normal lg:absolute lg:top-0 lg:right-0" id="show-this-qty-delegate" style="display: none;">
                     <div class="flex items-center justify-between ">
-                      <label for="guest" class="block mr-3 text-base font-medium text-black-nightblack dark:text-white">Additional Guest</label>
-                      <select id="small-select" name="qty_confirmation" onchange="listConfirmation(this)" class="bg-gray-50 border border-gray-300 text-black-nightblack text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[150px] lg:w-[100px] p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 font-monserrat">
-                        <option selected="">0</option>
+                      <label for="guest" class="block mr-3 text-base font-medium text-black-nightblack dark:text-white">Delegated Guest</label>
+                      <select id="qty-delegate" name="qty_delegate" onchange="listDelegate(this)" class="bg-gray-50 border border-gray-300 text-black-nightblack text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[150px] lg:w-[100px] p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 font-monserrat">
                         <option value="1">1</option>
-                        <option value="2">2</option>
+                        <option value="2" selected="">2</option>
                       </select>
                     </div>
-                  <div class="message text-red text-xs py-2 hidden" id="qty_confirmation"></div>
+              <!-- <div class="message text-red text-xs py-2 hidden" id="qty_delegate"></div> -->
+                  </div>                                    
                 </div>
-                                    
-                <div class="lg:justify-normal lg:absolute lg:top-0 lg:right-0" id="show-this-qty-delegate" style="display: none;">
-                  <div class="flex items-center justify-between ">
-                    <label for="guest" class="block mr-3 text-base font-medium text-black-nightblack dark:text-white">Delegated Guest</label>
-                    <select id="qty-delegate" name="qty_delegate" onchange="listDelegate(this)" class="bg-gray-50 border border-gray-300 text-black-nightblack text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[150px] lg:w-[100px] p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 font-monserrat">
-                      <option value="1">1</option>
-                      <option value="2" selected="">2</option>
-                    </select>
-                  </div>
-             <!-- <div class="message text-red text-xs py-2 hidden" id="qty_delegate"></div> -->
-                </div>                                    
               </div>
             </div>
-          </div>
 
-          <hr class="w-[90%] lg:max-w-[800px] bg-white-light3 mx-auto">
-          <div class="grid gap-4 lg:gap-5 px-4 py-6 lg:px-0 lg:py-8 text-left lg:max-w-[800px] lg:mx-auto" id="show-this-delegate" style="display:none;">
-          </div>
+            <hr class="w-[90%] lg:max-w-[800px] bg-white-light3 mx-auto">
+            <div class="grid gap-4 lg:gap-5 px-4 py-6 lg:px-0 lg:py-8 text-left lg:max-w-[800px] lg:mx-auto" id="show-this-delegate" style="display:none;">
+            </div>
 
-          <div class="grid gap-4 lg:gap-5 px-4 py-6 lg:px-0 lg:py-8 text-left lg:max-w-[800px] lg:mx-auto" id="attends"></div>
-          <div class="grid gap-4 lg:gap-5 px-4 py-6 lg:px-0 lg:py-8 text-left lg:max-w-[800px] lg:mx-auto" id="delegates"></div>
-          <div class="section-header text-center">
-            <button class="text-sm font-medium disabled:pointer-events-none disabled:opacity-50 focus:outline-none text-white focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 py-2 rounded-full px-10 bg-black-nightblack hover:bg-gray-500 my-4 transition duration-300" type="submit">SUBMIT</button>
+            <div class="grid gap-4 lg:gap-5 px-4 py-6 lg:px-0 lg:py-8 text-left lg:max-w-[800px] lg:mx-auto" id="attends"></div>
+            <div class="grid gap-4 lg:gap-5 px-4 py-6 lg:px-0 lg:py-8 text-left lg:max-w-[800px] lg:mx-auto" id="delegates"></div>
+            <div class="section-header text-center">
+              <button class="text-sm font-medium disabled:pointer-events-none disabled:opacity-50 focus:outline-none text-white focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 py-2 rounded-full px-10 bg-black-nightblack hover:bg-gray-500 my-4 transition duration-300" type="submit">SUBMIT</button>
+            </div>
+          </form>
+        <?php else: ?>
+          <div class="text-center py-6">
+            <h2 class="text-xl font-bold">Thank you for your response!</h2>
+            <p class="text-gray-600">You have already confirmed your attendance.</p>
           </div>
-        </form>
+        <?php endif; ?>
       </div>
     </section>
   </main>
@@ -339,18 +349,18 @@
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
   <!-- JavaScript Libraries -->
-  <script src="assets/lib/jquery/jquery.min.js"></script>
-  <script src="assets/lib/jquery/jquery-migrate.min.js"></script>
-  <script src="assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/lib/easing/easing.min.js"></script>
-  <script src="assets/lib/superfish/hoverIntent.js"></script>
-  <script src="assets/lib/superfish/superfish.min.js"></script>
-  <script src="assets/lib/wow/wow.min.js"></script>
-  <script src="assets/lib/venobox/venobox.min.js"></script>
-  <script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="http://localhost:8080/assets/lib/jquery/jquery.min.js"></script>
+  <script src="http://localhost:8080/assets/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="http://localhost:8080/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="http://localhost:8080/assets/lib/easing/easing.min.js"></script>
+  <script src="http://localhost:8080/assets/lib/superfish/hoverIntent.js"></script>
+  <script src="http://localhost:8080/assets/lib/superfish/superfish.min.js"></script>
+  <script src="http://localhost:8080/assets/lib/wow/wow.min.js"></script>
+  <script src="http://localhost:8080/assets/lib/venobox/venobox.min.js"></script>
+  <script src="http://localhost:8080/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="assets/js/main.js"></script>
+  <script src="http://localhost:8080/assets/js/main.js"></script>
 
   <script type="text/javascript">          
             function listConfirmation(elm){
@@ -428,12 +438,14 @@
                     e.preventDefault();
 
                     var formData = $(this).serializeArray();
+                    console.log(formData);
                     $.ajax({
                         url: $(this).attr('action'),
                         type: 'POST',
                         data: formData,
                         success: function(response) {
                             if (response.success==true) {
+                                alert(response.message);
                                 window.location.href = response.redirectUrl;
                             } else {
                                 alert(response.message);

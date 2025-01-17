@@ -2,52 +2,301 @@
 namespace App\Controllers;
 
 use  App\Models\AttendeeModel;
+use App\Models\DelegateModel;
+use App\Models\GuestModel;
+use CodeIgniter\I18n\Time;
 class InvitationController extends BaseController
 {
+    
     public function show($id = null) {
-
-        return view('comming_soon');
-
-        // $model = new AttendeeModel();
-        // if ($id == null) {
-        //     var_dump("here");
-        //     return redirect()->back()->with('error','invitation ID is required.');
-        // } else {
-        //     $attendee = $model->getAttendee($id);
-        //     if ($attendee == null) {
-        //         return redirect()->back()->with('error','invitation ID not found.');
-        //     } else {
-        //         $data['attendee'] = $attendee;
-        //         return view('rsvp_confirmation', $data);
-        //     }
-        // }
+        log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['id' => $id]), ['id' => $id]);
+        
+        $model = new AttendeeModel();
+        if ($id == null) {    
+              
+            log_message('error', 'InvitationController::show - invitation ID is required.', ['id' => $id]);
+            return redirect()->back()->with('error','invitation ID is required.');
+        } else {
+            $attendee = $model->getAttendee($id);  
+            log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['hash' => $id,'attendee' => $attendee]), ['hash' => $id,'attendee' => $attendee]);          
+            if ($attendee == null) {
+                return redirect()->back()->with('error','invitation ID not found.');
+            } else {
+                $data['attendee'] = $attendee;                
+                return view('rsvp_confirmation', $data);
+            }
+        }
     }
 
     public function confirm()
     {
-        $hash_id = $this->request->getPost('hash_id');
-        $confirmed = $this->request->getPost('confirmed');
-        $guests = $this->request->getPost('guests');        
-        
+        $invitationID = $this->request->getPost('_invitationID');
+        $status = $this->request->getPost('status');
+        $qty_confirmation = $this->request->getPost('qty_confirmation');
+        log_message(
+            'info', 
+            'InvitationController::confirm - ' . json_encode(['invitationID' => $invitationID, 'status' => $status, 'qty_confirmation' => $qty_confirmation])
+        );
+
         $attendeeModel = new AttendeeModel();
-        $attendee = $attendeeModel->isAttendeeRegistered($hash_id);
+        $attendee = $attendeeModel->getAttendee($invitationID);
 
-        if ($attendee['confirmed_at'] != null) {
-            $data['message'] = "Mohon maaf, peserta sudah melakukan konfirmasi pada tanggal " . $attendee['confirmed_at'] . ".";
+        if (isset($attendee['status'])) {
+            log_message(
+                'error', 
+                'InvitationController::confirm - '. $attendee['fullname'] . ' has already responded.' . ' - status = ' . $attendee['status']
+            );
+            
+            $success = false;
+            $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+            $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+
+            // Response array
+            $response = [
+                'success' => $success,
+                'redirectUrl' => $redirectUrl,
+                'message' => $message,
+            ];
+
+            // Return JSON response
+            return $this->response->setJSON($response);            
+        } 
+
+
+        if ($status == 'attend') { 
+            // insert guests if any
+            if ($qty_confirmation > 0) {            
+                if (isset($_POST['guest_list']) && is_array($_POST['guest_list'])) {
+                    $GuestModel = new GuestModel();
+                    try {
+                        foreach ($_POST['guest_list'] as $key => $guest) {
+                            $name = htmlspecialchars($guest['name'] ?? 'Unknown', ENT_QUOTES, 'UTF-8');
+                            $position = htmlspecialchars($guest['position'] ?? 'Unknown', ENT_QUOTES, 'UTF-8');
+            
+                            $GuestModel->save([
+                                'attendee_id'=> $attendee['id'],
+                                'fullname'=> $name,
+                                'position'=> $position,
+                                'created_at' => Time::now('Asia/Jakarta', 'en_US'),
+                            ]);
+            
+                            log_message(
+                                'info', 
+                            'InvitationController::confirm - '. $attendee['fullname'] . ' inserting guest - ' . $name . ' - ' . $position.' - created_at = ' . Time::now('Asia/Jakarta', 'en_US') 
+                            ); 
+                        }
+
+                        // update attendee status
+                        if ($status == 'attend') {
+                            $status = 'attend with guests';
+                        }
+                                
+                        $updatedAt = Time::now('Asia/Jakarta', 'en_US');
+                        $attendeeModel->update($attendee['id'], [
+                            'status'=> $status,
+                            'updated_at' => $updatedAt,
+                        ]);
+
+                        log_message(
+                            'info', 
+                            'InvitationController::confirm - '. $attendee['fullname'] . ' status successfully updated.' . ' - status = ' . $status . ' - updated_at = ' . $updatedAt
+                        );
+
+                        $success = true;
+                        $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+                        $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+
+                        // Response array
+                        $response = [
+                            'success' => $success,
+                            'redirectUrl' => $redirectUrl,
+                            'message' => $message,
+                        ];
+
+                        // Return JSON response
+                        return $this->response->setJSON($response); 
+
+                    } catch(\Exception $e) {
+                        log_message(
+                            'error', 
+                            'InvitationController::confirm - '. $attendee['fullname'] . ' inserting guest - error : ' . $e->getMessage()
+                        );
+
+                        $success = false;
+                        $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+                        $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+
+                        // Response array
+                        $response = [
+                            'success' => $success,
+                            'redirectUrl' => $redirectUrl,
+                            'message' => $message,
+                        ];
+
+                        // Return JSON response
+                        return $this->response->setJSON($response); 
+                    }                
+                }
+            } else {
+                try {
+                    $updatedAt = Time::now('Asia/Jakarta', 'en_US');
+                    $attendeeModel->update($attendee['id'], [
+                        'status'=> $status,
+                        'updated_at' => $updatedAt,
+                    ]);
+
+                    log_message(
+                    'info', 
+                'InvitationController::confirm - '. $attendee['fullname'] . ' status successfully updated.' . ' - status = ' . $status . ' - updated_at = ' . $updatedAt
+                    );
+
+                    $success = true;
+                    $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+                    $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+
+                    // Response array
+                    $response = [
+                        'success' => $success,
+                        'redirectUrl' => $redirectUrl,
+                        'message' => $message,
+                    ];
+
+                    // Return JSON response
+                    return $this->response->setJSON($response); 
+                } catch (\Exception $e) {
+                    log_message(
+                        'error', 
+                        'InvitationController::confirm - '. $attendee['fullname'] . ' updating status - error : ' . $e->getMessage()
+                    );
+    
+                    $success = false;
+                    $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+                    $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+    
+                    // Response array
+                    $response = [
+                        'success' => $success,
+                        'redirectUrl' => $redirectUrl,
+                        'message' => $message,
+                    ];
+    
+                    // Return JSON response
+                    return $this->response->setJSON($response);                     
+                }                
+            }        
+        } else if ($status == 'delegate') {
+            if (isset($_POST['guest_list']) && is_array($_POST['guest_list'])) {
+                $DelegateModel = new DelegateModel();
+                try {
+                    foreach ($_POST['guest_list'] as $key => $guest) {
+                        $name = htmlspecialchars($guest['name'] ?? 'Unknown', ENT_QUOTES, 'UTF-8');
+                        $position = htmlspecialchars($guest['position'] ?? 'Unknown', ENT_QUOTES, 'UTF-8');
+        
+                        $DelegateModel->save([
+                            'attendee_id'=> $attendee['id'],
+                            'fullname'=> $name,
+                            'position'=> $position,
+                            'created_at' => Time::now('Asia/Jakarta', 'en_US'),
+                        ]);
+        
+                        log_message(
+                            'info', 
+                        'InvitationController::confirm - '. $attendee['fullname'] . ' inserting delegation - ' . $name . ' - ' . $position.' - created_at = ' . Time::now('Asia/Jakarta', 'en_US') 
+                        ); 
+                    }
+        
+                    $updatedAt = Time::now('Asia/Jakarta', 'en_US');
+                    $attendeeModel->update($attendee['id'], [
+                        'status'=> $status,
+                        'updated_at' => $updatedAt,
+                    ]);
+
+                    log_message(
+                        'info', 
+                        'InvitationController::confirm - '. $attendee['fullname'] . ' status successfully updated.' . ' - status = ' . $status . ' - updated_at = ' . $updatedAt
+                    );
+
+                    $success = true;
+                    $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+                    $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+
+                    // Response array
+                    $response = [
+                        'success' => $success,
+                        'redirectUrl' => $redirectUrl,
+                        'message' => $message,
+                    ];
+
+                    // Return JSON response
+                    return $this->response->setJSON($response); 
+
+                } catch(\Exception $e) {
+                    log_message(
+                        'error', 
+                        'InvitationController::confirm - '. $attendee['fullname'] . ' inserting guest - error : ' . $e->getMessage()
+                    );
+
+                    $success = false;
+                    $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+                    $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+
+                    // Response array
+                    $response = [
+                        'success' => $success,
+                        'redirectUrl' => $redirectUrl,
+                        'message' => $message,
+                    ];
+
+                    // Return JSON response
+                    return $this->response->setJSON($response); 
+                }                
+            }
         } else {
-            $attendeeModel->update([
-                'confirmed' => $confirmed,
-                'bring_guests' => $guests,
-                'confirmed_at' => date('Y-m-d H:i:s'),
-            ]);            
-            $data['message'] = "Terima kasih. {$attendee['name']}., atas konfirmasi anda.";        
+            try {
+                $updatedAt = Time::now('Asia/Jakarta', 'en_US');
+                $attendeeModel->update($attendee['id'], [
+                    'status'=> $status,
+                    'updated_at' => $updatedAt,
+                ]);
+    
+                log_message(
+            'info', 
+            'InvitationController::confirm - '. $attendee['fullname'] . ' status successfully updated.' . ' - status = ' . $status . ' - updated_at = ' . $updatedAt
+                );
+    
+                $success = true;
+                $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+                $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+    
+                // Response array
+                $response = [
+                    'success' => $success,
+                    'redirectUrl' => $redirectUrl,
+                    'message' => $message,
+                ];
+    
+                // Return JSON response
+                return $this->response->setJSON($response); 
+            } catch (\Exception $e) {
+                log_message(
+                    'error', 
+                    'InvitationController::confirm - '. $attendee['fullname'] . ' updating status - error : ' . $e->getMessage()
+                );
+
+                $success = false;
+                $redirectUrl = base_url('invitation/' . $invitationID); // URL to redirect
+                $message = $success ? 'Thank you for your response!' : 'An error occurred.';
+
+                // Response array
+                $response = [
+                    'success' => $success,
+                    'redirectUrl' => $redirectUrl,
+                    'message' => $message,
+                ];
+
+                // Return JSON response
+                return $this->response->setJSON($response); 
+            }
         }
-
-        return view('confirmation', $data);
-    }
-
-    public function submit()
-    {
-        return view('submit_recorded');
-    }
+    }    
 }

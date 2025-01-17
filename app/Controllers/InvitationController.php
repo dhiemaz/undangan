@@ -23,7 +23,7 @@ class InvitationController extends BaseController
                 $decodedInvitationID = urldecode($encodedInvitationID);
                 $attendee = $model->getAttendee($decodedInvitationID);  
             
-                log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $decodedInvitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
+                log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $decodedInvitationID,'attendee' => $attendee]), ['$invitationID' => $decodedInvitationID,'attendee' => $attendee]);          
                 $data['attendee'] = $attendee;                
                 return view('rsvp_confirmation', $data);
             } catch (\Exception $e) {

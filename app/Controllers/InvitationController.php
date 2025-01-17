@@ -32,7 +32,7 @@ class InvitationController extends BaseController
 
     public function confirm()
     {
-        $invitationID = urlencode($this->request->getPost('_invitationID'));
+        $invitationID = $this->request->getPost('_invitationID');
         $status = $this->request->getPost('status');
         $qty_confirmation = $this->request->getPost('qty_confirmation');
         log_message(

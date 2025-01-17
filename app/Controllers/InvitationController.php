@@ -9,20 +9,20 @@ class InvitationController extends BaseController
 {
     
     public function show($id = null) {
-        $encodedInvitationID = urlencode($id);
+        $invitationID = json_encode($id);
         
-        log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $encodedInvitationID]), ['id' => $encodedInvitationID]);
+        log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $invitationID]), ['id' => $invitationID]);
             
         if ($id == null) {    
-            log_message('error', 'InvitationController::show - invitation ID is required.', ['invitationID' => $encodedInvitationID]);
+            log_message('error', 'InvitationController::show - invitation ID is required.', ['invitationID' => $invitationID]);
             return redirect()->back()->with('error','invitation ID is required.');
         } else {
             $model = new AttendeeModel();
 
-            $decodedInvitationID = urldecode($encodedInvitationID);
-            $attendee = $model->getAttendee($decodedInvitationID);  
+            //$decodedInvitationID = urldecode($encodedInvitationID);
+            $attendee = $model->getAttendee($invitationID);  
             
-            log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $decodedInvitationID,'attendee' => $attendee]), ['$invitationID' => $decodedInvitationID,'attendee' => $attendee]);          
+            log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $invitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
             $data['attendee'] = $attendee;                
             return view('rsvp_confirmation', $data);
         }

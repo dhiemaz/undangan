@@ -9,7 +9,7 @@ class InvitationController extends BaseController
 {
     
     public function show($id = null) {
-        $invitationID = json_encode($id);
+        $invitationID = urlencode($id);
         
         log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $invitationID]), ['id' => $invitationID]);
             

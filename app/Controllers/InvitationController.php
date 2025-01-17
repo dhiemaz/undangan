@@ -9,7 +9,15 @@ class InvitationController extends BaseController
 {
     
     public function show($id = null) {
-        $invitationID = urlencode($id);
+        // $invitationID = urlencode($id);
+
+        $invitationID = preg_replace_callback(
+            '/[^a-zA-Z0-9_\-\.]/',
+            function ($matches) {
+                return '%' . strtoupper(dechex(ord($matches[0])));
+            },
+            $id
+        );
         
         log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $invitationID]), ['id' => $invitationID]);
             

@@ -10,21 +10,21 @@
   <meta content="Dimas Yudha Prawira" name="author">
 
   <!-- Favicons -->
-  <link href="http://localhost:8080/assets/images/favicon.png" rel="icon">
+  <link href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/images/favicon.png" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link  href="http://localhost:8080/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link  href="http://localhost:8080/assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link  href="http://localhost:8080/assets/lib/animate/animate.min.css" rel="stylesheet">
-  <link  href="http://localhost:8080/assets/lib/venobox/venobox.css" rel="stylesheet">
-  <link  href="http://localhost:8080/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link  href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link  href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link  href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/animate/animate.min.css" rel="stylesheet">
+  <link  href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/venobox/venobox.css" rel="stylesheet">
+  <link  href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="http://localhost:8080/assets/css/style.css" rel="stylesheet">
-  <link href="http://localhost:8080/assets/css/app.css" rel="stylesheet">
+  <link href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/css/style.css" rel="stylesheet">
+  <link href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/css/app.css" rel="stylesheet">
 
 </head>
 
@@ -61,7 +61,7 @@
   <section id="intro">
     <div class="intro-container wow fadeIn">
       <p class="mb-1 pb-0">Cordially invite You to:</p>      
-      <img src="http://localhost:8080/assets/images/BRI_MFO_2025.png" 
+      <img src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/images/BRI_MFO_2025.png" 
           alt="BRI Microfinance Outlook 2025" 
           class="img-fluid" 
           style="width: 700px; height: auto;">
@@ -220,7 +220,7 @@
             </div>            
         </div>
         <div class="supporter-logo" style="border:0;">
-            <img src="http://localhost:8080/assets/images/cnbc-2024.png" alt="Media Partner Logo">
+            <img src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/images/cnbc-2024.png" alt="Media Partner Logo">
         </div>
     </section>
 
@@ -238,7 +238,7 @@
         </div>
 
         <?php if (!isset($attendee['status'])): ?>
-          <form onsubmit="return false;" method="post" action="http://localhost:8080/invitation/confirm" id="form-submit">
+          <form onsubmit="return false;" method="post" action="invitation/confirm" id="form-submit">
             <input type="hidden" name="_invitationID" value="<?= htmlspecialchars($attendee['hash'], ENT_QUOTES, 'UTF-8'); ?>"   autocomplete="off">                        <input type="hidden" name="dress_code" value="Business Attire (Jas/Blazer)">
             <input type="hidden" name="date" value="<?= date('Y-m-d'); ?>">                        
             <input type="hidden" name="max_confirmation_date" value="2025-01-30 20:55:00">
@@ -349,18 +349,18 @@
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
   <!-- JavaScript Libraries -->
-  <script src="http://localhost:8080/assets/lib/jquery/jquery.min.js"></script>
-  <script src="http://localhost:8080/assets/lib/jquery/jquery-migrate.min.js"></script>
-  <script src="http://localhost:8080/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="http://localhost:8080/assets/lib/easing/easing.min.js"></script>
-  <script src="http://localhost:8080/assets/lib/superfish/hoverIntent.js"></script>
-  <script src="http://localhost:8080/assets/lib/superfish/superfish.min.js"></script>
-  <script src="http://localhost:8080/assets/lib/wow/wow.min.js"></script>
-  <script src="http://localhost:8080/assets/lib/venobox/venobox.min.js"></script>
-  <script src="http://localhost:8080/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/jquery/jquery.min.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/easing/easing.min.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/superfish/hoverIntent.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/superfish/superfish.min.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/wow/wow.min.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/venobox/venobox.min.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="http://localhost:8080/assets/js/main.js"></script>
+  <script src="https://brimicrofinanceoutlook.id/bri-microfinance-2025/assets/js/main.js"></script>
 
   <script type="text/javascript">          
             function listConfirmation(elm){

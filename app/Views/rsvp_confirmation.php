@@ -335,11 +335,10 @@ use function PHPUnit\Framework\isNull;
           </div>
         <?php endif; ?>
 
-        <?php if (isNull($attendee)): ?>
-          <div class="text-center py-6">
-            <h2 class="text-xl font-bold">Invalid Invitation ID!</h2>
-            <p class="text-gray-600">We cannot find your invitation in our database.</p>
-          </div>
+        <?php if ($this->session->flashdata('error')): ?>
+            <div class="alert alert-danger">
+            <?= $this->session->flashdata('error'); ?>
+            </div>
         <?php endif; ?>
       </div>
     </section>

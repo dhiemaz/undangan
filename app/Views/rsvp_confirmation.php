@@ -337,7 +337,7 @@ use function PHPUnit\Framework\isNull;
 
         <?php if ($this->session->flashdata('error')): ?>
             <div class="alert alert-danger">
-            <?= $this->session->flashdata('error'); ?>
+                <?= htmlspecialchars($this->session->flashdata('error'), ENT_QUOTES, 'UTF-8'); ?>
             </div>
         <?php endif; ?>
       </div>

@@ -9,25 +9,26 @@ class InvitationController extends BaseController
 {
     
     public function show($id = null) {
-        $escapedString = urlencode($id);
+        $encodedInvitationID = urlencode($id);
         
-        log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $escapedString]), ['id' => $escapedString]);
+        log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => urldecode($encodedInvitationID)]), ['id' => $encodedInvitationID]);
             
         if ($id == null) {    
-            log_message('error', 'InvitationController::show - invitation ID is required.', ['invitationID' => $escapedString]);
+            log_message('error', 'InvitationController::show - invitation ID is required.', ['invitationID' => $encodedInvitationID]);
             return redirect()->back()->with('error','invitation ID is required.');
         } else {
             try {
                 $model = new AttendeeModel();
-                $attendee = $model->getAttendee($escapedString);  
+
+                $decodedInvitationID = urldecode($encodedInvitationID);
+                $attendee = $model->getAttendee($decodedInvitationID);  
             
-                log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $escapedString,'attendee' => $attendee]), ['hash' => $escapedString,'attendee' => $attendee]);          
+                log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $decodedInvitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
                 $data['attendee'] = $attendee;                
                 return view('rsvp_confirmation', $data);
             } catch (\Exception $e) {
-                log_message('error', 'InvitationController::show attendee by invitationID - error : ' . $e->getMessage(), ['id' => $escapedString]);
-                $data['attendee'] = $attendee;                
-                return view('rsvp_confirmation', $data);
+                log_message('error', 'InvitationController::show attendee by invitationID - error : ' . $e->getMessage(), ['$invitationID' => $decodedInvitationID]);
+                return redirect()->back()->with('error', $e->getMessage());
             }
         }
     }

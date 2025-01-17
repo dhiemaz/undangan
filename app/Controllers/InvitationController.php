@@ -9,16 +9,18 @@ class InvitationController extends BaseController
 {
     
     public function show($id = null) {
-        log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['id' => $id]), ['id' => $id]);
+        $escapedString = urlencode($id);
+        
+        log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $escapedString]), ['id' => $escapedString]);
         
         $model = new AttendeeModel();
         if ($id == null) {    
               
-            log_message('error', 'InvitationController::show - invitation ID is required.', ['id' => $id]);
+            log_message('error', 'InvitationController::show - invitation ID is required.', ['invitationID' => $escapedString]);
             return redirect()->back()->with('error','invitation ID is required.');
         } else {
-            $attendee = $model->getAttendee($id);  
-            log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['hash' => $id,'attendee' => $attendee]), ['hash' => $id,'attendee' => $attendee]);          
+            $attendee = $model->getAttendee($escapedString);  
+            log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $escapedString,'attendee' => $attendee]), ['hash' => $escapedString,'attendee' => $attendee]);          
             if ($attendee == null) {
                 return redirect()->back()->with('error','invitation ID not found.');
             } else {
@@ -30,7 +32,7 @@ class InvitationController extends BaseController
 
     public function confirm()
     {
-        $invitationID = $this->request->getPost('_invitationID');
+        $invitationID = urlencode($this->request->getPost('_invitationID'));
         $status = $this->request->getPost('status');
         $qty_confirmation = $this->request->getPost('qty_confirmation');
         log_message(

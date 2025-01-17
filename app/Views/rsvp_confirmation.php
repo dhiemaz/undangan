@@ -333,13 +333,7 @@ use function PHPUnit\Framework\isNull;
             <h2 class="text-xl font-bold">Thank you for your response!</h2>
             <p class="text-gray-600">You have already confirmed your attendance.</p>
           </div>
-        <?php endif; ?>
-
-        <?php if ($this->session->flashdata('error')): ?>
-            <div class="alert alert-danger">
-                <?= htmlspecialchars($this->session->flashdata('error'), ENT_QUOTES, 'UTF-8'); ?>
-            </div>
-        <?php endif; ?>
+        <?php endif; ?>        
       </div>
     </section>
   </main>

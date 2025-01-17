@@ -238,7 +238,7 @@
         </div>
 
         <?php if (!isset($attendee['status'])): ?>
-          <form onsubmit="return false;" method="post" action="invitation/confirm" id="form-submit">
+          <form onsubmit="return false;" method="post" action="/invitation/confirm" id="form-submit">
             <input type="hidden" name="_invitationID" value="<?= htmlspecialchars($attendee['hash'], ENT_QUOTES, 'UTF-8'); ?>"   autocomplete="off">                        <input type="hidden" name="dress_code" value="Business Attire (Jas/Blazer)">
             <input type="hidden" name="date" value="<?= date('Y-m-d'); ?>">                        
             <input type="hidden" name="max_confirmation_date" value="2025-01-30 20:55:00">

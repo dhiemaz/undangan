@@ -237,7 +237,11 @@
           <p>Please confirm your attendance</p>
         </div>
 
-        <?php if (!isset($attendee['status'])): ?>
+        <?php
+
+use function PHPUnit\Framework\isNull;
+
+ if (!isset($attendee['status'])): ?>
           <form onsubmit="return false;" method="post" action="https://brimicrofinanceoutlook.id/bri-microfinance-2025/invitation/confirm" id="form-submit">
             <input type="hidden" name="_invitationID" value="<?= htmlspecialchars($attendee['hash'], ENT_QUOTES, 'UTF-8'); ?>"   autocomplete="off">                        <input type="hidden" name="dress_code" value="Business Attire (Jas/Blazer)">
             <input type="hidden" name="date" value="<?= date('Y-m-d'); ?>">                        
@@ -328,6 +332,13 @@
           <div class="text-center py-6">
             <h2 class="text-xl font-bold">Thank you for your response!</h2>
             <p class="text-gray-600">You have already confirmed your attendance.</p>
+          </div>
+        <?php endif; ?>
+
+        <?php if (isNull($attendee)): ?>
+          <div class="text-center py-6">
+            <h2 class="text-xl font-bold">Invalid Invitation ID!</h2>
+            <p class="text-gray-600">We cannot find your invitation in our database.</p>
           </div>
         <?php endif; ?>
       </div>

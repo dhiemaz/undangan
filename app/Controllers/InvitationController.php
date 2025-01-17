@@ -17,12 +17,18 @@ class InvitationController extends BaseController
             log_message('error', 'InvitationController::show - invitation ID is required.', ['invitationID' => $escapedString]);
             return redirect()->back()->with('error','invitation ID is required.');
         } else {
-            $model = new AttendeeModel();
-            $attendee = $model->getAttendee($escapedString);  
+            try {
+                $model = new AttendeeModel();
+                $attendee = $model->getAttendee($escapedString);  
             
-            log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $escapedString,'attendee' => $attendee]), ['hash' => $escapedString,'attendee' => $attendee]);          
-            $data['attendee'] = $attendee;                
-            return view('rsvp_confirmation', $data);
+                log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $escapedString,'attendee' => $attendee]), ['hash' => $escapedString,'attendee' => $attendee]);          
+                $data['attendee'] = $attendee;                
+                return view('rsvp_confirmation', $data);
+            } catch (\Exception $e) {
+                log_message('error', 'InvitationController::show attendee by invitationID - error : ' . $e->getMessage(), ['id' => $escapedString]);
+                $data['attendee'] = $attendee;                
+                return view('rsvp_confirmation', $data);
+            }
         }
     }
 

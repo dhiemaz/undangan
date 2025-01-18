@@ -4,7 +4,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class AttendeeModel extends Model {
-    protected $table = 'attendees';
+    protected $table = 'attendees_event';
     protected $primaryKey = 'id';
     protected $allowedFields = ['hash', 'fullname', 'position', 'institution', 'status'];
     protected $useTimestamps = false;

@@ -34,9 +34,7 @@ class InvitationController extends BaseController
             log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $invitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
             if ($attendee == null) {
                 log_message('error', 'InvitationController::show - attendee not found.', ['invitationID' => $invitationID]);
-                
-                $data['attendee'] = null;                
-                return view('rsvp_confirmation', $data);
+                return redirect()->back()->with('error','attendee not found.');
             }
             
             $data['attendee'] = $attendee;                

@@ -261,7 +261,7 @@ use function PHPUnit\Framework\isNull;
                   <div class="w-full lg:max-w-[512px] font-monserrat">
                       <input type="text" id="job_title" name="position" 
                       value="<?= htmlspecialchars($attendee['position'], ENT_QUOTES, 'UTF-8'); ?>"
-                      class="bg-[#F0F0F0] border border-gray-300 text-[#999] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="PR" required="" readonly="">
+                      class="bg-[#F0F0F0] border border-gray-300 text-[#999] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="-" required="" readonly="">
                   </div>
                 </div>
 

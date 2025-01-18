@@ -19,6 +19,8 @@ class InvitationController extends BaseController
             $id
         );
         
+        $invitationID = rawurldecode($invitationID);
+
         log_message('info', 'InvitationController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $invitationID]), ['id' => $invitationID]);
             
         if ($id == null) {    
@@ -28,11 +30,13 @@ class InvitationController extends BaseController
             $model = new AttendeeModel();
 
             //$decodedInvitationID = urldecode($encodedInvitationID);
-            $attendee = $model->getAttendee(  urlencode($invitationID));  
+            $attendee = $model->getAttendee(  rawurldecode($invitationID));  
             log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $invitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
             if ($attendee == null) {
                 log_message('error', 'InvitationController::show - attendee not found.', ['invitationID' => $invitationID]);
-                return redirect()->back()->with('error','attendee not found.');
+                
+                $data['attendee'] = null;                
+                return view('rsvp_confirmation', $data);
             }
             
             $data['attendee'] = $attendee;                

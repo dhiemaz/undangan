@@ -46,10 +46,10 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="#intro">Home</a></li>
           <li><a href="#about">About</a></li>          
-          <li><a href="#schedule">Schedule</a></li>
+          <!-- <li><a href="#schedule">Schedule</a></li> -->
           <li><a href="#venue">Venue</a></li>          
           <li><a href="#supporters">Official Media Partner</a></li>          
-          <li class="buy-tickets"><a href="#buy-tickets">confirm your attendance</a></li>
+          <li class="buy-tickets"><a href="#buy-tickets">Confirm your attendance</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>

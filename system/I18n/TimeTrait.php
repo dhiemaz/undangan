@@ -73,8 +73,13 @@ trait TimeTrait
      */
     public function __construct(?string $time = null, $timezone = null, ?string $locale = null)
     {
-        $this->locale = $locale !== null && $locale !== '' && $locale !== '0' ? $locale : Locale::getDefault();
-
+        if (class_exists('Locale')) {
+            $this->locale = $locale !== null && $locale !== '' && $locale !== '0' ? $locale : Locale::getDefault();
+        } else {
+            // Fallback to a default locale if the intl extension is not available
+            $this->locale = 'en_US'; // or any other default locale you want to use
+        }
+        
         $time ??= '';
 
         // If a test instance has been provided, use it instead.

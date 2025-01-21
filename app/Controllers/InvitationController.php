@@ -25,7 +25,8 @@ class InvitationController extends BaseController
             
         if ($id == null) {    
             log_message('error', 'InvitationController::show - invitation ID is required.', ['invitationID' => $invitationID]);
-            return redirect()->back()->with('error','invitation ID is required.');
+            $data['attendee'] = null;                
+            return view('rsvp_confirmation', $data);
         } else {
             $model = new AttendeeModel();
 
@@ -34,7 +35,9 @@ class InvitationController extends BaseController
             log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $invitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
             if ($attendee == null) {
                 log_message('error', 'InvitationController::show - attendee not found.', ['invitationID' => $invitationID]);
-                return redirect()->back()->with('error','attendee not found.');
+                
+                $data['attendee'] = null;                
+                return view('rsvp_confirmation', $data);                
             }
             
             $data['attendee'] = $attendee;                

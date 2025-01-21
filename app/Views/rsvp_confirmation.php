@@ -241,7 +241,7 @@
 
 use function PHPUnit\Framework\isNull;
 
- if (!isset($attendee['status'])): ?>
+ if (!isNull($attendee) && !isset($attendee['status'])): ?>
           <form onsubmit="return false;" method="post" action="https://brimicrofinanceoutlook.id/bri-microfinance-2025/invitation/confirm" id="form-submit">
             <input type="hidden" name="_invitationID" value="<?= htmlspecialchars($attendee['hash'], ENT_QUOTES, 'UTF-8'); ?>"   autocomplete="off">                        <input type="hidden" name="dress_code" value="Business Attire (Jas/Blazer)">
             <input type="hidden" name="date" value="<?= date('Y-m-d'); ?>">                        
@@ -328,10 +328,15 @@ use function PHPUnit\Framework\isNull;
               <button class="text-sm font-medium disabled:pointer-events-none disabled:opacity-50 focus:outline-none text-white focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 py-2 rounded-full px-10 bg-black-nightblack hover:bg-gray-500 my-4 transition duration-300" type="submit">SUBMIT</button>
             </div>
           </form>
-        <?php else: ?>
+        <?php elseif (!isNull($attendee) && isset($attendee['status'])): ?>
           <div class="text-center py-6">
             <h2 class="text-xl font-bold">Thank you for your response!</h2>
             <p class="text-gray-600">You have already confirmed your attendance.</p>
+          </div>
+        <?php else: ?>
+          <div class="text-center py-6">
+            <h2 class="text-xl font-bold text-red-600">Invitation Not Found</h2>
+            <p class="text-gray-700">We couldn't find an invitation with the provided ID. Please double-check the invitation code and try again.</p>
           </div>
         <?php endif; ?>        
       </div>
@@ -448,8 +453,7 @@ use function PHPUnit\Framework\isNull;
                         type: 'POST',
                         data: formData,
                         success: function(response) {
-                            if (response.success==true) {
-                                alert(response.message);
+                            if (response.success==true) {                                
                                 window.location.href = response.redirectUrl;
                             } else {
                                 alert(response.message);

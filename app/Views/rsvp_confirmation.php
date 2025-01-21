@@ -239,7 +239,10 @@
 
         <?php
 
-use function PHPUnit\Framework\isNull;
+ use function PHPUnit\Framework\isNull;
+
+ var_dump($attendee);
+ die()
 
  if (!isNull($attendee) && !isset($attendee['status'])): ?>
           <form onsubmit="return false;" method="post" action="https://brimicrofinanceoutlook.id/bri-microfinance-2025/invitation/confirm" id="form-submit">

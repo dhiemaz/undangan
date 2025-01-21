@@ -181,28 +181,20 @@
                             <h3 class="rate-percentage">551</h3>                            
                           </div>
                           <div>
-                            <p class="statistics-title">Confirm attend</p>
+                            <p class="statistics-title">Attend</p>
                             <h3 class="rate-percentage">5</h3>                            
                           </div>
                           <div>
                             <p class="statistics-title">Attend with guests</p>
                             <h3 class="rate-percentage">2</h3>                            
-                          </div>
-                          <div>
-                            <p class="statistics-title">Guests</p>
-                            <h3 class="rate-percentage">4</h3>                            
-                          </div>
+                          </div>                          
                           <div>
                             <p class="statistics-title">Delegate</p>
                             <h3 class="rate-percentage">0</h3>                            
-                          </div>
+                          </div>                                              
                           <div>
-                            <p class="statistics-title">Delegation</p>
+                            <p class="statistics-title">Inattend</p>
                             <h3 class="rate-percentage">0</h3>                            
-                          </div>                          
-                          <div>
-                            <p class="statistics-title">Waiting confirmation</p>
-                            <h3 class="rate-percentage">546</h3>                            
                           </div>                                                                              
                         </div>
                       </div>

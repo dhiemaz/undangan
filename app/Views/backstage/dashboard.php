@@ -481,10 +481,11 @@
         const getStatusBadge = (status) => {
             switch (status.toLowerCase()) {
                 case 'attend':
-                case 'attend with guests':
                     return 'success';
-                case 'delegate':
+                case 'attend with guests':
                     return 'info';
+                case 'delegate':
+                    return 'warning';
                 case 'inattend':
                     return 'danger';
                 default:

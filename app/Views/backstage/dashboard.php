@@ -265,7 +265,7 @@
                                       </div>
                                       <div>
                                         <p class="text-small mb-2">Total Invitations</p>
-                                        <h4 class="mb-0 fw-bold" id="total-invitation">0</h4>
+                                        <h4 class="mb-0 fw-bold" id="total-invitation-chart">0</h4>
                                       </div>
                                     </div>
                                   </div>
@@ -276,7 +276,7 @@
                                       </div>
                                       <div>
                                         <p class="text-small mb-2">Total Confirmed</p>
-                                        <h4 class="mb-0 fw-bold" id="total-confirmed">0</h4>
+                                        <h4 class="mb-0 fw-bold" id="total-confirmed-chart">0</h4>
                                       </div>
                                     </div>
                                   </div>
@@ -362,7 +362,8 @@
                 success: function (response) {
                     // Update the statistics in the DOM
                     $('#total-invitation').text(response.total_invitations);
-                    $('#total-confirmed').text(response.total_confirmed);
+                    $('#total-invitation-chart').text(response.total_invitations);
+                    $('#total-confirmed-chart').text(response.total_confirmed);
                     $('#attend-count').text(response.attend);
                     $('#attend-with-guests-count').text(response.attend_with_guests);
                     $('#delegate-count').text(response.delegates);

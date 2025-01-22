@@ -193,7 +193,7 @@
                       <div class="col-sm-12">
                         <div class="statistics-details d-flex align-items-center justify-content-between">
                           <div>
-                            <p class="statistics-title">Total invitation</p>
+                            <p class="statistics-title">Total invitations</p>
                             <h3 class="rate-percentage" id="total-invitation">0</h3>                            
                           </div>
                           <div>
@@ -265,7 +265,7 @@
                                       </div>
                                       <div>
                                         <p class="text-small mb-2">Total Invitations</p>
-                                        <h4 class="mb-0 fw-bold" id="total-invitation">551</h4>
+                                        <h4 class="mb-0 fw-bold" id="total-invitation">0</h4>
                                       </div>
                                     </div>
                                   </div>
@@ -276,7 +276,7 @@
                                       </div>
                                       <div>
                                         <p class="text-small mb-2">Total Confirmed</p>
-                                        <h4 class="mb-0 fw-bold" id="total-confirmed">5</h4>
+                                        <h4 class="mb-0 fw-bold" id="total-confirmed">0</h4>
                                       </div>
                                     </div>
                                   </div>

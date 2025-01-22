@@ -20706,18 +20706,18 @@ code {
 }
 
 .badge-opacity-info {
-  background: white;
-  color: #1fbeff;
+  background: #8f8eed;
+  color: #e2e2e2;
 }
 
 .badge-opacity-warning {
   background: #fff2d6;
-  color: #cc8c00;
+  color: #e2e2e2;
 }
 
 .badge-opacity-danger {
-  background: white;
-  color: #f73122;
+  background: #ffc480;
+  color: #e2e2e2;
 }
 
 .badge-opacity-light {

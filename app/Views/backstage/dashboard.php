@@ -194,23 +194,23 @@
                         <div class="statistics-details d-flex align-items-center justify-content-between">
                           <div>
                             <p class="statistics-title">Total invitation</p>
-                            <h3 class="rate-percentage">551</h3>                            
+                            <h3 class="rate-percentage" id="total-invitation">0</h3>                            
                           </div>
                           <div>
                             <p class="statistics-title">Attend</p>
-                            <h3 class="rate-percentage">5</h3>                            
+                            <h3 class="rate-percentage" id="attend-count">0</h3>                            
                           </div>
                           <div>
                             <p class="statistics-title">Attend with guests</p>
-                            <h3 class="rate-percentage">2</h3>                            
+                            <h3 class="rate-percentage" id="attend-with-guests-count">0</h3>                            
                           </div>                          
                           <div>
                             <p class="statistics-title">Delegate</p>
-                            <h3 class="rate-percentage">0</h3>                            
+                            <h3 class="rate-percentage" id="delegate-count">0</h3>                            
                           </div>                                              
                           <div>
                             <p class="statistics-title">Inattend</p>
-                            <h3 class="rate-percentage">0</h3>                            
+                            <h3 class="rate-percentage" id="inattend-count">0</h3>                            
                           </div>                                                                              
                         </div>
                       </div>
@@ -223,7 +223,7 @@
                               <div class="card-body">
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                   <div>
-                                    <h4 class="card-title card-title-dash">Invitation List</h4>
+                                    <h4 class="card-title card-title-dash">Invitation update list</h4>
                                    <p class="card-subtitle card-subtitle-dash"></p>
                                   </div>
                                   <div>
@@ -240,94 +240,12 @@
                                         <th>Status</th>
                                       </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr>                                        
-                                        <!-- <td>
-                                          <div class="d-flex center">
-                                            <img src="../../assets/images/man-user-circle-icon.webp" alt="">
-                                            <div class="text-center">
-                                              <h6>Brandon Washington</h6>                                              
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
-                                      </tr>
-                                      <tr>                                        
-                                        <!-- <td>
-                                          <div class="d-flex center">
-                                          <img src="../../assets/images/man-user-circle-icon.webp" alt="">
-                                            <div class="text-center">
-                                              <h6>Brandon Washington</h6>                                              
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
-                                      </tr>
-                                      <tr>                                        
-                                        <!-- <td>
-                                          <div class="d-flex center">
-                                          <img src="../../assets/images/man-user-circle-icon.webp" alt="">
-                                            <div class="text-center">
-                                              <h6>Brandon Washington</h6>                                              
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
-                                      </tr>
-                                      <tr>                                        
-                                        <!-- <td>
-                                          <div class="d-flex center">
-                                          <img src="../../assets/images/man-user-circle-icon.webp" alt="">
-                                            <div class="text-center">
-                                              <h6>Brandon Washington</h6>                                              
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
-                                      </tr>
-                                      <tr>                                        
-                                        <!-- <td>
-                                          <div class="d-flex center">
-                                          <img src="../../assets/images/man-user-circle-icon.webp" alt="">
-                                            <div class="text-center">
-                                              <h6>Brandon Washington</h6>                                              
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td>
-                                          <h6>Head of Engineer</h6>                                          
-                                        </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
-                                      </tr>
+                                    <tbody>                                      
                                     </tbody>
                                   </table>
+                                  <nav>
+                                    <ul class="pagination justify-content-center mt-3"></ul>
+                                  </nav>
                                 </div>
                               </div>
                             </div>                            
@@ -347,7 +265,7 @@
                                       </div>
                                       <div>
                                         <p class="text-small mb-2">Total Invitations</p>
-                                        <h4 class="mb-0 fw-bold">551</h4>
+                                        <h4 class="mb-0 fw-bold" id="total-invitation">551</h4>
                                       </div>
                                     </div>
                                   </div>
@@ -358,7 +276,7 @@
                                       </div>
                                       <div>
                                         <p class="text-small mb-2">Total Confirmed</p>
-                                        <h4 class="mb-0 fw-bold">5</h4>
+                                        <h4 class="mb-0 fw-bold" id="total-confirmed">5</h4>
                                       </div>
                                     </div>
                                   </div>
@@ -366,68 +284,28 @@
                               </div>
                             </div>                            
                           </div>
-                        </div>
-                        <div class="col-12 grid-margin stretch-card">
-                        <div class="card card-rounded">
-                              <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                  <h4 class="card-title card-title-dash">Activities</h4>
-                                  <p class="mb-0">20 finished, 5 remaining</p>
-                                </div>
-                                <ul class="bullet-line-list">
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">Ben Tossell</span> assign you a task</div>
-                                      <p>Just now</p>
+                          <div class="col-md-4 col-lg-12 grid-margin">   
+                            <div class="card card-rounded">
+                                <div class="card-body">
+                                  <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <h4 class="card-title card-title-dash">Activities</h4>
+                                    <!-- <p class="mb-0">20 finished, 5 remaining</p> -->
+                                  </div>
+                                  <ul class="bullet-line-list" id="activity-list">                                                                
+                                  </ul>
+                                  <div class="list align-items-center pt-3">
+                                    <div class="wrapper w-100">
+                                      <p class="mb-0">
+                                        <a class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
+                                      </p>
                                     </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">Oliver Noah</span> assign you a task</div>
-                                      <p>1h</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">Jack William</span> assign you a task</div>
-                                      <p>1h</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">Leo Lucas</span> assign you a task</div>
-                                      <p>1h</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">Thomas Henry</span> assign you a task</div>
-                                      <p>1h</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">Ben Tossell</span> assign you a task</div>
-                                      <p>1h</p>
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="d-flex justify-content-between">
-                                      <div><span class="text-light-green">Ben Tossell</span> assign you a task</div>
-                                      <p>1h</p>
-                                    </div>
-                                  </li>
-                                </ul>
-                                <div class="list align-items-center pt-3">
-                                  <div class="wrapper w-100">
-                                    <p class="mb-0">
-                                      <a href="#" class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
-                                    </p>
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            </div>                                              
+                          </div>
                         </div>
+                        <div class="col-12 grid-margin stretch-card">                        
                       </div>
                     </div>                    
                   </div>
@@ -471,7 +349,153 @@
   <!-- Custom js for this page-->
   <script src="../../assets/js/dashboard.js"></script>
   <script src="../../assets/js/Chart.roundedBarCharts.js"></script>
+
   <!-- End custom js for this page-->
+  <script>
+    $(document).ready(function () {
+        // Function to fetch and update statistics
+        function updateStatistics() {
+            $.ajax({
+                url: '/backstage/api/getSummaryCount', // Replace with your API endpoint
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    // Update the statistics in the DOM
+                    $('#total-invitation').text(response.total_invitations);
+                    $('#total-confirmed').text(response.total_confirmed);
+                    $('#attend-count').text(response.attend);
+                    $('#attend-with-guests-count').text(response.attend_with_guests);
+                    $('#delegate-count').text(response.delegates);
+                    $('#inattend-count').text(response.inattend);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to fetch statistics:', error);
+                }
+            });
+        }
+
+        // Initial call to update statistics
+        updateStatistics();
+
+        // Set interval to refresh data every 3 minutes
+        setInterval(updateStatistics, 180000); // 180000 ms = 3 minutes
+
+        function fetchRecentActivities() {
+            $.ajax({
+                url: '/backstage/api/getRecentActivities', // Replace with your API endpoint
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    const activityList = $('#activity-list');
+                    activityList.empty(); // Clear existing activities
+
+                    response.activities.forEach(activity => {
+                        const timeAgo = calculateTimeAgo(activity.updated_at); // Helper function to calculate time
+                        const listItem = `
+                            <li>
+                                <div class="d-flex justify-content-between">
+                                    <div><span class="text-light-green">${activity.fullname}</span> ${activity.status}</div>
+                                    <p>${timeAgo}</p>
+                                </div>
+                            </li>`;
+                        activityList.append(listItem); // Append new activity
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to fetch activities:', error);
+                }
+            });
+        }
+
+        // Calculate time ago from timestamp
+        function calculateTimeAgo(timestamp) {
+            const activityTime = new Date(timestamp);
+            const now = new Date();
+            const diffMinutes = Math.floor((now - activityTime) / 60000); // Difference in minutes
+
+            if (diffMinutes < 1) return 'Just now';
+            if (diffMinutes < 60) return `${diffMinutes} min ago`;
+            if (diffMinutes < 1440) return `${Math.floor(diffMinutes / 60)} h ago`;
+            return `${Math.floor(diffMinutes / 1440)} d ago`;
+        }
+
+        // Fetch activities on load
+        fetchRecentActivities();
+
+        // Set interval to refresh activities every 3 minutes
+        setInterval(fetchRecentActivities, 180000); // 180000 ms = 3 minutes
+
+        const fetchUpdatedInvitations = (page = 1) => {
+            const perPage = 5; // Items per page
+
+            $.ajax({
+                url: '/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+                method: 'GET',
+                data: { page, perPage }, // Pass pagination parameters
+                dataType: 'json',
+                success: function (response) {
+                    const tbody = $('.select-table tbody');
+                    const pagination = $('.pagination');
+                    tbody.empty(); // Clear existing rows
+                    pagination.empty(); // Clear pagination controls
+
+                    // Populate table rows
+                    response.data.forEach(invitation => {
+                        const tableRow = `
+                            <tr>
+                                <td>${invitation.fullname}</td>
+                                <td>${invitation.position}</td>
+                                <td>${invitation.institution}</td>
+                                <td>
+                                    <div class="badge badge-opacity-${getStatusBadge(invitation.status)}">
+                                        ${invitation.status}
+                                    </div>
+                                </td>
+                            </tr>`;
+                        tbody.append(tableRow);
+                    });
+
+                    // Generate pagination controls
+                    for (let i = 1; i <= response.pagination.totalPages; i++) {
+                        pagination.append(`
+                            <li class="page-item ${i === response.pagination.currentPage ? 'active' : ''}">
+                                <a class="page-link" href="#">${i}</a>
+                            </li>
+                        `);
+                    }
+
+                    // Add click event for pagination links
+                    $('.page-link').on('click', function (e) {
+                        e.preventDefault();
+                        const page = $(this).text();
+                        fetchUpdatedInvitations(page);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to fetch updated invitations:', error);
+                }
+            });
+        };
+
+        // Helper function to determine badge style
+        const getStatusBadge = (status) => {
+            switch (status.toLowerCase()) {
+                case 'attend':
+                case 'attend with guests':
+                    return 'success';
+                case 'delegate':
+                    return 'info';
+                case 'inattend':
+                    return 'danger';
+                default:
+                    return 'warning';
+            }
+        };
+
+        // Fetch updated invitations on page load
+        fetchUpdatedInvitations();
+    });
+</script>
 </body>
 
-</html>
+</html> 

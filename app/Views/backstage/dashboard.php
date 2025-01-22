@@ -6,6 +6,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>BRI Microfinance Outlook 2025 Backstage </title>
+  
+  <!-- external icon -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../assets/lib/feather/feather.css">
   <link rel="stylesheet" href="../../assets/lib/mdi/css/materialdesignicons.min.css">
@@ -23,7 +27,7 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="../../assets/images/favicon.png" />
 </head>
-<body>
+<body class="sidebar-dark">
   <div class="container-scroller"> 
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
@@ -130,6 +134,18 @@
           </li>                              
           <li class="nav-item nav-category">pages</li>
           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#datasheet" aria-expanded="false" aria-controls="datasheet">
+              <i class="menu-icon mdi mdi-google-spreadsheet"></i>
+              <span class="menu-title">Attendees List</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="datasheet">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="https://docs.google.com/spreadsheets/d/1yrYbzNa6bzlDp6gsr6YGFfrwz3vU5E4oVci96M-BpR0/edit?usp=sharing" target="_blank"> Google Sheet </a></li>
+              </ul>
+            </div>
+          </li>     
+          <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
               <span class="menu-title">User Pages</span>
@@ -226,7 +242,7 @@
                                     </thead>
                                     <tbody>
                                       <tr>                                        
-                                        <td>
+                                        <!-- <td>
                                           <div class="d-flex center">
                                             <img src="../../assets/images/man-user-circle-icon.webp" alt="">
                                             <div class="text-center">
@@ -240,10 +256,10 @@
                                         <td>
                                           <h6>Head of Engineer</h6>                                          
                                         </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td>
+                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
                                       </tr>
                                       <tr>                                        
-                                        <td>
+                                        <!-- <td>
                                           <div class="d-flex center">
                                           <img src="../../assets/images/man-user-circle-icon.webp" alt="">
                                             <div class="text-center">
@@ -257,10 +273,10 @@
                                         <td>
                                           <h6>Head of Engineer</h6>                                          
                                         </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td>
+                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
                                       </tr>
                                       <tr>                                        
-                                        <td>
+                                        <!-- <td>
                                           <div class="d-flex center">
                                           <img src="../../assets/images/man-user-circle-icon.webp" alt="">
                                             <div class="text-center">
@@ -274,10 +290,10 @@
                                         <td>
                                           <h6>Head of Engineer</h6>                                          
                                         </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td>
+                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
                                       </tr>
                                       <tr>                                        
-                                        <td>
+                                        <!-- <td>
                                           <div class="d-flex center">
                                           <img src="../../assets/images/man-user-circle-icon.webp" alt="">
                                             <div class="text-center">
@@ -291,10 +307,10 @@
                                         <td>
                                           <h6>Head of Engineer</h6>                                          
                                         </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td>
+                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
                                       </tr>
                                       <tr>                                        
-                                        <td>
+                                        <!-- <td>
                                           <div class="d-flex center">
                                           <img src="../../assets/images/man-user-circle-icon.webp" alt="">
                                             <div class="text-center">
@@ -308,7 +324,7 @@
                                         <td>
                                           <h6>Head of Engineer</h6>                                          
                                         </td>
-                                        <td><div class="badge badge-opacity-warning">In progress</div></td>
+                                        <td><div class="badge badge-opacity-warning">In progress</div></td> -->
                                       </tr>
                                     </tbody>
                                   </table>

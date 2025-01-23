@@ -19,8 +19,7 @@
   <link rel="stylesheet" href="../../assets/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="../../assets/css/datatables.net-bs4/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="../../assets/css/select.dataTables.min.css">
+  <link href="https://cdn.datatables.net/v/bs4/dt-2.2.1/sl-3.0.0/datatables.min.css" rel="stylesheet">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../../assets/css/vertical-layout-light/style.css">
@@ -496,6 +495,9 @@
 
         // Fetch updated invitations on page load
         fetchUpdatedInvitations();
+
+        // Set interval to refresh activities every 3 minutes
+        setInterval(fetchUpdatedInvitations, 180000); // 180000 ms = 3 minutes
     });
 </script>
 </body>

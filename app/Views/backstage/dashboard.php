@@ -226,7 +226,7 @@
                                    <p class="card-subtitle card-subtitle-dash"></p>
                                   </div>
                                   <div>
-                                    <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-ref"></i>Refresh</button>
+                                    <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button" onclick="fetchUpdatedInvitations()"><i class="mdi mdi-ref"></i>Refresh</button>
                                   </div>
                                 </div>
                                 <div class="table-responsive  mt-1">
@@ -497,7 +497,7 @@
         fetchUpdatedInvitations();
 
         // Set interval to refresh activities every 3 minutes
-        setInterval(fetchUpdatedInvitations, 180000); // 180000 ms = 3 minutes
+        setInterval(fetchUpdatedInvitations, 300000); // 300000 ms = 5 minutes
     });
 </script>
 </body>

@@ -563,7 +563,7 @@
     // Function to fetch and update statistics
     function updateStatistics() {
             $.ajax({
-                url: '/backstage/api/getSummaryCount', // Replace with your API endpoint
+                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getSummaryCount', // Replace with your API endpoint
                 method: 'GET',
                 dataType: 'json',
                 success: function (response) {
@@ -584,7 +584,7 @@
 
         function fetchRecentActivities() {
             $.ajax({
-                url: '/backstage/api/getRecentActivities', // Replace with your API endpoint
+                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getRecentActivities', // Replace with your API endpoint
                 method: 'GET',
                 dataType: 'json',
                 success: function (response) {
@@ -626,7 +626,7 @@
             const perPage = 5; // Items per page
 
             $.ajax({
-                url: '/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
                 method: 'GET',
                 data: { page, perPage }, // Pass pagination parameters
                 dataType: 'json',
@@ -681,7 +681,7 @@
             const perPage = 20; // Items per page
 
             $.ajax({
-                url: '/backstage/api/getAllInvitations', // Replace with your API endpoint
+                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
                 method: 'GET',
                 data: { page, perPage }, // Pass pagination parameters
                 dataType: 'json',
@@ -735,7 +735,7 @@
             const perPage = 20; // Items per page
 
             $.ajax({
-                url: '/backstage/api/getInvitationGuests', // Replace with your API endpoint
+                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationGuests', // Replace with your API endpoint
                 method: 'GET',
                 data: { page, perPage }, // Pass pagination parameters
                 dataType: 'json',
@@ -784,7 +784,7 @@
             const perPage = 20; // Items per page
 
             $.ajax({
-                url: '/backstage/api/getInvitationDelegation', // Replace with your API endpoint
+                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationDelegation', // Replace with your API endpoint
                 method: 'GET',
                 data: { page, perPage }, // Pass pagination parameters
                 dataType: 'json',

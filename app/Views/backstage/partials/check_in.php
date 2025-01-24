@@ -24,7 +24,11 @@
                     <div class="form-group">
                         <label for="InputCompany">Company</label>
                         <input type="text" disabled="true" class="form-control" id="InputCompany" placeholder="-">
-                    </div>     
+                    </div>                       
+                    <div class="form-group">
+                        <label for="InputStatus">Status</label>
+                        <button type="button" id="statusButton" class="btn btn-success">-</button>
+                    </div>   
                     
                     <button type="submit" class="btn btn-success btn-rounded btn-fw">Check-In</button>                    
                     <button type="button" id="reset" class="btn btn-warning btn-rounded btn-fw">Reset</button>

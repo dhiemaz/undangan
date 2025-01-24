@@ -453,6 +453,15 @@
 
     // Function to start scanning
     async function startScanning() {
+      document.getElementById("InputFullname").value = "";
+      document.getElementById("InputPosition").value = "";
+      document.getElementById("InputCompany").value = ""; 
+      const button = document.getElementById("statusButton");
+      // Remove existing color classes
+      button.classList.remove("btn-success", "btn-danger", "btn-warning", "btn-primary");
+      button.classList.add("btn-secondary");
+      button.textContent = "NA";
+      
       try {
         const devices = await Html5Qrcode.getCameras(); // Get list of available cameras
         if (devices && devices.length) {
@@ -494,9 +503,17 @@
           resultContainer.textContent.value = `QR Code Content: ${decodedText}`;
       }
 
+      //https://brimicrofinanceoutlook.id/bri-microfinance-2025/invitation/WpNRCRmdntxINbSNZWuK6ZIuw
 
-      console.log("Decoded result:", decodedResult);
-      alert("Decoded result:", decodedResult.decodedText);
+      // Create a URL object
+      const urlObj = new URL(decodedResult.decodedText);
+
+      // Extract the token from the pathname
+      const pathSegments = urlObj.pathname.split("/");
+      const token = pathSegments[pathSegments.length - 1];
+      console.log("Decoded result:", token); 
+      getInvitationDetail(token);    
+      
       // Optionally stop scanning after successful detection
       stopScanning();
     }
@@ -582,6 +599,45 @@
     // Attach event listeners to buttons
     //startButton.addEventListener("click", startScanning);
     //stopButton.addEventListener("click", stopScanning);
+
+    function getInvitationDetail(token) {
+            $.ajax({
+                url: 'http://localhost:8080/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                  console.log(response);
+                  document.getElementById("InputFullname").value = response.data.fullname;
+                  document.getElementById("InputPosition").value = response.data.position;
+                  document.getElementById("InputCompany").value = response.data.institution; 
+                  const button = document.getElementById("statusButton");
+
+                  // Remove existing color classes
+                  button.classList.remove("btn-success", "btn-danger", "btn-warning", "btn-primary");
+                  // Change the button's text and color based on the status
+                  switch (response.data.status) {
+                    case "attend":
+                        button.classList.add("btn-success");
+                        button.textContent = response.data.status;
+                        break;                    
+                    case "delegate":
+                        button.classList.add("btn-warning");
+                        button.textContent = response.data.status;
+                        break;
+                    case "attend with guests":
+                        button.classList.add("btn-primary");
+                        button.textContent = response.data.status;
+                        break;
+                    default:
+                        button.classList.add("btn-secondary");
+                        button.textContent = "unconfirmed";
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to fetch statistics:', error);
+                }
+            });
+        }
 
     // Function to fetch and update statistics
     function updateStatistics() {

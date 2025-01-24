@@ -203,4 +203,42 @@ class BackStageController extends BaseController
             ],
         ]);
     }
+
+    public function getInvitationData($id = null){
+        $invitationID = preg_replace_callback(
+            '/[^a-zA-Z0-9_\-\.]/',
+            function ($matches) {
+                return '%' . strtoupper(dechex(ord($matches[0])));
+            },
+            $id
+        );
+        
+        $invitationID = rawurldecode($invitationID);
+
+        log_message('info', 'BackstageController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $invitationID]), ['id' => $invitationID]);
+            
+        if ($id == null) {    
+            log_message('error', 'BackstageController::show - invitation ID is required.', ['invitationID' => $invitationID]);
+            return $this->response->setJSON([
+                    'data' => null,
+            ],400);
+        } else {
+            $model = new AttendeeModel();
+
+            //$decodedInvitationID = urldecode($encodedInvitationID);
+            $attendee = $model->getAttendee(  rawurldecode($invitationID));  
+            log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $invitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
+            if ($attendee == null) {
+                log_message('error', 'InvitationController::show - attendee not found.', ['invitationID' => $invitationID]);
+                
+                return $this->response->setJSON([
+                    'data' => null,
+            ],404);              
+            }
+            
+            return $this->response->setJSON([
+                'data' => $attendee,
+        ],unencoded: 200);  
+        }
+    }
 }

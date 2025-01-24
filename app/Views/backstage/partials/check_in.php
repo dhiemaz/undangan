@@ -30,7 +30,7 @@
                         <button type="button" id="statusButton" class="btn btn-success">-</button>
                     </div>   
                     
-                    <button type="submit" class="btn btn-success btn-rounded btn-fw">Check-In</button>                    
+                    <button type="submit" id="check-in" class="btn btn-success btn-rounded btn-fw">Check-In</button>                    
                     <button type="button" id="reset" class="btn btn-warning btn-rounded btn-fw">Reset</button>
                 </form>
             </div>

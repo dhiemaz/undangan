@@ -53,7 +53,7 @@
                                     </tbody>
                                   </table>
                                   <nav>
-                                    <ul class="pagination justify-content-center mt-3"></ul>
+                                    <ul class="pagination justify-content-center mt-3" id="pagination-updated-invitations"></ul>
                                   </nav>
                                 </div>
                               </div>

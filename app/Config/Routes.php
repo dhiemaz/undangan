@@ -15,7 +15,16 @@ $routes->get('/backstage/dashboard', 'BackstageController::dashboard');
 $routes->post('/backstage/login/authenticate', 'LoginController::authenticate');
 $routes->get('/backstage/logout', 'LoginController::logout');
 
+$routes->get('/backstage/dashboard/tabs/overview', 'BackstageController::overview');
+$routes->get('/backstage/dashboard/tabs/invitations', 'BackstageController::invitations');
+$routes->get('/backstage/dashboard/tabs/guests', 'BackstageController::guests');
+$routes->get('/backstage/dashboard/tabs/delegations', 'BackstageController::delegations');
+$routes->get('/backstage/dashboard/tabs/check_in', 'BackstageController::checkIn');
+
 // Backstage API
 $routes->get('/backstage/api/getSummaryCount', 'BackstageController::getSummaryCount');
 $routes->get('/backstage/api/getRecentActivities', 'BackstageController::getRecentActivities');
 $routes->get('/backstage/api/getUpdatedInvitations', 'BackstageController::getUpdatedInvitations');
+$routes->get('/backstage/api/getAllInvitations', 'BackstageController::getAllInvitations');
+$routes->get('/backstage/api/getInvitationGuests', 'BackstageController::getInvitationGuests');
+$routes->get('/backstage/api/getInvitationDelegation', 'BackstageController::getInvitationDelegation');

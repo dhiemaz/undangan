@@ -17,6 +17,31 @@ class BackStageController extends BaseController
         return view('backstage/dashboard'); // Load the login form view
     }
 
+    public function invitations()
+    {        
+        return view('backstage/partials/invitations'); // Return a view
+    }
+
+    public function guests()
+    {        
+        return view('backstage/partials/guests'); // Return a view
+    }
+
+    public function delegations()
+    {        
+        return view('backstage/partials/delegations'); // Return a view
+    }
+
+    public function overview()
+    {        
+        return view('backstage/partials/overview'); // Return a view
+    }
+
+    public function checkIn()
+    {        
+        return view('backstage/partials/check_in'); // Return a view
+    }
+
     public function getSummaryCount()
     {
         $attendeeModel = new AttendeeModel();
@@ -54,6 +79,99 @@ class BackStageController extends BaseController
 
         // Return JSON response
         return $this->response->setJSON(['activities' => $activities]);
+    }
+
+    public function getAllInvitations()
+    {
+        $attendeeModel = new AttendeeModel();
+
+        log_message(
+            'info', 
+        'BackstageController::getAllInvitations'); 
+        
+        // Get pagination parameters from the request
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 20;
+
+        // Fetch paginated data
+        $updatedInvitations = $attendeeModel
+            ->select('fullname, position, institution, status')            
+            ->orderBy('fullname', 'ASC')
+            ->paginate($perPage, 'default', $page);
+
+        $total = $attendeeModel->countAllResults();
+
+        return $this->response->setJSON([
+            'data' => $updatedInvitations,
+            'pagination' => [
+                'currentPage' => $page,
+                'perPage' => $perPage,
+                'totalPages' => ceil($total / $perPage),
+                'totalItems' => $total,
+            ],
+        ]);
+    }
+
+    public function getInvitationGuests()
+    {
+        $guestModel = new GuestModel();
+
+        log_message(
+            'info', 
+        'BackstageController::getInvitationGuests'); 
+        
+        // Get pagination parameters from the request
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 20;
+
+        // Fetch paginated data
+        $invitationGuests = $guestModel
+            ->select('guests.fullname as fullname, guests.position as position, attendees.fullname as attendee_name')    
+            ->join('attendees', 'attendees.id = guests.attendee_id', 'inner')                    
+            ->paginate($perPage, 'default', $page);
+
+        $total = $guestModel->countAllResults();
+
+        return $this->response->setJSON([
+            'data' => $invitationGuests,
+            'pagination' => [
+                'currentPage' => $page,
+                'perPage' => $perPage,
+                'totalPages' => ceil($total / $perPage),
+                'totalItems' => $total,
+            ],
+        ]);
+    }
+
+    public function getInvitationDelegation()
+    {
+        $delegationModel = new DelegateModel();
+
+        log_message(
+            'info', 
+        'BackstageController::getInvitationDelegation'); 
+        
+        // Get pagination parameters from the request
+        $page = $this->request->getGet('page') ?? 1;
+        $perPage = $this->request->getGet('perPage') ?? 20;
+
+        // Fetch paginated data
+        $invitationDelegation = $delegationModel
+            ->select('delegations.fullname as fullname, delegations.position as position, attendees.fullname as attendee_name')    
+            ->join('attendees', 'attendees.id = delegations.attendee_id', 'inner')                    
+            ->paginate($perPage, 'default', $page);
+
+        $total = $delegationModel->countAllResults();
+
+        return $this->response->setJSON([
+            'data' => $invitationDelegation,
+            'pagination' => [
+                'currentPage' => $page,
+                'perPage' => $perPage,
+                'totalPages' => ceil($total / $perPage),
+                'totalItems' => $total,
+            ],
+        ]);
     }
 
     public function getUpdatedInvitations()

@@ -25,6 +25,13 @@
   <link rel="stylesheet" href="../../assets/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+  <style>    
+    #scanner-container {
+      margin: 20px auto;
+      width: 80%;
+      max-width: 500px;
+    }
+  </style>
 </head>
 <body class="sidebar-dark">
   <div class="container-scroller"> 
@@ -133,6 +140,18 @@
           </li>                              
           <li class="nav-item nav-category">pages</li>
           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#attendees" aria-expanded="false" aria-controls="attendees">
+              <i class="menu-icon mdi mdi-checkbox-marked-circle-outline"></i>
+              <span class="menu-title">Check-In</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="attendees">
+              <ul class="nav flex-column sub-menu">          
+                <li class="nav-item"><a class="nav-link" id="check-in" data-bs-toggle="tab" href="/backstage/dashboard/tabs/check_in" data-content-target="#overview" role="tab" aria-selected="false">Invitation check-in</a></li>
+              </ul>
+            </div>
+          </li>    
+          <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#datasheet" aria-expanded="false" aria-controls="datasheet">
               <i class="menu-icon mdi mdi-google-spreadsheet"></i>
               <span class="menu-title">Attendees List</span>
@@ -167,16 +186,16 @@
                 <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                      <a class="nav-link active ps-0" id="overview-tab" data-bs-toggle="tab" href="/backstage/dashboard/tabs/overview" data-content-target="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences" role="tab" aria-selected="false">Invitations</a>
+                      <a class="nav-link" id="invitations-tab" data-bs-toggle="tab" href="/backstage/dashboard/tabs/invitations" data-content-target="#overview" role="tab" aria-selected="false">Invitations</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab" aria-selected="false">Guests</a>
+                      <a class="nav-link" id="guests-tab" data-bs-toggle="tab" href="/backstage/dashboard/tabs/guests" data-content-target="#overview" role="tab" aria-selected="false">Guests</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab" aria-selected="false">Delegations</a>
+                      <a class="nav-link border-0" id="delegations-tab" data-bs-toggle="tab" href="/backstage/dashboard/tabs/delegations" data-content-target="#overview" role="tab" aria-selected="false">Delegations</a>
                     </li>
                   </ul>
                   <div>
@@ -186,6 +205,7 @@
                     </div>
                   </div>
                 </div>
+                <!-- content -->
                 <div class="tab-content tab-content-basic">
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                     <div class="row">
@@ -243,7 +263,7 @@
                                     </tbody>
                                   </table>
                                   <nav>
-                                    <ul class="pagination justify-content-center mt-3"></ul>
+                                    <ul class="pagination justify-content-center mt-3" id="pagination-updated-invitations"></ul>
                                   </nav>
                                 </div>
                               </div>
@@ -308,7 +328,9 @@
                       </div>
                     </div>                    
                   </div>
-                </div>
+                  <div id="scanner-container"></div>                
+                  <!-- content-wrapper ends -->                  
+                </div>                
               </div>
             </div>
           </div>
@@ -348,14 +370,200 @@
   <!-- Custom js for this page-->
   <script src="../../assets/js/dashboard.js"></script>
   <script src="../../assets/js/Chart.roundedBarCharts.js"></script>
+  <script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>
 
   <!-- End custom js for this page-->
   <script>
-    $(document).ready(function () {
-        // Function to fetch and update statistics
-        function updateStatistics() {
+    let updateStatisticsInterval; // Store the interval ID
+    let recentActivityInterval;
+    let fetchUpdatedInvitationsInterval;
+    let fetchAllInvitationsInterval;
+    let fetchInvitationGuestsInterval;
+    let fetchInvitationDelegationInterval;
+
+    function initializeOverviewIntervals() {
+      if (!updateStatisticsInterval) {
+          updateStatisticsInterval = setInterval(updateStatistics, 180000); // Every 3 minutes
+      }
+
+      if (!recentActivityInterval) {
+          recentActivityInterval = setInterval(fetchRecentActivities, 180000); // Every 3 minutes
+      }
+
+      if (!fetchUpdatedInvitationsInterval) {
+          recentActivityInterval = setInterval(fetchUpdatedInvitations, 300000); // Every 5 minutes
+      }      
+    }
+
+    function initializeInvitationsIntervals() {
+      if (!fetchAllInvitationsInterval) {
+        fetchAllInvitationsInterval = setInterval(fetchAllInvitations, 300000); // Every 5 minutes
+      }
+    }
+
+    function initializeInvitationGuestsIntervals() {
+      if (!fetchInvitationGuestsInterval) {
+        fetchInvitationGuestsInterval = setInterval(fetchInvitationGuests, 300000); // Every 5 minutes
+      }
+    }
+
+    function initializeInvitationDelegationIntervals() {
+      if (!fetchInvitationGuestsInterval) {
+        fetchInvitationGuestsInterval = setInterval(fetchInvitationGuests, 300000); // Every 5 minutes
+      }
+    }
+
+
+    function clearIntervals() {
+      if (updateStatisticsInterval) {
+        clearInterval(updateStatisticsInterval);
+        updateStatisticsInterval = null; // Reset the interval ID
+      }
+
+      if (recentActivityInterval) {
+        clearInterval(recentActivityInterval);
+        recentActivityInterval = null; // Reset the interval ID
+      }
+
+      if (fetchUpdatedInvitationsInterval) {
+        clearInterval(fetchUpdatedInvitationsInterval);
+        fetchUpdatedInvitationsInterval = null; // Reset the interval ID
+      }
+
+      if (fetchAllInvitationsInterval) {
+        clearInterval(fetchAllInvitationsInterval);
+        fetchAllInvitationsInterval = null; // Reset the interval ID
+      }
+
+      if (fetchInvitationGuestsInterval) {
+        clearInterval(fetchInvitationGuestsInterval);
+        fetchInvitationGuestsInterval = null; // Reset the interval ID
+      }
+
+      if (fetchInvitationDelegationInterval) {
+        clearInterval(fetchInvitationDelegationInterval);
+        fetchInvitationDelegationInterval = null; // Reset the interval ID
+      }
+    }
+
+    // Initialize the scanner once
+    const scanner = new Html5Qrcode("scanner-container");
+    let currentCameraId;
+
+    // Function to start scanning
+    async function startScanning() {
+      try {
+        const devices = await Html5Qrcode.getCameras(); // Get list of available cameras
+        if (devices && devices.length) {
+          // Use the first camera in the list
+          currentCameraId = devices[0].id;
+          console.log("Using camera ID:", currentCameraId);
+
+          // Start the QR code scanner with the selected camera
+          await scanner.start(
+            currentCameraId, // Pass the camera ID
+            { fps: 10, qrbox: { width: 250, height: 250 } }, // Set scan options
+            onScanSuccess,
+            onScanError
+          );
+        } else {
+          console.log("No cameras found.");
+        }
+      } catch (err) {
+          console.error("Error starting scanner:", err);
+      }
+    }
+
+    // Function to stop scanning
+    function stopScanning() {
+      scanner
+        .stop()
+        .then(() => {
+          console.log("Scanner stopped.");
+        })
+      .catch((err) => {
+          console.error("Error stopping scanner:", err);
+      });
+    }
+
+    // Handlers for scan success and errors
+    function onScanSuccess(decodedText, decodedResult) {
+      const resultContainer = document.getElementById("InputFullname");
+      if (resultContainer) {
+          resultContainer.textContent = `QR Code Content: ${decodedText}`;
+      }
+      console.log("Decoded result:", decodedResult);
+      // Optionally stop scanning after successful detection
+      stopScanning();
+    }
+
+    function onScanError(errorMessage) {
+      //console.warn("Scan error:", errorMessage);
+    }
+
+    // Call this function on tab switch
+    function handleTabSwitch(id) {
+      // clear intervals
+      clearIntervals();      
+      if (id === 'overview-tab') {
+        stopScanning();
+        // reinitialize intervals
+        initializeOverviewIntervals();  
+        // update statistics
+        updateStatistics();
+        // Fetch activities
+        fetchRecentActivities();
+        // Fetch updated invitations
+        fetchUpdatedInvitations();
+      }
+
+      if (id === 'invitations-tab') {
+        stopScanning();
+        // reinitialize intervals
+        initializeInvitationsIntervals(); 
+        // fetchAllInvitations
+        fetchAllInvitations();
+      }
+
+      if (id === 'guests-tab') {
+        stopScanning();
+        // reinitialize intervals
+        initializeInvitationGuestsIntervals(); 
+        // fetchAllInvitations
+        fetchInvitationGuests();
+      }
+
+      if (id === 'delegations-tab') {
+        stopScanning();
+        // reinitialize intervals
+        initializeInvitationDelegationIntervals(); 
+        // fetchAllInvitations
+        fetchInvitationDelegation();        
+      }
+
+      if (id === 'delegations-tab') {
+        stopScanning();
+        // reinitialize intervals
+        initializeInvitationDelegationIntervals(); 
+        // fetchAllInvitations
+        fetchInvitationDelegation();
+      }
+
+      if (id === 'check-in') {
+        const resultContainer = document.getElementById("InputFullname");
+        const resetButton = document.getElementById("reset");      
+        startScanning();
+      }        
+    }
+
+    // Attach event listeners to buttons
+    //startButton.addEventListener("click", startScanning);
+    //stopButton.addEventListener("click", stopScanning);
+
+    // Function to fetch and update statistics
+    function updateStatistics() {
             $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getSummaryCount', // Replace with your API endpoint
+                url: '/backstage/api/getSummaryCount', // Replace with your API endpoint
                 method: 'GET',
                 dataType: 'json',
                 success: function (response) {
@@ -374,15 +582,9 @@
             });
         }
 
-        // Initial call to update statistics
-        updateStatistics();
-
-        // Set interval to refresh data every 3 minutes
-        setInterval(updateStatistics, 180000); // 180000 ms = 3 minutes
-
         function fetchRecentActivities() {
             $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getRecentActivities', // Replace with your API endpoint
+                url: '/backstage/api/getRecentActivities', // Replace with your API endpoint
                 method: 'GET',
                 dataType: 'json',
                 success: function (response) {
@@ -419,23 +621,18 @@
             return `${Math.floor(diffMinutes / 1440)} d ago`;
         }
 
-        // Fetch activities on load
-        fetchRecentActivities();
-
-        // Set interval to refresh activities every 3 minutes
-        setInterval(fetchRecentActivities, 180000); // 180000 ms = 3 minutes
-
+        // Function to fetch updated invitations
         const fetchUpdatedInvitations = (page = 1) => {
             const perPage = 5; // Items per page
 
             $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+                url: '/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
                 method: 'GET',
                 data: { page, perPage }, // Pass pagination parameters
                 dataType: 'json',
                 success: function (response) {
                     const tbody = $('.select-table tbody');
-                    const pagination = $('.pagination');
+                    const pagination = $('#pagination-updated-invitations');
                     tbody.empty(); // Clear existing rows
                     pagination.empty(); // Clear pagination controls
 
@@ -477,6 +674,161 @@
             });
         };
 
+        
+
+      // Function to fetch updated invitations
+      const fetchAllInvitations = (page = 1) => {
+            const perPage = 20; // Items per page
+
+            $.ajax({
+                url: '/backstage/api/getAllInvitations', // Replace with your API endpoint
+                method: 'GET',
+                data: { page, perPage }, // Pass pagination parameters
+                dataType: 'json',
+                success: function (response) {
+                    const tbody = $('.table-hover tbody');
+                    const pagination = $('#pagination-invitations');
+                    tbody.empty(); // Clear existing rows
+                    pagination.empty(); // Clear pagination controls
+
+                    console.log(response);
+
+                    // Populate table rows
+                    response.data.forEach(invitation => {
+                        const tableRow = `
+                            <tr>
+                                <td>${invitation.fullname}</td>
+                                <td>${invitation.position}</td>
+                                <td>${invitation.institution}</td>
+                                <td>
+                                    <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
+                                      ${invitation.status || 'unconfirmed'}
+                                    </div>
+                                </td>
+                            </tr>`;
+                        tbody.append(tableRow);
+                    });
+
+                    // Generate pagination controls
+                    for (let i = 1; i <= response.pagination.totalPages; i++) {
+                        pagination.append(`
+                            <li class="page-item ${i === response.pagination.currentPage ? 'active' : ''}">
+                                <a class="page-link" href="#">${i}</a>
+                            </li>
+                        `);
+                    }
+
+                    // Add click event for pagination links
+                    $('.page-link').on('click', function (e) {
+                        e.preventDefault();
+                        const page = $(this).text();
+                        fetchAllInvitations(page);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to fetch updated invitations:', error);
+                }
+            });
+        };
+
+        const fetchInvitationGuests = (page = 1) => {
+            const perPage = 20; // Items per page
+
+            $.ajax({
+                url: '/backstage/api/getInvitationGuests', // Replace with your API endpoint
+                method: 'GET',
+                data: { page, perPage }, // Pass pagination parameters
+                dataType: 'json',
+                success: function (response) {
+                    const tbody = $('.table-hover tbody');
+                    const pagination = $('#pagination-guests');
+                    tbody.empty(); // Clear existing rows
+                    pagination.empty(); // Clear pagination controls
+
+                    console.log(response);
+
+                    // Populate table rows
+                    response.data.forEach(invitation => {
+                        const tableRow = `
+                            <tr>
+                                <td>${invitation.fullname}</td>
+                                <td>${invitation.position}</td>
+                                <td>${invitation.attendee_name}</td>                                
+                            </tr>`;
+                        tbody.append(tableRow);
+                    });
+
+                    // Generate pagination controls
+                    for (let i = 1; i <= response.pagination.totalPages; i++) {
+                        pagination.append(`
+                            <li class="page-item ${i === response.pagination.currentPage ? 'active' : ''}">
+                                <a class="page-link" href="#">${i}</a>
+                            </li>
+                        `);
+                    }
+
+                    // Add click event for pagination links
+                    $('.page-link').on('click', function (e) {
+                        e.preventDefault();
+                        const page = $(this).text();
+                        fetchInvitationGuests(page);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to fetch updated invitations:', error);
+                }
+            });
+        };
+
+        const fetchInvitationDelegation = (page = 1) => {
+            const perPage = 20; // Items per page
+
+            $.ajax({
+                url: '/backstage/api/getInvitationDelegation', // Replace with your API endpoint
+                method: 'GET',
+                data: { page, perPage }, // Pass pagination parameters
+                dataType: 'json',
+                success: function (response) {
+                    const tbody = $('.table-hover tbody');
+                    const pagination = $('#pagination-delegations');
+                    tbody.empty(); // Clear existing rows
+                    pagination.empty(); // Clear pagination controls
+
+                    console.log(response);
+
+                    // Populate table rows
+                    response.data.forEach(invitation => {
+                        const tableRow = `
+                            <tr>
+                                <td>${invitation.fullname}</td>
+                                <td>${invitation.position}</td>
+                                <td>${invitation.attendee_name}</td>                                
+                            </tr>`;
+                        tbody.append(tableRow);
+                    });
+
+                    // Generate pagination controls
+                    for (let i = 1; i <= response.pagination.totalPages; i++) {
+                        pagination.append(`
+                            <li class="page-item ${i === response.pagination.currentPage ? 'active' : ''}">
+                                <a class="page-link" href="#">${i}</a>
+                            </li>
+                        `);
+                    }
+
+                    // Add click event for pagination links
+                    $('.page-link').on('click', function (e) {
+                        e.preventDefault();
+                        const page = $(this).text();
+                        fetchInvitationDelegation(page);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to fetch updated invitations:', error);
+                }
+            });
+        };
+
         // Helper function to determine badge style
         const getStatusBadge = (status) => {
             switch (status.toLowerCase()) {
@@ -493,11 +845,52 @@
             }
         };
 
+
+    $(document).ready(function () {
+        // Initial call to update statistics
+        updateStatistics();
+        // Fetch activities on load
+        fetchRecentActivities();
         // Fetch updated invitations on page load
         fetchUpdatedInvitations();
 
+
+        // Set interval to refresh data every 3 minutes
+        setInterval(updateStatistics, 180000); // 180000 ms = 3 minutes
+        // Set interval to refresh activities every 3 minutes
+        setInterval(fetchRecentActivities, 180000); // 180000 ms = 3 minutes
         // Set interval to refresh activities every 3 minutes
         setInterval(fetchUpdatedInvitations, 300000); // 300000 ms = 5 minutes
+
+        // Add the new script here
+        document.querySelectorAll('.nav-link').forEach(tab => {
+            tab.addEventListener('click', function (event) {
+                const contentTarget = this.getAttribute('data-content-target');
+                const url = this.getAttribute('href');
+                const id = this.getAttribute('id');
+
+                if (contentTarget && url) {
+                    fetch(url)
+                        .then(response => {                          
+                            if (response.ok) {
+                                return response.text();
+                            } else {
+                                throw new Error('Failed to load content');
+                            }
+                        })
+                        .then(html => {
+                            document.querySelector(contentTarget).innerHTML = html;
+                            // Reinitialize functionality for the loaded content
+                            handleTabSwitch(id);
+                        })
+                        .catch(error => {
+                            console.error('Error loading content:', error);
+                            document.querySelector(contentTarget).innerHTML = `<p class="text-danger">Error loading content</p>`;
+                        });
+                }
+                event.preventDefault();
+            });
+        });
     });
 </script>
 </body>

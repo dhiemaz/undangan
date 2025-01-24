@@ -496,7 +496,7 @@
 
 
       console.log("Decoded result:", decodedResult);
-      alert("Decoded result:", decodedText);
+      alert("Decoded result:", decodedResult.result.text);
       // Optionally stop scanning after successful detection
       stopScanning();
     }

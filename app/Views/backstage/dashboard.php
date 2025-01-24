@@ -459,8 +459,11 @@
       const button = document.getElementById("statusButton");
       // Remove existing color classes
       button.classList.remove("btn-success", "btn-danger", "btn-warning", "btn-primary");
-      button.classList.add("btn-secondary");
+      button.classList.add("btn-secondary");      
       button.textContent = "NA";
+
+      const buttonCheckIn = document.getElementById("check-in");
+      buttonCheckIn.disabled = true;
       
       try {
         const devices = await Html5Qrcode.getCameras(); // Get list of available cameras
@@ -602,7 +605,7 @@
 
     function getInvitationDetail(token) {
             $.ajax({
-                url: 'http://localhost:8080/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
+                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
                 method: 'GET',
                 dataType: 'json',
                 success: function (response) {
@@ -611,6 +614,7 @@
                   document.getElementById("InputPosition").value = response.data.position;
                   document.getElementById("InputCompany").value = response.data.institution; 
                   const button = document.getElementById("statusButton");
+                  const checkInButton = document.getElementById("check-in");
 
                   // Remove existing color classes
                   button.classList.remove("btn-success", "btn-danger", "btn-warning", "btn-primary");
@@ -631,6 +635,7 @@
                     default:
                         button.classList.add("btn-secondary");
                         button.textContent = "unconfirmed";
+                        checkInButton.disabled = true;
                     }
                 },
                 error: function (xhr, status, error) {

@@ -449,6 +449,7 @@
     // Initialize the scanner once
     const scanner = new Html5Qrcode("scanner-container");
     let currentCameraId;
+    let isScannerStart = false;
 
     // Function to start scanning
     async function startScanning() {
@@ -502,12 +503,15 @@
     }
 
     // Call this function on tab switch
-    function handleTabSwitch(id) {
-      startScanning();
+    function handleTabSwitch(id) {      
       // clear intervals
       clearIntervals();      
       if (id === 'overview-tab') {
-        stopScanning();
+        if (isScannerStart) {
+          stopScanning();
+          isScannerStart = false;          
+        }
+        
         // reinitialize intervals
         initializeOverviewIntervals();  
         // update statistics
@@ -519,7 +523,10 @@
       }
 
       if (id === 'invitations-tab') {
-        stopScanning();
+        if (isScannerStart) {
+          stopScanning();
+          isScannerStart = false;          
+        }
         // reinitialize intervals
         initializeInvitationsIntervals(); 
         // fetchAllInvitations
@@ -527,7 +534,10 @@
       }
 
       if (id === 'guests-tab') {
-        stopScanning();
+        if (isScannerStart) {
+          stopScanning();
+          isScannerStart = false;          
+        }
         // reinitialize intervals
         initializeInvitationGuestsIntervals(); 
         // fetchAllInvitations
@@ -535,7 +545,10 @@
       }
 
       if (id === 'delegations-tab') {
-        stopScanning();
+        if (isScannerStart) {
+          stopScanning();
+          isScannerStart = false;          
+        }
         // reinitialize intervals
         initializeInvitationDelegationIntervals(); 
         // fetchAllInvitations
@@ -543,7 +556,10 @@
       }
 
       if (id === 'delegations-tab') {
-        stopScanning();
+        if (isScannerStart) {
+          stopScanning();
+          isScannerStart = false;          
+        }
         // reinitialize intervals
         initializeInvitationDelegationIntervals(); 
         // fetchAllInvitations
@@ -552,7 +568,11 @@
 
       if (id === 'check-in') {
         const resultContainer = document.getElementById("InputFullname");
-        const resetButton = document.getElementById("reset");              
+        const resetButton = document.getElementById("reset"); 
+
+        resetButton.addEventListener("click", startScanning);
+        isScannerStart = true;            
+        startScanning();
       }        
     }
 

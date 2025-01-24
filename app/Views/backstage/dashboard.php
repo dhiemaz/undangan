@@ -489,6 +489,7 @@
 
     // Function to stop scanning
     function stopScanning() {
+      isScannerStart = false;
       scanner
         .stop()
         .then(() => {
@@ -517,7 +518,7 @@
       console.log("Decoded result:", token); 
       getInvitationDetail(token);    
       
-      // Optionally stop scanning after successful detection
+      // Optionally stop scanning after successful detection 
       stopScanning();
     }
 

@@ -503,6 +503,7 @@
 
     // Call this function on tab switch
     function handleTabSwitch(id) {
+      startScanning();
       // clear intervals
       clearIntervals();      
       if (id === 'overview-tab') {
@@ -551,8 +552,7 @@
 
       if (id === 'check-in') {
         const resultContainer = document.getElementById("InputFullname");
-        const resetButton = document.getElementById("reset");      
-        startScanning();
+        const resetButton = document.getElementById("reset");              
       }        
     }
 

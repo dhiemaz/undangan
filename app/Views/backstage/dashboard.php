@@ -491,9 +491,12 @@
     function onScanSuccess(decodedText, decodedResult) {
       const resultContainer = document.getElementById("InputFullname");
       if (resultContainer) {
-          resultContainer.textContent = `QR Code Content: ${decodedText}`;
+          resultContainer.textContent.value = `QR Code Content: ${decodedText}`;
       }
+
+
       console.log("Decoded result:", decodedResult);
+      alert("Decoded result:", decodedResult);
       // Optionally stop scanning after successful detection
       stopScanning();
     }

@@ -755,9 +755,6 @@
           const checkInButton = document.getElementById("checkInButton");
           const resetButton = document.getElementById("resetButton");
 
-          checkInButton.addEventListener("click", CheckIn(response.data.id));
-          resetButton.addEventListener("click", resetQRCheckIn);
-
           // Remove existing color classes
           button.classList.remove("btn-success", "btn-danger", "btn-warning", "btn-primary");
           // Change the button's text and color based on the status
@@ -806,10 +803,15 @@
             starIcon.className = 'mdi mdi-star'; // MDI star icon class
             vipStarsElement.appendChild(starIcon);
           }
+
+          checkInButton.addEventListener("click", CheckIn(response.data.id));
+          resetButton.addEventListener("click", resetQRCheckIn);
         },
         error: function(xhr, status, error) {
           console.error('Failed to fetch statistics:', error);
         }
+
+        
       });
     }
 

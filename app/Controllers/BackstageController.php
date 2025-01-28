@@ -101,7 +101,7 @@ class BackStageController extends BaseController
 
         // Fetch paginated data
         $updatedInvitations = $attendeeModel
-            ->select('id, title, fullname, position, institution, status, additional_information')            
+            ->select('id, title, fullname, position, institution, status, type')            
             ->orderBy('fullname', 'ASC')
             ->paginate($perPage, 'default', $page);
 
@@ -133,7 +133,7 @@ class BackStageController extends BaseController
 
         // Fetch paginated data
         $invitations = $attendeeModel
-            ->select('title, fullname, position, institution, status, additional_information')  
+            ->select('title, fullname, position, institution, status, type')  
             ->like('fullname', $searchQuery)
             ->orderBy('fullname', 'ASC')
             ->paginate($perPage, 'default', $page);
@@ -267,7 +267,7 @@ class BackStageController extends BaseController
 
     // Fetch paginated data
     $updatedInvitations = $attendeeModel
-        ->select('title, fullname, position, institution, status, additional_information')
+        ->select('title, fullname, position, institution, status, type')
         ->where('status IS NOT NULL', null, false)
         ->orderBy('updated_at', 'DESC')
         ->paginate($perPage, 'default', $page);

@@ -954,9 +954,9 @@
               // Optionally update UI elements
               alert(response.message);
 
-              $('#checkin-manual-fullname').val('');
-              $('#checkin-manual-position').val('');
-              $('#checkin-manual-institution').val('');
+              // $('#checkin-manual-fullname').val('');
+              // $('#checkin-manual-position').val('');
+              // $('#checkin-manual-institution').val('');
             } else {
               console.error(response.message);
               alert('Error: ' + response.message);

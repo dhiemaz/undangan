@@ -1386,7 +1386,29 @@
           tbody.empty(); // Clear existing rows
           pagination.empty(); // Clear pagination controls          
 
-          response.data.forEach(invitation => {          
+          response.data.forEach(invitation => {     
+            let starCount = 0;
+
+            if (invitation.type === null) {
+              invitations_type = "biasa bri"
+            } else {
+              invitations_type = invitation.type
+            }
+
+            if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
+              starCount = 5; // 5 stars for VVIP
+            } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
+              starCount = 4; // 4 stars for VIP
+            } else if (invitations_type === 'biasa bri') {
+              starCount = 3; // 4 stars for VIP
+            }
+
+            // Generate star icons as a string
+            let starsHTML = '';
+            for (let i = 0; i < starCount; i++) {
+              starsHTML += '<i class="mdi mdi-star text-warning"></i>'; // Material Design Icon (mdi) star class
+            }
+
             const tableRow = `                            
                             <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${invitation.status || 'unconfirmed'}" data-info="Some additional info">                                        
                               <td>
@@ -1408,7 +1430,11 @@
                                     ${invitation.status || 'unconfirmed'}
                                 </div>
                               </td>
-                              <td>${getInvitationStatus(invitation.type)}</td>
+                              <td>
+                                  <div id="invitations-star">
+                                    ${starsHTML}
+                                  </div>
+                              </td>
                             </tr>`;
             tbody.append(tableRow);
           });

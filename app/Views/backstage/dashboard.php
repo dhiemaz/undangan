@@ -731,7 +731,7 @@
           stopScanning();
           isScannerStart = false;
         }
-        
+
         // reinitialize intervals
         initializeInvitationDelegationIntervals();
         // fetchAllInvitations
@@ -1771,6 +1771,32 @@
       });
     };
 
+    const registerAndCheckInButton = document.getElementById("registerAndCheckInButton");
+    registerAndCheckInButton.addEventListener('click', function() {
+      const fullname = $('#checkin-manual-fullname').val().trim();
+      const position = $('#checkin-manual-position').val().trim();
+      const company = $('#checkin-manual-institution').val().trim();
+
+      if (fullname === null || position === null || company === null) {
+        alert('Please fill in all fields');
+      } else {
+        RegisterAndCheckIn(fullname, position, company);
+      }
+    });
+    
+
+    // $(document).on('click', '#registerAndCheckInButton', function() {
+    //   console.log('register and check-in button clicked');
+    //   const fullname = $('#checkin-manual-fullname').val().trim();
+    //   const position = $('#checkin-manual-position').val().trim();
+    //   const company = $('#checkin-manual-institution').val().trim();
+
+    //   if (fullname === null || position === null || company === null) {
+    //     alert('Please fill in all fields');
+    //   } else {
+    //     RegisterAndCheckIn(fullname, position, company);
+    //   }
+    // });
 
     const getTitle = (title) => {
       switch (title) {
@@ -1891,19 +1917,6 @@
       //     fetchInvitationDelegation();
       //   }
       // });
-
-      $(document).on('click', '#registerAndCheckInButton', function() {
-        console.log('register and check-in button clicked');
-        const fullname = $('#checkin-manual-fullname').val().trim();
-        const position = $('#checkin-manual-position').val().trim();
-        const company = $('#checkin-manual-institution').val().trim();
-
-        if (fullname === null || position === null || company === null) {
-          alert('Please fill in all fields');
-        } else {
-          RegisterAndCheckIn(fullname, position, company);
-        }
-      });
 
       $(document).on('click', '#resetManualCheckInButton', function() {
         console.log('reset register and check-in button clicked');

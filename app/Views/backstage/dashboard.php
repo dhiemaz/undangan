@@ -1442,6 +1442,7 @@
           // Add event listeners to rows for modal handling
           document.querySelectorAll('tr[data-bs-toggle="modal"]').forEach(row => {
             row.addEventListener('click', function() {
+              const invitationId = row.getAttribute('data-invitation-id');
               const imageSrc = row.getAttribute('data-image');
               const fullname = row.getAttribute('data-fullname');
               const position = row.getAttribute('data-position');
@@ -1449,38 +1450,52 @@
               const status = row.getAttribute('data-status');
               const info = row.getAttribute('data-info');
 
-              // Update the modal content              
-              // updateStars(invitations_type);
+              // Update the modal content                            
+              document.querySelector('#invitationModal #invitations-invitation-id').value = invitationId;
               document.querySelector('#invitationModal #invitations-image').src = imageSrc;
               document.querySelector('#invitationModal #modal-fullname').textContent = fullname;
               document.querySelector('#invitationModal #invitations-position').value = position; // You may need to add this span in the modal
               document.querySelector('#invitationModal #invitations-company').value = company;
-              document.querySelector('#invitationModal #invitations-status-button').value = status;
-              //document.querySelector('#invitationModal #modal-info').textContent = info;
+              document.querySelector('#invitationModal #invitations-status-button').textContent = status;
+              // document.querySelector('#invitationModal #invitations-type').value = invitations_type;              
+
+              if (status === 'check-in') {
+                document.querySelector('#invitationModal #invitations-checkInBtn').disabled = true;
+              } else {
+                document.querySelector('#invitationModal #invitations-checkInBtn').disabled = false;
+              }
 
               const vipStarsElement = document.querySelector('#invitationModal #vip-stars');
               if (vipStarsElement) {
-                vipStarsElement.innerHTML = '';
+                vipStarsElement.innerHTML = ''; // Clear existing stars                
               } else {
                 console.log('vipStarsElement is null');
               }
 
               let starCount = 0;
-              if (invitations_type === 'vvip') {
+              if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
                 starCount = 5; // 5 stars for VVIP
-              } else if (invitations_type === 'vip') {
+              } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
                 starCount = 4; // 4 stars for VIP
-              } else if (invitations_type === 'standard') {
+              } else if (invitations_type === 'biasa bri') {
                 starCount = 3; // 4 stars for VIP
               }
-
-              console.log(vipStarsElement);
 
               for (let i = 0; i < starCount; i++) {
                 const starIcon = document.createElement('i');
                 starIcon.className = 'mdi mdi-star'; // MDI star icon class
                 vipStarsElement.appendChild(starIcon);
               }
+
+              const br = document.createElement('br');
+              vipStarsElement.appendChild(br);
+              vipStarsElement.appendChild(br);
+
+              // Add a label after the stars
+              const label = document.createElement('span');
+              label.className = 'ml-2 text-sm text-black'; // Optional class for spacing
+              label.textContent = "[" + invitations_type + "]"; // Use the invitation type as the label text
+              vipStarsElement.appendChild(label);
             });
           });
 
@@ -1509,18 +1524,32 @@
 
           $('#all-invitations-prev-btn').on('click', function() {
             if (currentPage > 1) {
-              searchAllInvitations(query, currentPage - 1);
+              fetchAllInvitations(currentPage - 1);
             }
           });
 
           $('#all-invitations-next-btn').on('click', function() {
             if (currentPage < totalPages) {
-              searchAllInvitations(query, currentPage + 1);
+              fetchAllInvitations(currentPage + 1);
+            }
+          });
+
+          const invitationsCheckIn = document.querySelector('#invitationModal #invitations-checkInBtn');      
+          invitationsCheckIn.addEventListener('click', function() {
+            const invitationID = document.querySelector('#invitationModal #invitations-invitation-id');
+            CheckIn(invitationID.value);
+
+            if (currentPage < totalPages) {
+              fetchAllInvitations(currentPage + 1);
+            }
+
+            if (currentPage > 1) {
+              fetchAllInvitations(currentPage - 1);
             }
           });
         },
         error: function(xhr, status, error) {
-          console.error('Failed to search invitations:', error);
+          console.error('Failed to fetch all invitations:', error);
         }
       });
     };

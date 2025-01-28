@@ -166,7 +166,7 @@
       <nav class="sidebar sidebar-bg-options sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/dashboard">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Backstage</span>
             </a>

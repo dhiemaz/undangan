@@ -908,6 +908,10 @@
       let hashData = '';
       const status = 'check-in';
 
+      if (fullname == '' || position == '' || company == '') {
+        alert('Please fill in all fields');        
+      }
+
       generateHash(fullname.concat(position, company)).then(hash => {
         console.log('Generated Hash:', hash);
         hashData = hash; // Assign the generated hash

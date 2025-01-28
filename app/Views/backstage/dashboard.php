@@ -725,6 +725,18 @@
         isScannerStart = true;
         initializeScanner();
       }
+
+      if (id === 'manual-check-in') {
+        if (isScannerStart) {
+          stopScanning();
+          isScannerStart = false;
+        }
+        
+        // reinitialize intervals
+        initializeInvitationDelegationIntervals();
+        // fetchAllInvitations
+        fetchInvitationDelegation();
+      }
     }
 
     // Function to reset the QR code check-in

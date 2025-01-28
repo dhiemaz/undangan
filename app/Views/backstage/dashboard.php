@@ -617,6 +617,7 @@
 
     // Handlers for scan success and errors
     function onScanSuccess(decodedText, decodedResult) {
+      let token = '';
       const resultContainer = document.getElementById("InputFullname");
       if (resultContainer) {
         resultContainer.textContent.value = `QR Code Content: ${decodedText}`;
@@ -629,7 +630,14 @@
 
       // Extract the token from the pathname
       const pathSegments = urlObj.pathname.split("/");
-      const token = pathSegments[pathSegments.length - 3]; 
+      token = pathSegments[pathSegments.length - 1]; 
+
+      // Decode the token
+      if (token.includes("/")) {
+          const cleansingToken = token.split("/")[0];
+          token = cleansingToken;
+      }
+      
       console.log("Decoded result:", token);
       getInvitationDetail(token);
 

@@ -629,7 +629,7 @@
 
       // Extract the token from the pathname
       const pathSegments = urlObj.pathname.split("/");
-      const token = pathSegments[pathSegments.length - 1];
+      const token = pathSegments[pathSegments.length - 3]; 
       console.log("Decoded result:", token);
       getInvitationDetail(token);
 

@@ -765,23 +765,25 @@
           switch (response.data.status) {
             case "attend":
               button.classList.add("btn-success");
-              button.textContent = response.data.status;
-              checkInButton.disabled = false;
+              button.textContent = response.data.status;              
               break;
             case "delegate":
               button.classList.add("btn-warning");
-              button.textContent = response.data.status;
-              checkInButton.disabled = false;
+              button.textContent = response.data.status;              
               break;
             case "attend with guests":
               button.classList.add("btn-primary");
-              button.textContent = response.data.status;
-              checkInButton.disabled = false;
+              button.textContent = response.data.status;              
               break;
             default:
               button.classList.add("btn-secondary");
-              button.textContent = "unconfirmed";
-              checkInButton.disabled = true;
+              button.textContent = "unconfirmed";              
+          }
+
+          if (response.data.status === 'check-in') {
+            checkInButton.disabled = true;
+          }else {
+            checkInButton.disabled = false;
           }
 
           const vipStarsElement = document.getElementById('invitation-type');

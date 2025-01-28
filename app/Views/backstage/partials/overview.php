@@ -45,8 +45,7 @@
                   <tr>
                     <th>Fullname</th>
                     <th>Company</th>
-                    <th>Status</th>
-                    <th>Invitation Type</th>
+                    <th>Status</th>                    
                   </tr>
                 </thead>
                 <tbody>

@@ -292,8 +292,7 @@
                                       <tr>
                                         <th>Fullname</th>
                                         <th>Company</th>
-                                        <th>Status</th>
-                                        <th>Invitation Type</th>
+                                        <th>Status</th>                                        
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -956,8 +955,7 @@
                                 <div class="badge badge-opacity-${getStatusBadge(invitation.status)}">
                                     ${invitation.status}
                                 </div>
-                              </td>
-                              <td>${getInvitationStatus(invitation.type)}</td>
+                              </td>                              
                             </tr>`;
             tbody.append(tableRow);
           });

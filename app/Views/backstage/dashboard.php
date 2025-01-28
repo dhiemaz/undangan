@@ -1771,7 +1771,7 @@
       });
     };
 
-    const registerAndCheckInButton = document.getElementById("registerAndCheckInButton");
+    const registerAndCheckInButton = document.querySelectordocument("#registerAndCheckInButton");
     registerAndCheckInButton.addEventListener('click', function() {
       const fullname = $('#checkin-manual-fullname').val().trim();
       const position = $('#checkin-manual-position').val().trim();
@@ -1783,7 +1783,7 @@
         RegisterAndCheckIn(fullname, position, company);
       }
     });
-    
+
 
     // $(document).on('click', '#registerAndCheckInButton', function() {
     //   console.log('register and check-in button clicked');

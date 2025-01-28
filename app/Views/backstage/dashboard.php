@@ -617,7 +617,7 @@
 
     // Handlers for scan success and errors
     function onScanSuccess(decodedText, decodedResult) {
-      let token = '';
+      let cleanToken = '';
       const resultContainer = document.getElementById("InputFullname");
       if (resultContainer) {
         resultContainer.textContent.value = `QR Code Content: ${decodedText}`;
@@ -630,12 +630,16 @@
 
       // Extract the token from the pathname
       const pathSegments = urlObj.pathname.split("/");
-      token = pathSegments[pathSegments.length - 1]; 
+      const token = pathSegments[pathSegments.length - 1]; 
 
       // Decode the token
       if (token.includes("/")) {
-          const cleansingToken = token.split("/")[0];
-          token = cleansingToken;
+        const cleansingToken = token.split("/")[0]; // Take the first segment before the first "/"        
+        console.log("Extracted token:", token);
+        cleanToken =cleansingToken;
+      } else {
+        cleanToken = token;
+        console.error("The string does not contain '/'");
       }
       
       console.log("Decoded result:", token);

@@ -418,6 +418,7 @@
   <!-- Custom js for this page-->
   <script src="../../assets/js/dashboard.js"></script>
   <script src="../../assets/js/Chart.roundedBarCharts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -865,7 +866,7 @@
 
 
     function QRCheckIn() {
-      const id = document.getElementById('checkin-invitation-id').value;      
+      const id = document.getElementById('checkin-invitation-id').value;
       const status = 'check-in';
 
       if (id) {
@@ -902,6 +903,11 @@
       }
     }
 
+    function generateHash(data) {
+      // Generate SHA-256 hash synchronously
+      return CryptoJS.SHA256(data).toString(CryptoJS.enc.Hex);
+    }
+
 
     // Function to register and check in
     function RegisterAndCheckIn(fullname, position, company) {
@@ -911,45 +917,41 @@
       if (fullname == '' || position == '' || company == '') {
         alert('Please fill in all fields');
       } else {
-        generateHash(fullname.concat(position, company)).then(hash => {
-          console.log('Generated Hash:', hash);
-          hashData = hash; // Assign the generated hash
+        hashData = generateHash(fullname.concat(position, company));
+        const requestData = {
+          hash: hashData,
+          fullname: fullname,
+          position: position,
+          company: company,
+          status: status
+        };
 
-          const requestData = {
-            hash: hashData,
-            fullname: fullname,
-            position: position,
-            company: company,
-            status: status
-          };
+        console.log(requestData);
+        $.ajax({
+          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/registrationAndCheckIn', // Replace with your API endpoint
+          // url: 'http://localhost:8080/backstage/api/invitations/registrationAndCheckIn', // Replace with your API endpoint
+          method: 'POST',
+          dataType: 'json',
+          contentType: 'application/json', // Ensure the content type matches the cURL
+          data: JSON.stringify(requestData), // Convert data to JSON string
+          success: function(response) {
+            if (response.success) {
+              console.log(response.message);
+              // Optionally update UI elements
+              alert(response.message);
 
-          console.log(requestData);
-          $.ajax({
-            url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/registrationAndCheckIn', // Replace with your API endpoint
-            // url: 'http://localhost:8080/backstage/api/invitations/registrationAndCheckIn', // Replace with your API endpoint
-            method: 'POST',
-            dataType: 'json',
-            contentType: 'application/json', // Ensure the content type matches the cURL
-            data: JSON.stringify(requestData), // Convert data to JSON string
-            success: function(response) {
-              if (response.success) {
-                console.log(response.message);
-                // Optionally update UI elements
-                alert(response.message);
-
-                $('#checkin-manual-fullname').val('');
-                $('#checkin-manual-position').val('');
-                $('#checkin-manual-institution').val('');
-              } else {
-                console.error(response.message);
-                alert('Error: ' + response.message);
-              }
-            },
-            error: function(xhr, status, error) {
-              console.error('Failed to process check-in:', error);
-              alert('Failed to process registration & check-in. Please try again.');
+              $('#checkin-manual-fullname').val('');
+              $('#checkin-manual-position').val('');
+              $('#checkin-manual-institution').val('');
+            } else {
+              console.error(response.message);
+              alert('Error: ' + response.message);
             }
-          });
+          },
+          error: function(xhr, status, error) {
+            console.error('Failed to process check-in:', error);
+            alert('Failed to process registration & check-in. Please try again.');
+          }
         });
       }
     }

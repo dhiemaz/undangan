@@ -78,9 +78,9 @@
           <a class="navbar-brand brand-logo" href="#">
             <img src="../../assets/images/BRI_MFO_2025.png" alt="logo" />
           </a>
-          <!-- <a class="navbar-brand brand-logo-mini" href="#">
+          <a class="navbar-brand brand-logo-mini" href="#">
             <img src="../../assets/images/BRI_MFO_2025.png" alt="logo" />
-          </a> -->
+          </a>
         </div>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-top">
@@ -633,17 +633,6 @@
       console.log(pathSegments)
       const token = pathSegments[3]; 
 
-      // Decode the token
-      // if (token.includes("/")) {
-      //   const cleansingToken = token.split("/")[0]; // Take the first segment before the first "/"        
-      //   console.log("Extracted token:", token);
-      //   cleanToken = cleansingToken;
-      // } else {
-      //   console.log("Extracted token:", token);
-      //   cleanToken = token;
-      //   console.error("The string does not contain '/'");
-      // }
-      
       console.log("Decoded result:", token);
       getInvitationDetail(token);
 

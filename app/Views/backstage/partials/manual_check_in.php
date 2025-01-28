@@ -26,7 +26,7 @@
                     </div>                
                     <div class="row">
                         <div class="col-6">
-                            <button type="submit" id="registerAndCheckInButton" class="btn btn-success btn-rounded btn-fw w-100">Register and Check-In</button>
+                            <button type="submit" id="registerAndCheckInButton" class="btn btn-success btn-rounded btn-fw w-100">Check-In</button>
                         </div>
                         <div class="col-6">
                             <button type="button" id="resetManualCheckInButton" class="btn btn-warning btn-rounded btn-fw w-100">Reset</button>

@@ -42,6 +42,11 @@ class BackStageController extends BaseController
         return view('backstage/partials/check_in'); // Return a view
     }
 
+    public function manualCheckIn()
+    {        
+        return view('backstage/partials/manual_check_in'); // Return a view
+    }
+
     public function getSummaryCount()
     {
         $attendeeModel = new AttendeeModel();
@@ -343,6 +348,83 @@ class BackStageController extends BaseController
                 ->setJSON([
                     'success' => false,
                     'message' => 'Failed to update status. Please try again later.',
+                ]);
+        }
+    }
+
+    public function invitationRegistrationAndCheckIn()
+    {
+        // Load the AttendeeModel
+        $attendeeModel = new AttendeeModel();
+
+        // Decode the JSON payload
+        $jsonPayload = $this->request->getBody(); // Get raw input stream
+        $requestData = json_decode($jsonPayload, true); // Decode JSON to an associative array
+
+        // Validate input
+        if (!isset($requestData['hash'], $requestData['fullname'], $requestData['position'], $requestData['company'], $requestData['status'])) {
+            return $this->response
+                ->setStatusCode(400) // Bad Request
+                ->setJSON([
+                    'success' => false,
+                    'message' => 'hash, fullname, position, company, and status are required.',
+                ]);
+        }
+
+        // Extract input fields
+        $hashData = $requestData['hash'];
+        $fullname = $requestData['fullname'];
+        $position = $requestData['position'];
+        $company = $requestData['company'];
+        $status = $requestData['status'];
+
+        // Log the request data
+        log_message('info', 'BackstageController::invitationRegistrationAndCheckIn - ' . json_encode([
+            'fullname' => $fullname,
+            'position' => $position,
+            'company' => $company,
+            'status' => $status,
+        ]));
+
+        // Insert data into the database
+        try {
+            $attendeeId = $attendeeModel->insert([
+                'hash' => $hashData,
+                'fullname' => $fullname,
+                'position' => $position,
+                'company' => $company,
+                'status' => $status,
+            ]);
+
+            if ($attendeeId) {
+                return $this->response
+                    ->setStatusCode(201) // Created
+                    ->setJSON([
+                        'success' => true,
+                        'message' => 'Invitation registered and checked-in successfully.',
+                        'data' => [
+                            'id' => $attendeeId,
+                            'fullname' => $fullname,
+                            'position' => $position,
+                            'company' => $company,
+                            'status' => $status,
+                        ],
+                    ]);
+            } else {
+                return $this->response
+                    ->setStatusCode(500) // Internal Server Error
+                    ->setJSON([
+                        'success' => false,
+                        'message' => 'Failed to register and check-in. Please try again later.',
+                    ]);
+            }
+        } catch (\Exception $e) {
+            log_message('error', 'Error in invitationRegistrationAndCheckIn: ' . $e->getMessage());
+            return $this->response
+                ->setStatusCode(500) // Internal Server Error
+                ->setJSON([
+                    'success' => false,
+                    'message' => 'An error occurred. Please try again later.',
                 ]);
         }
     }

@@ -20,6 +20,7 @@ $routes->get('/backstage/dashboard/tabs/invitations', 'BackstageController::invi
 $routes->get('/backstage/dashboard/tabs/guests', 'BackstageController::guests');
 $routes->get('/backstage/dashboard/tabs/delegations', 'BackstageController::delegations');
 $routes->get('/backstage/dashboard/tabs/check_in', 'BackstageController::checkIn');
+$routes->get('/backstage/dashboard/tabs/manual_check_in', 'BackstageController::manualCheckIn');
 
 // Backstage API
 $routes->get('/backstage/api/getSummaryCount', 'BackstageController::getSummaryCount');
@@ -32,3 +33,4 @@ $routes->get('/backstage/api/getInvitationData/(:any)', 'BackstageController::ge
 $routes->get('/backstage/api/invitations/search', 'BackstageController::searchInvitations');
 $routes->get('/backstage/api/invitations/guests-search', 'BackstageController::searchGuests');
 $routes->post('/backstage/api/invitations/checkIn', 'BackstageController::invitationCheckIn');
+$routes->post('/backstage/api/invitations/registrationAndCheckIn', 'BackstageController::invitationRegistrationAndCheckIn');

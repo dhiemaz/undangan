@@ -183,8 +183,7 @@
                 <li class="nav-item"><a class="nav-link" id="check-in" data-bs-toggle="tab" href="/backstage/dashboard/tabs/check_in" data-content-target="#overview" role="tab" aria-selected="false">QR check-in</a></li>
               </ul>
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" id="invitations-tab" data-bs-toggle="tab" href="/backstage/dashboard/tabs/invitations" data-content-target="#overview" role="tab" aria-selected="false">Manual check-in</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" id="check-in" data-bs-toggle="tab" href="/backstage/dashboard/tabs/check_in" data-content-target="#overview" role="tab" aria-selected="false">Manual check-in</a></li> -->
+                <li class="nav-item"><a class="nav-link" id="manual-check-in" data-bs-toggle="tab" href="/backstage/dashboard/tabs/manual_check_in" data-content-target="#overview" role="tab" aria-selected="false">Manual check-in</a></li>
               </ul>
             </div>
           </li>
@@ -292,7 +291,7 @@
                                       <tr>
                                         <th>Fullname</th>
                                         <th>Company</th>
-                                        <th>Status</th>                                        
+                                        <th>Status</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -705,6 +704,17 @@
         fetchInvitationDelegation();
       }
 
+      if (id === 'delegations-tab') {
+        if (isScannerStart) {
+          stopScanning();
+          isScannerStart = false;
+        }
+        // reinitialize intervals
+        initializeInvitationDelegationIntervals();
+        // fetchAllInvitations
+        fetchInvitationDelegation();
+      }
+
       if (id === 'check-in') {
         const flipCameraButton = document.getElementById("flip-camera");
         // Event listener for the flip camera button
@@ -733,8 +743,8 @@
       let invitations_type = '';
 
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -761,24 +771,24 @@
           switch (response.data.status) {
             case "attend":
               button.classList.add("btn-success");
-              button.textContent = response.data.status;              
+              button.textContent = response.data.status;
               break;
             case "delegate":
               button.classList.add("btn-warning");
-              button.textContent = response.data.status;              
+              button.textContent = response.data.status;
               break;
             case "attend with guests":
               button.classList.add("btn-primary");
-              button.textContent = response.data.status;              
+              button.textContent = response.data.status;
               break;
             default:
               button.classList.add("btn-secondary");
-              button.textContent = "unconfirmed";              
+              button.textContent = "unconfirmed";
           }
 
           if (response.data.status === 'check-in' || response.data.status === null) {
             checkInButton.disabled = true;
-          }else {
+          } else {
             checkInButton.disabled = false;
           }
 
@@ -811,7 +821,7 @@
           console.error('Failed to fetch statistics:', error);
         }
 
-        
+
       });
     }
 
@@ -827,8 +837,8 @@
 
         console.log(requestData);
         $.ajax({
-          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
-          // url: 'http://localhost:8080/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          url: 'http://localhost:8080/backstage/api/invitations/checkIn', // Replace with your API endpoint
           method: 'POST',
           dataType: 'json',
           contentType: 'application/json', // Ensure the content type matches the cURL
@@ -866,8 +876,8 @@
 
         console.log(requestData);
         $.ajax({
-          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
-          // url: 'http://localhost:8080/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          url: 'http://localhost:8080/backstage/api/invitations/checkIn', // Replace with your API endpoint
           method: 'POST',
           dataType: 'json',
           contentType: 'application/json', // Ensure the content type matches the cURL
@@ -892,11 +902,59 @@
       }
     }
 
+
+    // Function to register and check in
+    function RegisterAndCheckIn(fullname, position, company) {
+      let hashData = '';
+      const status = 'check-in';
+
+      generateHash(fullname.concat(position, company)).then(hash => {
+        console.log('Generated Hash:', hash);
+        hashData = hash; // Assign the generated hash
+
+        const requestData = {
+          hash: hashData,
+          fullname: fullname,
+          position: position,
+          company: company,
+          status: status
+        };
+
+        console.log(requestData);
+        $.ajax({
+          // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          url: 'http://localhost:8080/backstage/api/invitations/registrationAndCheckIn', // Replace with your API endpoint
+          method: 'POST',
+          dataType: 'json',
+          contentType: 'application/json', // Ensure the content type matches the cURL
+          data: JSON.stringify(requestData), // Convert data to JSON string
+          success: function(response) {
+            if (response.success) {
+              console.log(response.message);
+              // Optionally update UI elements
+              alert(response.message);
+
+              $('#checkin-manual-fullname').val('');
+              $('#checkin-manual-position').val('');
+              $('#checkin-manual-institution').val('');
+            } else {
+              console.error(response.message);
+              alert('Error: ' + response.message);
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error('Failed to process check-in:', error);
+            alert('Failed to process registration & check-in. Please try again.');
+          }
+        });
+      });
+    }
+
     // Function to fetch and update statistics
     function updateStatistics() {
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/getSummaryCount', // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getSummaryCount', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/getSummaryCount', // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getSummaryCount', // Replace with your API endpoint
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -917,8 +975,8 @@
 
     function fetchRecentActivities() {
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/getRecentActivities', // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getRecentActivities', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/getRecentActivities', // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getRecentActivities', // Replace with your API endpoint
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -960,8 +1018,8 @@
       const perPage = 7; // Items per page
 
       $.ajax({
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
-        // url: 'http://localhost:8080/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
         method: 'GET',
         data: {
           page,
@@ -1048,8 +1106,8 @@
       var invitations_type;
 
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/getAllInvitations', // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/getAllInvitations', // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
         method: 'GET',
         data: {
           page,
@@ -1210,7 +1268,7 @@
             }
           });
 
-          const invitationsCheckIn = document.querySelector('#invitationModal #invitations-checkInBtn');      
+          const invitationsCheckIn = document.querySelector('#invitationModal #invitations-checkInBtn');
           invitationsCheckIn.addEventListener('click', function() {
             const invitationID = document.querySelector('#invitationModal #invitations-invitation-id');
             CheckIn(invitationID.value);
@@ -1235,8 +1293,8 @@
       const perPage = 20; // Items per page
 
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/getInvitationGuests', // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationGuests', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/getInvitationGuests', // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationGuests', // Replace with your API endpoint
         method: 'GET',
         data: {
           page,
@@ -1323,8 +1381,8 @@
       const perPage = 20; // Items per page
 
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/getInvitationDelegation', // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationDelegation', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/getInvitationDelegation', // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationDelegation', // Replace with your API endpoint
         method: 'GET',
         data: {
           page,
@@ -1412,8 +1470,8 @@
       var invitations_type;
 
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/invitations/search', // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/search', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/invitations/search', // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/search', // Replace with your API endpoint
         method: 'GET',
         data: {
           query,
@@ -1427,7 +1485,7 @@
           tbody.empty(); // Clear existing rows
           pagination.empty(); // Clear pagination controls          
 
-          response.data.forEach(invitation => {     
+          response.data.forEach(invitation => {
             let starCount = 0;
 
             if (invitation.type === null) {
@@ -1575,7 +1633,7 @@
             }
           });
 
-          const invitationsCheckIn = document.querySelector('#invitationModal #invitations-checkInBtn');      
+          const invitationsCheckIn = document.querySelector('#invitationModal #invitations-checkInBtn');
           invitationsCheckIn.addEventListener('click', function() {
             const invitationID = document.querySelector('#invitationModal #invitations-invitation-id');
             CheckIn(invitationID.value);
@@ -1586,15 +1644,15 @@
               } else {
                 fetchAllInvitations(currentPage + 1);
               }
-              
+
             }
 
             if (currentPage > 1) {
-              if (query !== null) {                
-                  searchAllInvitations(query, currentPage - 1);
-              }else{
-                  fetchAllInvitations(currentPage - 1);
-              }              
+              if (query !== null) {
+                searchAllInvitations(query, currentPage - 1);
+              } else {
+                fetchAllInvitations(currentPage - 1);
+              }
             }
           });
         },
@@ -1611,8 +1669,8 @@
       var invitations_type;
 
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/invitations/guests-search', // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/guests-search', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/invitations/guests-search', // Replace with your API endpoint
+        // url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/guests-search', // Replace with your API endpoint
         method: 'GET',
         data: {
           query,
@@ -1687,7 +1745,7 @@
             if (currentPage < totalPages) {
               fetchInvitationGuests(currentPage + 1);
             }
-          });      
+          });
         },
         error: function(xhr, status, error) {
           console.error('Failed to search invitations:', error);
@@ -1729,6 +1787,14 @@
           return 'warning';
       }
     };
+
+    async function generateHash(data) {
+      const encoder = new TextEncoder();
+      const dataBuffer = encoder.encode(data);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    }
 
     $(document).ready(function() {
       // Initial call to update statistics
@@ -1786,7 +1852,7 @@
           fetchAllInvitations();
         }
       });
-      
+
       // Add search functionality
       $(document).on('click', '#guests-search-button', function() {
         console.log('search button clicked');
@@ -1796,6 +1862,36 @@
         } else {
           fetchInvitationGuests();
         }
+      });
+
+      // $(document).on('click', '#delegations-search-button', function() {
+      //   console.log('search button clicked');
+      //   const query = $('#guests-search-input').val().trim();
+      //   if (query !== '') {
+      //     searchDelegations(query);
+      //   } else {
+      //     fetchInvitationDelegation();
+      //   }
+      // });
+
+      $(document).on('click', '#registerAndCheckInButton', function() {
+        console.log('register and check-in button clicked');
+        const fullname = $('#checkin-manual-fullname').val().trim();
+        const position = $('#checkin-manual-position').val().trim();
+        const company = $('#checkin-manual-institution').val().trim();
+
+        if (fullname === null || position === null || company === null) {
+          alert('Please fill in all fields');
+        } else {
+          RegisterAndCheckIn(fullname, position, company);
+        }
+      });
+
+      $(document).on('click', '#resetManualCheckInButton', function() {
+        console.log('reset register and check-in button clicked');
+        $('#checkin-manual-fullname').val('');
+        $('#checkin-manual-position').val('');
+        $('#checkin-manual-institution').val('');
       });
     });
   </script>

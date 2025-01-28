@@ -1771,13 +1771,13 @@
       });
     };
 
-    const registerAndCheckInButton = document.querySelectordocument("#registerAndCheckInButton");
+    const registerAndCheckInButton = document.querySelector("#registerAndCheckInButton"); // Fix the typo here
     registerAndCheckInButton.addEventListener('click', function() {
       const fullname = $('#checkin-manual-fullname').val().trim();
       const position = $('#checkin-manual-position').val().trim();
       const company = $('#checkin-manual-institution').val().trim();
 
-      if (fullname === null || position === null || company === null) {
+      if (!fullname || !position || !company) { // Check for empty fields
         alert('Please fill in all fields');
       } else {
         RegisterAndCheckIn(fullname, position, company);

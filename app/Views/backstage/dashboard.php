@@ -223,7 +223,7 @@
                 <div class="d-sm-flex align-items-center justify-content-between border-bottom">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active ps-0" id="overview-tab" data-bs-toggle="tab" href="/backstage/dashboard/tabs/overview" data-content-target="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                      <a class="nav-link active ps-0" id="overview-tab" data-bs-toggle="tab" href="https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/dashboard" data-content-target="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="invitations-tab" data-bs-toggle="tab" href="/backstage/dashboard/tabs/invitations" data-content-target="#overview" role="tab" aria-selected="false">Invitations</a>

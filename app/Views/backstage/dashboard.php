@@ -909,7 +909,8 @@
       const status = 'check-in';
 
       if (fullname == '' || position == '' || company == '') {
-        alert('Please fill in all fields');        
+        alert('Please fill in all fields');   
+        return;     
       }
 
       generateHash(fullname.concat(position, company)).then(hash => {

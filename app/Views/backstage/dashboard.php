@@ -926,6 +926,7 @@
     // Function to register and check in
     function RegisterAndCheckIn(fullname, position, company) {
       let hashData = '';
+      let message = '';
       const status = 'check-in';
 
       if (fullname == '' || position == '' || company == '') {
@@ -952,21 +953,23 @@
             if (response.success) {
               console.log(response.message);
               // Optionally update UI elements
-              alert(response.message);
+              message = response.message;
 
               // $('#checkin-manual-fullname').val('');
               // $('#checkin-manual-position').val('');
               // $('#checkin-manual-institution').val('');
             } else {
-              console.error(response.message);
-              alert('Error: ' + response.message);
+              message = response.message;
+              console.error(response.message);              
             }
           },
           error: function(xhr, status, error) {
             console.error('Failed to process check-in:', error);
-            alert('Failed to process registration & check-in. Please try again.');
+            message = 'Failed to process registration & check-in. Please try again.';
           }
         });
+
+        alert(message);
       }
     }
 

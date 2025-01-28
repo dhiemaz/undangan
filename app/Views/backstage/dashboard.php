@@ -630,6 +630,7 @@
 
       // Extract the token from the pathname
       const pathSegments = urlObj.pathname.split("/");
+      console.log(pathSegments)
       const token = pathSegments[pathSegments.length - 1]; 
 
       // Decode the token

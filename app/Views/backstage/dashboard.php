@@ -736,6 +736,8 @@
         initializeInvitationDelegationIntervals();
         // fetchAllInvitations
         fetchInvitationDelegation();
+
+        initializeManualCheckIn();
       }
     }
 
@@ -1771,18 +1773,22 @@
       });
     };
 
-    const registerAndCheckInButton = document.querySelector("#registerAndCheckInButton"); // Fix the typo here
-    registerAndCheckInButton.addEventListener('click', function() {
-      const fullname = $('#checkin-manual-fullname').val().trim();
-      const position = $('#checkin-manual-position').val().trim();
-      const company = $('#checkin-manual-institution').val().trim();
+    const initializeManualCheckIn = () => {
+      const registerAndCheckInButton = document.querySelector("#registerAndCheckInButton"); // Fix the typo here
+      registerAndCheckInButton.addEventListener('click', function() {
+        const fullname = $('#checkin-manual-fullname').val().trim();
+        const position = $('#checkin-manual-position').val().trim();
+        const company = $('#checkin-manual-institution').val().trim();
 
-      if (!fullname || !position || !company) { // Check for empty fields
-        alert('Please fill in all fields');
-      } else {
-        RegisterAndCheckIn(fullname, position, company);
-      }
-    });
+        if (!fullname || !position || !company) { // Check for empty fields
+          alert('Please fill in all fields');
+        } else {
+          RegisterAndCheckIn(fullname, position, company);
+        }
+      });
+    }
+
+
 
 
     // $(document).on('click', '#registerAndCheckInButton', function() {
@@ -1831,14 +1837,6 @@
           return 'warning';
       }
     };
-
-    async function generateHash(data) {
-      const encoder = new TextEncoder();
-      const dataBuffer = encoder.encode(data);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-    }
 
     $(document).ready(function() {
       // Initial call to update statistics

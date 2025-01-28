@@ -233,7 +233,7 @@ class BackStageController extends BaseController
         // Fetch paginated data
         $invitationDelegation = $delegationModel
             ->select('"Bapak" as title, delegations.fullname as fullname, delegations.position as position, attendees_event.institution as institution, attendees_event.fullname as attendee_name')    
-            ->join('attendees_event', 'attendees.id = delegations.attendee_id', 'inner')                    
+            ->join('attendees_event', 'attendees_event.id = delegations.attendee_id', 'inner')                    
             ->paginate($perPage, 'default', $page);
 
         $totalItems = $delegationModel->countAllResults();

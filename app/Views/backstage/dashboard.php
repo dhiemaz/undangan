@@ -909,50 +909,49 @@
       const status = 'check-in';
 
       if (fullname == '' || position == '' || company == '') {
-        alert('Please fill in all fields');   
-        return;     
-      }
+        alert('Please fill in all fields');
+      } else {
+        generateHash(fullname.concat(position, company)).then(hash => {
+          console.log('Generated Hash:', hash);
+          hashData = hash; // Assign the generated hash
 
-      generateHash(fullname.concat(position, company)).then(hash => {
-        console.log('Generated Hash:', hash);
-        hashData = hash; // Assign the generated hash
+          const requestData = {
+            hash: hashData,
+            fullname: fullname,
+            position: position,
+            company: company,
+            status: status
+          };
 
-        const requestData = {
-          hash: hashData,
-          fullname: fullname,
-          position: position,
-          company: company,
-          status: status
-        };
+          console.log(requestData);
+          $.ajax({
+            url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
+            // url: 'http://localhost:8080/backstage/api/invitations/registrationAndCheckIn', // Replace with your API endpoint
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json', // Ensure the content type matches the cURL
+            data: JSON.stringify(requestData), // Convert data to JSON string
+            success: function(response) {
+              if (response.success) {
+                console.log(response.message);
+                // Optionally update UI elements
+                alert(response.message);
 
-        console.log(requestData);
-        $.ajax({
-          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
-          // url: 'http://localhost:8080/backstage/api/invitations/registrationAndCheckIn', // Replace with your API endpoint
-          method: 'POST',
-          dataType: 'json',
-          contentType: 'application/json', // Ensure the content type matches the cURL
-          data: JSON.stringify(requestData), // Convert data to JSON string
-          success: function(response) {
-            if (response.success) {
-              console.log(response.message);
-              // Optionally update UI elements
-              alert(response.message);
-
-              $('#checkin-manual-fullname').val('');
-              $('#checkin-manual-position').val('');
-              $('#checkin-manual-institution').val('');
-            } else {
-              console.error(response.message);
-              alert('Error: ' + response.message);
+                $('#checkin-manual-fullname').val('');
+                $('#checkin-manual-position').val('');
+                $('#checkin-manual-institution').val('');
+              } else {
+                console.error(response.message);
+                alert('Error: ' + response.message);
+              }
+            },
+            error: function(xhr, status, error) {
+              console.error('Failed to process check-in:', error);
+              alert('Failed to process registration & check-in. Please try again.');
             }
-          },
-          error: function(xhr, status, error) {
-            console.error('Failed to process check-in:', error);
-            alert('Failed to process registration & check-in. Please try again.');
-          }
+          });
         });
-      });
+      }
     }
 
     // Function to fetch and update statistics

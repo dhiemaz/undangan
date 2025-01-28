@@ -779,7 +779,7 @@
               button.textContent = "unconfirmed";              
           }
 
-          if (response.data.status === 'check-in') {
+          if (response.data.status === 'check-in' || response.data.status === null) {
             checkInButton.disabled = true;
           }else {
             checkInButton.disabled = false;

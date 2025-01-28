@@ -631,18 +631,18 @@
       // Extract the token from the pathname
       const pathSegments = urlObj.pathname.split("/");
       console.log(pathSegments)
-      const token = pathSegments[pathSegments.length - 1]; 
+      const token = pathSegments[3]; 
 
       // Decode the token
-      if (token.includes("/")) {
-        const cleansingToken = token.split("/")[0]; // Take the first segment before the first "/"        
-        console.log("Extracted token:", token);
-        cleanToken = cleansingToken;
-      } else {
-        console.log("Extracted token:", token);
-        cleanToken = token;
-        console.error("The string does not contain '/'");
-      }
+      // if (token.includes("/")) {
+      //   const cleansingToken = token.split("/")[0]; // Take the first segment before the first "/"        
+      //   console.log("Extracted token:", token);
+      //   cleanToken = cleansingToken;
+      // } else {
+      //   console.log("Extracted token:", token);
+      //   cleanToken = token;
+      //   console.error("The string does not contain '/'");
+      // }
       
       console.log("Decoded result:", token);
       getInvitationDetail(token);

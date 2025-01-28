@@ -833,10 +833,12 @@
           resetButton.addEventListener("click", resetQRCheckIn);
         },
         error: function(xhr, status, error) {
-          console.error('Failed to fetch statistics:', error);
+          if (status === 404) {
+            alert('Invitation not found');
+          } else {
+            console.error('Failed to fetch invitation detail:', error);
+          }          
         }
-
-
       });
     }
 

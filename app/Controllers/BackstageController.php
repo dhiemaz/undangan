@@ -202,8 +202,8 @@ class BackStageController extends BaseController
 
         // Fetch paginated data
         $invitationGuests = $guestModel
-            ->select('"Bapak" as title, guests.fullname as fullname, guests.position as position, attendees.institution as institution, attendees.fullname as attendee_name')    
-            ->join('attendees', 'attendees.id = guests.attendee_id', 'inner')                    
+            ->select('"Bapak" as title, guests.fullname as fullname, guests.position as position, attendees_event.institution as institution, attendees_event.fullname as attendee_name')    
+            ->join('attendees_event', 'attendees_event.id = guests.attendee_id', 'inner')                    
             ->paginate($perPage, 'default', $page);
 
         $totalItems = $guestModel->countAllResults();

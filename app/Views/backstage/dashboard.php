@@ -933,8 +933,9 @@
         alert('Please fill in all fields');
       } else {
         hashData = generateHash(fullname.concat(position, company));
+        const shortHash = hashData.substring(0, 12)
         const requestData = {
-          hash: hashData,
+          hash: shortHash,
           fullname: fullname,
           position: position,
           company: company,

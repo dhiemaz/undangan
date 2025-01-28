@@ -1409,8 +1409,8 @@
               starsHTML += '<i class="mdi mdi-star text-warning"></i>'; // Material Design Icon (mdi) star class
             }
 
-            const tableRow = `                            
-                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${invitation.status || 'unconfirmed'}" data-info="Some additional info">                                        
+            const tableRow = `  
+                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-info="Some additional info">                                                                                       
                               <td>
                                   <div class="d-flex ">                                    
                                     <img src="${getTitle(invitation.title)}" alt="" loading="lazy">

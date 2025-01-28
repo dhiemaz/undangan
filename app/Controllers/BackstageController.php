@@ -46,6 +46,8 @@ class BackStageController extends BaseController
     {
         $attendeeModel = new AttendeeModel();
 
+        log_message('info', 'BackstageController::getSummaryCount');
+
         // Fetch counts based on the 'status' column
         $invitationCount = $attendeeModel->countAll();
         $confirmedAllCount = $attendeeModel->where('status IS NOT NULL', null, false)->countAllResults();
@@ -69,6 +71,8 @@ class BackStageController extends BaseController
     {
         $attendeeModel = new AttendeeModel();
 
+        log_message('info', 'BackstageController::getRecentActivities');          
+
         // Fetch the last 5 activities based on status update
         $activities = $attendeeModel
             ->select('fullname, status, updated_at') // Select relevant fields
@@ -81,33 +85,107 @@ class BackStageController extends BaseController
         return $this->response->setJSON(['activities' => $activities]);
     }
 
+    /**
+     * Get all invitations
+     * @return \CodeIgniter\HTTP\ResponseInterface
+     */
     public function getAllInvitations()
     {
         $attendeeModel = new AttendeeModel();
 
-        log_message(
-            'info', 
-        'BackstageController::getAllInvitations'); 
-        
         // Get pagination parameters from the request
-        $page = $this->request->getGet('page') ?? 1;
-        $perPage = $this->request->getGet('perPage') ?? 20;
+        $page = (int) ($this->request->getGet('page') ?? 1);
+        $perPage = (int) ($this->request->getGet('perPage') ?? 20);
+
+        log_message('info', 'BackstageController::getAllInvitations' . ' - ' . json_encode(['page' => $page,'perPage' => $perPage]));          
 
         // Fetch paginated data
         $updatedInvitations = $attendeeModel
-            ->select('fullname, position, institution, status')            
+            ->select('id, title, fullname, position, institution, status, additional_information')            
             ->orderBy('fullname', 'ASC')
             ->paginate($perPage, 'default', $page);
 
-        $total = $attendeeModel->countAllResults();
+        $totalItems = $attendeeModel->countAllResults();
+
+        $totalPages = (int) ceil($totalItems / $perPage);
 
         return $this->response->setJSON([
             'data' => $updatedInvitations,
             'pagination' => [
                 'currentPage' => $page,
                 'perPage' => $perPage,
-                'totalPages' => ceil($total / $perPage),
-                'totalItems' => $total,
+                'totalPages' => $totalPages,
+                'totalItems' => $totalItems,
+            ],
+        ]);
+    }
+
+    public function searchInvitations()
+    {
+        $attendeeModel = new AttendeeModel();
+
+        // Get pagination parameters from the request
+        $page = (int) ($this->request->getGet('page') ?? 1);
+        $perPage = (int) ($this->request->getGet('perPage') ?? 20);
+        $searchQuery = $this->request->getGet('query') ?? '';
+
+        log_message('info', 'BackstageController::getAllInvitations' . ' - ' . json_encode(['page' => $page,'perPage' => $perPage, 'searchQuery' => $searchQuery]));          
+
+        // Fetch paginated data
+        $invitations = $attendeeModel
+            ->select('title, fullname, position, institution, status, additional_information')  
+            ->like('fullname', $searchQuery)
+            ->orderBy('fullname', 'ASC')
+            ->paginate($perPage, 'default', $page);
+
+            $totalItems = $attendeeModel
+            ->like('fullname', $searchQuery)
+            ->countAllResults();
+
+        $totalPages = (int) ceil($totalItems / $perPage);
+
+        return $this->response->setJSON([
+            'data' => $invitations,
+            'pagination' => [
+                'currentPage' => $page,
+                'perPage' => $perPage,
+                'totalPages' => $totalPages,
+                'totalItems' => $totalItems,
+            ],
+        ]);
+    }
+
+    public function searchGuests()
+    {
+        $guestModel = new GuestModel();
+
+        // Get pagination parameters from the request
+        $page = (int) ($this->request->getGet('page') ?? 1);
+        $perPage = (int) ($this->request->getGet('perPage') ?? 20);
+        $searchQuery = $this->request->getGet('query') ?? '';
+
+        log_message('info', 'BackstageController::searchGuests' . ' - ' . json_encode(['page' => $page,'perPage' => $perPage, 'searchQuery' => $searchQuery]));          
+
+        // Fetch paginated data
+        $invitationGuests = $guestModel
+            ->select('"Bapak" as title, guests.fullname as fullname, guests.position as position, attendees.institution as institution, attendees.fullname as attendee_name')    
+            ->like('guests.fullname', $searchQuery)
+            ->join('attendees', 'attendees.id = guests.attendee_id', 'inner')                    
+            ->paginate($perPage, 'default', $page);
+
+        $totalItems = $guestModel
+            ->like('fullname', $searchQuery)
+            ->countAllResults();
+
+        $totalPages = (int) ceil($totalItems / $perPage);
+
+        return $this->response->setJSON([
+            'data' => $invitationGuests,
+            'pagination' => [
+                'currentPage' => $page,
+                'perPage' => $perPage,
+                'totalPages' => $totalPages,
+                'totalItems' => $totalItems,
             ],
         ]);
     }
@@ -116,29 +194,28 @@ class BackStageController extends BaseController
     {
         $guestModel = new GuestModel();
 
-        log_message(
-            'info', 
-        'BackstageController::getInvitationGuests'); 
-        
         // Get pagination parameters from the request
-        $page = $this->request->getGet('page') ?? 1;
-        $perPage = $this->request->getGet('perPage') ?? 20;
+        $page = (int) ($this->request->getGet('page') ?? 1);
+        $perPage = (int) ($this->request->getGet('perPage') ?? 20);
+
+        log_message('info', 'BackstageController::getInvitationGuests' . ' - ' . json_encode(['page' => $page,'perPage' => $perPage]));          
 
         // Fetch paginated data
         $invitationGuests = $guestModel
-            ->select('guests.fullname as fullname, guests.position as position, attendees.fullname as attendee_name')    
+            ->select('"Bapak" as title, guests.fullname as fullname, guests.position as position, attendees.institution as institution, attendees.fullname as attendee_name')    
             ->join('attendees', 'attendees.id = guests.attendee_id', 'inner')                    
             ->paginate($perPage, 'default', $page);
 
-        $total = $guestModel->countAllResults();
+        $totalItems = $guestModel->countAllResults();
+        $totalPages = (int) ceil($totalItems / $perPage);
 
         return $this->response->setJSON([
             'data' => $invitationGuests,
             'pagination' => [
                 'currentPage' => $page,
                 'perPage' => $perPage,
-                'totalPages' => ceil($total / $perPage),
-                'totalItems' => $total,
+                'totalPages' => $totalPages,
+                'totalItems' => $totalItems,
             ],
         ]);
     }
@@ -147,63 +224,130 @@ class BackStageController extends BaseController
     {
         $delegationModel = new DelegateModel();
 
-        log_message(
-            'info', 
-        'BackstageController::getInvitationDelegation'); 
-        
         // Get pagination parameters from the request
-        $page = $this->request->getGet('page') ?? 1;
-        $perPage = $this->request->getGet('perPage') ?? 20;
+        $page = (int) ($this->request->getGet('page') ?? 1);
+        $perPage = (int) ($this->request->getGet('perPage') ?? 20);
+
+        log_message('info', 'BackstageController::getInvitationDelegation' . ' - ' . json_encode(['page' => $page,'perPage' => $perPage]));          
 
         // Fetch paginated data
         $invitationDelegation = $delegationModel
-            ->select('delegations.fullname as fullname, delegations.position as position, attendees.fullname as attendee_name')    
+            ->select('"Bapak" as title, delegations.fullname as fullname, delegations.position as position, attendees.institution as institution, attendees.fullname as attendee_name')    
             ->join('attendees', 'attendees.id = delegations.attendee_id', 'inner')                    
             ->paginate($perPage, 'default', $page);
 
-        $total = $delegationModel->countAllResults();
+        $totalItems = $delegationModel->countAllResults();
+        $totalPages = (int) ceil($totalItems / $perPage);
 
         return $this->response->setJSON([
             'data' => $invitationDelegation,
             'pagination' => [
                 'currentPage' => $page,
                 'perPage' => $perPage,
-                'totalPages' => ceil($total / $perPage),
-                'totalItems' => $total,
+                'totalPages' => $totalPages,
+                'totalItems' => $totalItems,
             ],
         ]);
     }
 
+    /**
+     * Summary of getUpdatedInvitations
+     * API to get updated invitations action
+     * @return \CodeIgniter\HTTP\ResponseInterface
+     */
     public function getUpdatedInvitations()
+{
+    $attendeeModel = new AttendeeModel();
+
+    // Retrieve pagination parameters with default values
+    $page = (int) ($this->request->getGet('page') ?? 1);
+    $perPage = (int) ($this->request->getGet('perPage') ?? 6);
+
+    log_message('info', 'BackstageController::getUpdatedInvitations' . ' - ' . json_encode(['page' => $page,'perPage' => $perPage]));          
+
+    // Fetch paginated data
+    $updatedInvitations = $attendeeModel
+        ->select('title, fullname, position, institution, status, additional_information')
+        ->where('status IS NOT NULL', null, false)
+        ->orderBy('updated_at', 'DESC')
+        ->paginate($perPage, 'default', $page);
+
+    // Calculate total records for pagination
+    $totalItems = $attendeeModel
+        ->where('status IS NOT NULL', null, false)
+        ->countAllResults();
+
+    $totalPages = (int) ceil($totalItems / $perPage);
+
+    // Prepare and return the response
+    return $this->response->setJSON([
+        'data' => $updatedInvitations,
+        'pagination' => [
+            'currentPage' => $page,
+            'perPage' => $perPage,
+            'totalPages' => $totalPages,
+            'totalItems' => $totalItems,
+            ],
+        ]);
+    }
+
+    public function invitationCheckIn()
     {
+        // Load the AttendeeModel
         $attendeeModel = new AttendeeModel();
 
-        // Get pagination parameters from the request
-        $page = $this->request->getGet('page') ?? 1;
-        $perPage = $this->request->getGet('perPage') ?? 6;
+        // Decode the JSON payload
+        $jsonPayload = $this->request->getBody(); // Get raw input stream
+        $requestData = json_decode($jsonPayload, true); // Decode JSON to an associative array
 
-        // Fetch paginated data
-        $updatedInvitations = $attendeeModel
-            ->select('fullname, position, institution, status')
-            ->where('status IS NOT NULL', null, false)
-            ->orderBy('updated_at', 'DESC')
-            ->paginate($perPage, 'default', $page);
+        // Validate input
+        if (!isset($requestData['id']) || !isset($requestData['status'])) {
+            return $this->response
+            ->setStatusCode(400) // Bad Request
+                ->setJSON([
+                    'success' => false,
+                    'message' => 'ID and status are required.',
+                ]);
+        }
 
-        $total = $attendeeModel
-            ->where('status IS NOT NULL', null, false)
-            ->countAllResults();
+        $id = (int) ($requestData['id']); // ID of the invitation
+        $status = $requestData['status']; // New status to update
 
-        return $this->response->setJSON([
-            'data' => $updatedInvitations,
-            'pagination' => [
-                'currentPage' => $page,
-                'perPage' => $perPage,
-                'totalPages' => ceil($total / $perPage),
-                'totalItems' => $total,
-            ],
-        ]);
+        log_message('info', 'BackstageController::invitationCheckIn' . ' - ' . json_encode(['id' => $id, 'status' => $status]));
+        
+        // Check if the record exists
+        $invitation = $attendeeModel->find($id);
+        if (!$invitation) {
+            log_message('error', 'BackstageController::findAttendeeByID' . ' - ' . json_encode(['attendee' => $invitation]), ['id' => $id, 'status' => $status]);
+            return $this->response
+                ->setStatusCode(404) // Not Found
+                ->setJSON([
+                    'success' => false,
+                    'message' => 'Invitation not found.',
+                ]);
+        }
+
+        try {
+            // Update the status
+            $updated = $attendeeModel->update($id, ['status' => $status]);
+            return $this->response
+                ->setStatusCode(200) // OK
+                ->setJSON([
+                    'success' => true,
+                    'message' => 'Status updated successfully.',
+                ]);
+        } catch (\Exception $e) {
+            log_message('error', 'BackstageController::findAttendeeByID' . ' - ' . json_encode(['error' => $e]), ['id' => $id, 'status' => $status]);
+            return $this->response
+                ->setStatusCode(500) // Internal Server Error
+                ->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to update status. Please try again later.',
+                ]);
+        }
     }
 
+    // API to get invitation data
     public function getInvitationData($id = null){
         $invitationID = preg_replace_callback(
             '/[^a-zA-Z0-9_\-\.]/',
@@ -230,15 +374,15 @@ class BackStageController extends BaseController
             log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $invitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
             if ($attendee == null) {
                 log_message('error', 'InvitationController::show - attendee not found.', ['invitationID' => $invitationID]);
-                
-                return $this->response->setJSON([
-                    'data' => null,
-            ],404);              
+
+                return $this->response->setStatusCode(404)->setJSON(['data' => null,
+                    'message' => 'Invitations not found',
+                ]);
             }
             
-            return $this->response->setJSON([
+            return $this->response->setStatusCode(200)->setJSON([
                 'data' => $attendee,
-        ],unencoded: 200);  
+            ]);  
         }
     }
 }

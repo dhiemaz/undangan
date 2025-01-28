@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>BRI Microfinance Outlook 2025 Backstage </title>
-  
+
   <!-- external icon -->
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
 
@@ -17,24 +17,55 @@
   <link rel="stylesheet" href="../../assets/lib/typicons/typicons.css">
   <link rel="stylesheet" href="../../assets/lib/simple-line-icons/css/simple-line-icons.css">
   <link rel="stylesheet" href="../../assets/css/vendor.bundle.base.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+
+  <!-- Latest compiled and minified JavaScript -->
+  <!-- <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> -->
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link href="https://cdn.datatables.net/v/bs4/dt-2.2.1/sl-3.0.0/datatables.min.css" rel="stylesheet">
   <!-- End plugin css for this page -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../../assets/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../assets/images/favicon.png" />
-  <style>    
+  <style>
     #scanner-container {
-      margin: 20px auto;
-      width: 80%;
-      max-width: 500px;
+      margin: 40px auto;
+      width: 100%;
+      max-width: 400px;
+      /* border: 1px solid #ccc; */
+      /* Adds a border */
+      padding: 10px;
+      /* Adds padding inside the container */
+      border-radius: 8px;
+      /* Optional: Rounds the corners */
+      overflow: hidden;
+      /* Prevents content from overflowing the container */
+    }
+
+    #flip-camera {
+      width: 50%;
+      /* Ensures the button is as wide as the container */
+      border-radius: 0;
+      /* Optional: removes border radius if you want sharp corners */
+    }
+
+    .text-ellipsis {
+      overflow: collapse;
+      white-space: wrap;
+      text-overflow: clip;
+      max-width: 200px;
+      /* Adjust based on your layout */
     }
   </style>
 </head>
+
 <body class="sidebar-dark">
-  <div class="container-scroller"> 
+  <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -52,14 +83,14 @@
           </a> -->
         </div>
       </div>
-      <div class="navbar-menu-wrapper d-flex align-items-top"> 
+      <div class="navbar-menu-wrapper d-flex align-items-top">
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
             <h1 class="welcome-text">BRI Microfinance Outlook 2025</h1>
-            <h3 class="welcome-sub-text">Event summary report </h3>
+            <h3 class="welcome-sub-text">Backstage Dashboard </h3>
           </li>
         </ul>
-        <ul class="navbar-nav ms-auto">          
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
               <span class="input-group-addon input-group-prepend border-right">
@@ -67,8 +98,8 @@
               </span>
               <input type="text" class="form-control">
             </div>
-          </li>          
-          <li class="nav-item dropdown"> 
+          </li>
+          <li class="nav-item dropdown">
             <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="icon-bell"></i>
               <span class="count"></span>
@@ -78,7 +109,7 @@
                 <p class="mb-0 font-weight-medium float-left"> -- sample notification -- </p>
                 <span class="badge badge-pill badge-primary float-right">View all</span>
               </a>
-              <div class="dropdown-divider"></div>              
+              <div class="dropdown-divider"></div>
               <!-- <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <img src="images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
@@ -107,7 +138,7 @@
                 <img class="img-sm rounded-circle" src="../../assets/images/man-user-circle-icon.webp" alt="Profile image">
                 <p class="mb-1 mt-3 font-weight-semibold">user</p>
                 <!-- <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p> -->
-              </div>              
+              </div>
               <a class="dropdown-item" href="/backstage/logout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>
@@ -124,20 +155,22 @@
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
-          <p class="settings-heading">Sidebar Menu Theme</p>          
-          <div class="sidebar-bg-options selected" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border me-3"></div>Dark</div>          
+          <p class="settings-heading">Themes</p>
+          <div class="sidebar-bg-options selected" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border me-3"></div>Dark
+          </div>
         </div>
-      </div>      
+      </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-bg-options sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="dashboard">
+            <a class="nav-link" href="#">
               <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">Backstage</span>
             </a>
-          </li>                              
+          </li>
           <li class="nav-item nav-category">pages</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#attendees" aria-expanded="false" aria-controls="attendees">
@@ -146,11 +179,15 @@
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="attendees">
-              <ul class="nav flex-column sub-menu">          
-                <li class="nav-item"><a class="nav-link" id="check-in" data-bs-toggle="tab" href="/backstage/dashboard/tabs/check_in" data-content-target="#overview" role="tab" aria-selected="false">Invitation check-in</a></li>
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" id="check-in" data-bs-toggle="tab" href="/backstage/dashboard/tabs/check_in" data-content-target="#overview" role="tab" aria-selected="false">QR check-in</a></li>
+              </ul>
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" id="invitations-tab" data-bs-toggle="tab" href="/backstage/dashboard/tabs/invitations" data-content-target="#overview" role="tab" aria-selected="false">Manual check-in</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" id="check-in" data-bs-toggle="tab" href="/backstage/dashboard/tabs/check_in" data-content-target="#overview" role="tab" aria-selected="false">Manual check-in</a></li> -->
               </ul>
             </div>
-          </li>    
+          </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#datasheet" aria-expanded="false" aria-controls="datasheet">
               <i class="menu-icon mdi mdi-google-spreadsheet"></i>
@@ -162,7 +199,7 @@
                 <li class="nav-item"> <a class="nav-link" href="https://docs.google.com/spreadsheets/d/1yrYbzNa6bzlDp6gsr6YGFfrwz3vU5E4oVci96M-BpR0/edit?usp=sharing" target="_blank"> Google Sheet </a></li>
               </ul>
             </div>
-          </li>     
+          </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
@@ -174,7 +211,7 @@
                 <li class="nav-item"> <a class="nav-link" href="backstage/logout"> Logout </a></li>
               </ul>
             </div>
-          </li>          
+          </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -199,7 +236,7 @@
                     </li>
                   </ul>
                   <div>
-                    <div class="btn-wrapper">                      
+                    <div class="btn-wrapper">
                       <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
                       <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
                     </div>
@@ -207,72 +244,87 @@
                 </div>
                 <!-- content -->
                 <div class="tab-content tab-content-basic">
-                  <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                  <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                     <div class="row">
                       <div class="col-sm-12">
                         <div class="statistics-details d-flex align-items-center justify-content-between">
                           <div>
                             <p class="statistics-title">Total invitations</p>
-                            <h3 class="rate-percentage" id="total-invitation">0</h3>                            
+                            <h3 class="rate-percentage" id="total-invitation">0</h3>
                           </div>
                           <div>
                             <p class="statistics-title">Attend</p>
-                            <h3 class="rate-percentage" id="attend-count">0</h3>                            
+                            <h3 class="rate-percentage" id="attend-count">0</h3>
                           </div>
                           <div>
                             <p class="statistics-title">Attend with guests</p>
-                            <h3 class="rate-percentage" id="attend-with-guests-count">0</h3>                            
-                          </div>                          
+                            <h3 class="rate-percentage" id="attend-with-guests-count">0</h3>
+                          </div>
                           <div>
                             <p class="statistics-title">Delegate</p>
-                            <h3 class="rate-percentage" id="delegate-count">0</h3>                            
-                          </div>                                              
+                            <h3 class="rate-percentage" id="delegate-count">0</h3>
+                          </div>
                           <div>
                             <p class="statistics-title">Inattend</p>
-                            <h3 class="rate-percentage" id="inattend-count">0</h3>                            
-                          </div>                                                                              
+                            <h3 class="rate-percentage" id="inattend-count">0</h3>
+                          </div>
                         </div>
                       </div>
-                    </div> 
+                    </div>
                     <div class="row">
                       <div class="col-lg-8 d-flex flex-column">
                         <div class="row flex-grow">
                           <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
-                          <div class="card card-rounded">
+                            <div class="card card-rounded">
                               <div class="card-body">
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                   <div>
                                     <h4 class="card-title card-title-dash">Invitation update list</h4>
-                                   <p class="card-subtitle card-subtitle-dash"></p>
+                                    <p class="card-subtitle card-subtitle-dash"></p>
                                   </div>
                                   <div>
                                     <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button" onclick="fetchUpdatedInvitations()"><i class="mdi mdi-ref"></i>Refresh</button>
                                   </div>
                                 </div>
-                                <div class="table-responsive  mt-1">
-                                  <table class="table select-table">
+                                <div class="table-responsive mt-2">
+                                  <table class="table" id="updated-invitations-table">
                                     <thead>
-                                      <tr>                                        
+                                      <tr>
                                         <th>Fullname</th>
-                                        <th>Position</th>
                                         <th>Company</th>
                                         <th>Status</th>
+                                        <th>Additional Information</th>
                                       </tr>
                                     </thead>
-                                    <tbody>                                      
+                                    <tbody>
                                     </tbody>
                                   </table>
-                                  <nav>
-                                    <ul class="pagination justify-content-center mt-3" id="pagination-updated-invitations"></ul>
-                                  </nav>
+                                  <div id="pagination-updated-invitations"></div>
                                 </div>
                               </div>
-                            </div>                            
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-lg-4 d-flex flex-column">
-                        <div class="row flex-grow">                          
+                        <div class="row flex-grow">
+                          <div class="col-12 grid-margin stretch-card">
+                            <div class="card card-rounded">
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                      <h4 class="card-title card-title-dash">Event Data</h4>
+                                    </div>
+                                    <canvas class="my-auto" id="doughnutChart" height="200"></canvas>
+                                    <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row flex-grow">
                           <div class="col-md-6 col-lg-12 grid-margin">
                             <div class="card card-rounded">
                               <div class="card-body">
@@ -301,36 +353,35 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>                            
+                            </div>
                           </div>
-                          <div class="col-md-4 col-lg-12 grid-margin">   
+                          <div class="col-md-4 col-lg-12 grid-margin">
                             <div class="card card-rounded">
-                                <div class="card-body">
-                                  <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <h4 class="card-title card-title-dash">Activities</h4>
-                                    <!-- <p class="mb-0">20 finished, 5 remaining</p> -->
-                                  </div>
-                                  <ul class="bullet-line-list" id="activity-list">                                                                
-                                  </ul>
-                                  <div class="list align-items-center pt-3">
-                                    <div class="wrapper w-100">
-                                      <p class="mb-0">
-                                        <a class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
-                                      </p>
-                                    </div>
-                                  </div>
+                              <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                  <h4 class="card-title card-title-dash">Activities</h4>
                                 </div>
+                                <ul class="bullet-line-list" id="activity-list">
+                                </ul>
+                                <!-- <div class="list align-items-center pt-3">
+                                  <div class="wrapper w-100">
+                                    <p class="mb-0">
+                                      <a class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
+                                    </p>
+                                  </div>
+                                </div> -->
                               </div>
-                            </div>                                              
+                            </div>
                           </div>
                         </div>
-                        <div class="col-12 grid-margin stretch-card">                        
                       </div>
-                    </div>                    
+                      <div class="col-12 grid-margin stretch-card">
+                      </div>
+                    </div>
                   </div>
-                  <div id="scanner-container"></div>                
-                  <!-- content-wrapper ends -->                  
-                </div>                
+                  <div id="scanner-container" class="text-center"></div>
+                  <!-- content-wrapper ends -->
+                </div>
               </div>
             </div>
           </div>
@@ -339,7 +390,7 @@
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+            <!-- <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span> -->
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
           </div>
         </footer>
@@ -365,12 +416,12 @@
   <script src="../../assets/js/hoverable-collapse.js"></script>
   <script src="../../assets/js/template.js"></script>
   <script src="../../assets/js/settings.js"></script>
-  <script src="../../assets/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="../../assets/js/dashboard.js"></script>
   <script src="../../assets/js/Chart.roundedBarCharts.js"></script>
   <script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- End custom js for this page-->
   <script>
@@ -383,16 +434,16 @@
 
     function initializeOverviewIntervals() {
       if (!updateStatisticsInterval) {
-          updateStatisticsInterval = setInterval(updateStatistics, 180000); // Every 3 minutes
+        updateStatisticsInterval = setInterval(updateStatistics, 180000); // Every 3 minutes
       }
 
       if (!recentActivityInterval) {
-          recentActivityInterval = setInterval(fetchRecentActivities, 180000); // Every 3 minutes
+        recentActivityInterval = setInterval(fetchRecentActivities, 180000); // Every 3 minutes
       }
 
       if (!fetchUpdatedInvitationsInterval) {
-          recentActivityInterval = setInterval(fetchUpdatedInvitations, 300000); // Every 5 minutes
-      }      
+        recentActivityInterval = setInterval(fetchUpdatedInvitations, 300000); // Every 5 minutes
+      }
     }
 
     function initializeInvitationsIntervals() {
@@ -447,43 +498,108 @@
     }
 
     // Initialize the scanner once
-    const scanner = new Html5Qrcode("scanner-container");
     let currentCameraId;
+    let scanner = new Html5Qrcode("scanner-container", {
+      fps: 10,
+      qrbox: 250
+    });
     let isScannerStart = false;
 
     // Function to start scanning
-    async function startScanning() {
-      document.getElementById("InputFullname").value = "";
-      document.getElementById("InputPosition").value = "";
-      document.getElementById("InputCompany").value = ""; 
+    async function startScanner(cameraId) {
+      document.getElementById("checkin-invitation-id").value = "";
+      document.getElementById("checkin-fullname").value = "";
+      document.getElementById("checkin-position").value = "";
+      document.getElementById("checkin-institution").value = "";
       const button = document.getElementById("statusButton");
       // Remove existing color classes
       button.classList.remove("btn-success", "btn-danger", "btn-warning", "btn-primary");
-      button.classList.add("btn-secondary");      
-      button.textContent = "NA";
+      button.classList.add("btn-secondary");
+      button.textContent = "N/A";
 
-      const buttonCheckIn = document.getElementById("check-in");
-      buttonCheckIn.disabled = true;
-      
+      // const buttonCheckIn = document.getElementById("check-in");
+      // buttonCheckIn.disabled = true;
+
+      try {
+        if (!scanner) {
+          console.error("Scanner is not initialized.");
+          return;
+        }
+
+        // Stop the scanner if it's already running
+        if (scanner.isScanning) {
+          await scanner.stop();
+        }
+
+        // Start the scanner with the specified camera ID
+        await scanner.start(
+          cameraId, {
+            fps: 10,
+            qrbox: {
+              width: 250,
+              height: 250,
+            },
+          },
+          onScanSuccess,
+          onScanError
+        );
+
+        currentCameraId = cameraId; // Store the current camera ID
+        console.log("start using camera ID:", cameraId);
+      } catch (err) {
+        console.error("Error starting scanner:", err);
+      }
+    }
+
+    // Function to switch between front and rear cameras, prioritizing the front camera
+    async function flipCamera() {
       try {
         const devices = await Html5Qrcode.getCameras(); // Get list of available cameras
-        if (devices && devices.length) {
-          // Use the first camera in the list
-          currentCameraId = devices[0].id;
-          console.log("Using camera ID:", currentCameraId);
-
-          // Start the QR code scanner with the selected camera
-          await scanner.start(
-            currentCameraId, // Pass the camera ID
-            { fps: 10, qrbox: { width: 250, height: 250 } }, // Set scan options
-            onScanSuccess,
-            onScanError
+        if (devices && devices.length > 0) {
+          // Look for a front camera first, then a back camera
+          const frontCamera = devices.find(device =>
+            device.label.toLowerCase().includes("front") || device.label.toLowerCase().includes("front-facing")
           );
+          const backCamera = devices.find(device =>
+            device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("rear")
+          );
+
+          // If a front camera is found, use it; otherwise, use the back camera
+          const nextCamera = frontCamera || backCamera || devices[0]; // Default to the first available camera
+
+          // Switch only if the camera is different from the current one
+          if (nextCamera.id !== currentCameraId) {
+            console.log("Switching to camera:", nextCamera.label);
+            await startScanner(nextCamera.id);
+          } else {
+            alert("Already using the selected camera.");
+          }
         } else {
-          console.log("No cameras found.");
+          alert("No cameras found.");
         }
       } catch (err) {
-          console.error("Error starting scanner:", err);
+        console.error("Error flipping camera:", err);
+      }
+    }
+
+    // Set up the initial camera (rear camera preferred)
+    async function initializeScanner() {
+      try {
+        const devices = await Html5Qrcode.getCameras(); // Get list of available cameras
+        if (devices && devices.length > 0) {
+          // Look for a back camera in the list of devices
+          const backCamera = devices.find(device =>
+            device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("rear")
+          );
+          // Use the back camera if available, otherwise fallback to the first available camera
+          const cameraToUse = backCamera ? backCamera.id : devices[0].id;
+          console.log("Using camera ID:", cameraToUse);
+          await startScanner(cameraToUse);
+        } else {
+          alert("No cameras found.");
+        }
+      } catch (err) {
+        console.error("Error starting scanner:", err);
       }
     }
 
@@ -495,16 +611,16 @@
         .then(() => {
           console.log("Scanner stopped.");
         })
-      .catch((err) => {
+        .catch((err) => {
           console.error("Error stopping scanner:", err);
-      });
+        });
     }
 
     // Handlers for scan success and errors
     function onScanSuccess(decodedText, decodedResult) {
       const resultContainer = document.getElementById("InputFullname");
       if (resultContainer) {
-          resultContainer.textContent.value = `QR Code Content: ${decodedText}`;
+        resultContainer.textContent.value = `QR Code Content: ${decodedText}`;
       }
 
       //https://brimicrofinanceoutlook.id/bri-microfinance-2025/invitation/WpNRCRmdntxINbSNZWuK6ZIuw
@@ -515,29 +631,29 @@
       // Extract the token from the pathname
       const pathSegments = urlObj.pathname.split("/");
       const token = pathSegments[pathSegments.length - 1];
-      console.log("Decoded result:", token); 
-      getInvitationDetail(token);    
-      
+      console.log("Decoded result:", token);
+      getInvitationDetail(token);
+
       // Optionally stop scanning after successful detection 
       stopScanning();
     }
 
     function onScanError(errorMessage) {
-      //console.warn("Scan error:", errorMessage);
+      console.log("Scan error:", errorMessage);
     }
 
     // Call this function on tab switch
-    function handleTabSwitch(id) {      
+    function handleTabSwitch(id) {
       // clear intervals
-      clearIntervals();      
+      clearIntervals();
       if (id === 'overview-tab') {
         if (isScannerStart) {
           stopScanning();
-          isScannerStart = false;          
+          isScannerStart = false;
         }
-        
+
         // reinitialize intervals
-        initializeOverviewIntervals();  
+        initializeOverviewIntervals();
         // update statistics
         updateStatistics();
         // Fetch activities
@@ -549,10 +665,10 @@
       if (id === 'invitations-tab') {
         if (isScannerStart) {
           stopScanning();
-          isScannerStart = false;          
+          isScannerStart = false;
         }
         // reinitialize intervals
-        initializeInvitationsIntervals(); 
+        initializeInvitationsIntervals();
         // fetchAllInvitations
         fetchAllInvitations();
       }
@@ -560,10 +676,10 @@
       if (id === 'guests-tab') {
         if (isScannerStart) {
           stopScanning();
-          isScannerStart = false;          
+          isScannerStart = false;
         }
         // reinitialize intervals
-        initializeInvitationGuestsIntervals(); 
+        initializeInvitationGuestsIntervals();
         // fetchAllInvitations
         fetchInvitationGuests();
       }
@@ -571,413 +687,1019 @@
       if (id === 'delegations-tab') {
         if (isScannerStart) {
           stopScanning();
-          isScannerStart = false;          
+          isScannerStart = false;
         }
         // reinitialize intervals
-        initializeInvitationDelegationIntervals(); 
+        initializeInvitationDelegationIntervals();
         // fetchAllInvitations
-        fetchInvitationDelegation();        
+        fetchInvitationDelegation();
       }
 
       if (id === 'delegations-tab') {
         if (isScannerStart) {
           stopScanning();
-          isScannerStart = false;          
+          isScannerStart = false;
         }
         // reinitialize intervals
-        initializeInvitationDelegationIntervals(); 
+        initializeInvitationDelegationIntervals();
         // fetchAllInvitations
         fetchInvitationDelegation();
       }
 
       if (id === 'check-in') {
-        const resultContainer = document.getElementById("InputFullname");
-        const resetButton = document.getElementById("reset"); 
+        const flipCameraButton = document.getElementById("flip-camera");
+        // Event listener for the flip camera button
+        flipCameraButton.addEventListener("click", flipCamera);
 
-        resetButton.addEventListener("click", startScanning);
-        isScannerStart = true;            
-        startScanning();
-      }        
+        // Initialize the scanner when the page loads
+        isScannerStart = true;
+        initializeScanner();
+      }
+    }
+
+    // Function to reset the QR code check-in
+    function resetQRCheckIn() {
+      const vipStarsElement = document.getElementById('invitation-type');
+      if (vipStarsElement) {
+        vipStarsElement.innerHTML = ''; // Clear existing stars
+      } else {
+        console.log('vipStarsElement is null');
+      }
+
+      initializeScanner();
     }
 
     // Attach event listeners to buttons
-    //startButton.addEventListener("click", startScanning);
-    //stopButton.addEventListener("click", stopScanning);
-
     function getInvitationDetail(token) {
-            $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
-                method: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                  console.log(response);
-                  document.getElementById("InputFullname").value = response.data.fullname;
-                  document.getElementById("InputPosition").value = response.data.position;
-                  document.getElementById("InputCompany").value = response.data.institution; 
-                  const button = document.getElementById("statusButton");
-                  const checkInButton = document.getElementById("check-in");
+      let invitations_type = '';
 
-                  // Remove existing color classes
-                  button.classList.remove("btn-success", "btn-danger", "btn-warning", "btn-primary");
-                  // Change the button's text and color based on the status
-                  switch (response.data.status) {
-                    case "attend":
-                        button.classList.add("btn-success");
-                        button.textContent = response.data.status;
-                        break;                    
-                    case "delegate":
-                        button.classList.add("btn-warning");
-                        button.textContent = response.data.status;
-                        break;
-                    case "attend with guests":
-                        button.classList.add("btn-primary");
-                        button.textContent = response.data.status;
-                        break;
-                    default:
-                        button.classList.add("btn-secondary");
-                        button.textContent = "unconfirmed";
-                        checkInButton.disabled = true;
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Failed to fetch statistics:', error);
-                }
-            });
+      $.ajax({
+        url: 'http://localhost:8080/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+          console.log(response);
+
+          if (response.data.additional_information === null) {
+            invitations_type = "standard";
+          } else {
+            invitations_type = response.data.additional_information;
+          }
+
+          document.getElementById('user-image').src = getTitle(response.data.title);
+          document.getElementById("checkin-invitation-id").value = response.data.id;
+          document.getElementById("checkin-fullname").value = response.data.fullname;
+          document.getElementById("checkin-position").value = response.data.position;
+          document.getElementById("checkin-institution").value = response.data.institution;
+          const button = document.getElementById("statusButton");
+          const checkInButton = document.getElementById("checkInButton");
+          const resetButton = document.getElementById("resetButton");
+
+          checkInButton.addEventListener("click", CheckIn(response.data.id));
+          resetButton.addEventListener("click", resetQRCheckIn);
+
+          // Remove existing color classes
+          button.classList.remove("btn-success", "btn-danger", "btn-warning", "btn-primary");
+          // Change the button's text and color based on the status
+          switch (response.data.status) {
+            case "attend":
+              button.classList.add("btn-success");
+              button.textContent = response.data.status;
+              checkInButton.disabled = false;
+              break;
+            case "delegate":
+              button.classList.add("btn-warning");
+              button.textContent = response.data.status;
+              checkInButton.disabled = false;
+              break;
+            case "attend with guests":
+              button.classList.add("btn-primary");
+              button.textContent = response.data.status;
+              checkInButton.disabled = false;
+              break;
+            default:
+              button.classList.add("btn-secondary");
+              button.textContent = "unconfirmed";
+              checkInButton.disabled = true;
+          }
+
+          const vipStarsElement = document.getElementById('invitation-type');
+          if (vipStarsElement) {
+            vipStarsElement.innerHTML = ''; // Clear existing stars
+          } else {
+            console.log('vipStarsElement is null');
+          }
+
+          let starCount = 0;
+          if (invitations_type === 'vvip') {
+            starCount = 5; // 5 stars for VVIP
+          } else if (invitations_type === 'vip') {
+            starCount = 4; // 4 stars for VIP
+          } else if (invitations_type === 'standard') {
+            starCount = 3; // 4 stars for standard
+          }
+
+          for (let i = 0; i < starCount; i++) {
+            const starIcon = document.createElement('i');
+            starIcon.className = 'mdi mdi-star'; // MDI star icon class
+            vipStarsElement.appendChild(starIcon);
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to fetch statistics:', error);
         }
+      });
+    }
+
+    function CheckIn(id) {
+      // const id = document.getElementById('checkin-invitation-id');
+      const status = 'check-in';
+
+      if (id) {
+        const requestData = {
+          id: id,
+          status: status
+        };
+
+        console.log(requestData);
+
+        $.ajax({
+          url: 'http://localhost:8080/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          method: 'POST',
+          dataType: 'json',
+          contentType: 'application/json', // Ensure the content type matches the cURL
+          data: JSON.stringify(requestData), // Convert data to JSON string
+          success: function(response) {
+            if (response.success) {
+              console.log(response.message);
+              // Optionally update UI elements
+              alert('Check-In Successful: ' + response.message);
+            } else {
+              console.error('Check-In Failed:', response.message);
+              alert('Error: ' + response.message);
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error('Failed to process check-in:', error);
+            alert('Failed to process check-in. Please try again.');
+          }
+        });
+      } else {
+        alert('Invitation ID is required.');
+      }
+    }
 
     // Function to fetch and update statistics
     function updateStatistics() {
-            $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getSummaryCount', // Replace with your API endpoint
-                method: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                    // Update the statistics in the DOM
-                    $('#total-invitation').text(response.total_invitations);
-                    $('#total-invitation-chart').text(response.total_invitations);
-                    $('#total-confirmed-chart').text(response.total_confirmed);
-                    $('#attend-count').text(response.attend);
-                    $('#attend-with-guests-count').text(response.attend_with_guests);
-                    $('#delegate-count').text(response.delegates);
-                    $('#inattend-count').text(response.inattend);
-                },
-                error: function (xhr, status, error) {
-                    console.error('Failed to fetch statistics:', error);
-                }
-            });
+      $.ajax({
+        url: 'http://localhost:8080/backstage/api/getSummaryCount', // Replace with your API endpoint
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getSummaryCount', // Replace with your API endpoint
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+          // Update the statistics in the DOM
+          $('#total-invitation').text(response.total_invitations);
+          $('#total-invitation-chart').text(response.total_invitations);
+          $('#total-confirmed-chart').text(response.total_confirmed);
+          $('#attend-count').text(response.attend);
+          $('#attend-with-guests-count').text(response.attend_with_guests);
+          $('#delegate-count').text(response.delegates);
+          $('#inattend-count').text(response.inattend);
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to fetch statistics:', error);
         }
+      });
+    }
 
-        function fetchRecentActivities() {
-            $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getRecentActivities', // Replace with your API endpoint
-                method: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                    const activityList = $('#activity-list');
-                    activityList.empty(); // Clear existing activities
+    function fetchRecentActivities() {
+      $.ajax({
+        url: 'http://localhost:8080/backstage/api/getRecentActivities', // Replace with your API endpoint
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getRecentActivities', // Replace with your API endpoint
+        method: 'GET',
+        dataType: 'json',
+        success: function(response) {
+          const activityList = $('#activity-list');
+          activityList.empty(); // Clear existing activities
 
-                    response.activities.forEach(activity => {
-                        const timeAgo = calculateTimeAgo(activity.updated_at); // Helper function to calculate time
-                        const listItem = `
+          response.activities.forEach(activity => {
+            const timeAgo = calculateTimeAgo(activity.updated_at); // Helper function to calculate time
+            const listItem = `
                             <li>
                                 <div class="d-flex justify-content-between">
                                     <div><span class="text-light-green">${activity.fullname}</span> ${activity.status}</div>
                                     <p>${timeAgo}</p>
                                 </div>
                             </li>`;
-                        activityList.append(listItem); // Append new activity
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Failed to fetch activities:', error);
-                }
-            });
+            activityList.append(listItem); // Append new activity
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to fetch activities:', error);
         }
+      });
+    }
 
-        // Calculate time ago from timestamp
-        function calculateTimeAgo(timestamp) {
-            const activityTime = new Date(timestamp);
-            const now = new Date();
-            const diffMinutes = Math.floor((now - activityTime) / 60000); // Difference in minutes
+    // Calculate time ago from timestamp
+    function calculateTimeAgo(timestamp) {
+      const activityTime = new Date(timestamp);
+      const now = new Date();
+      const diffMinutes = Math.floor((now - activityTime) / 60000); // Difference in minutes
 
-            if (diffMinutes < 1) return 'Just now';
-            if (diffMinutes < 60) return `${diffMinutes} min ago`;
-            if (diffMinutes < 1440) return `${Math.floor(diffMinutes / 60)} h ago`;
-            return `${Math.floor(diffMinutes / 1440)} d ago`;
-        }
+      if (diffMinutes < 1) return 'Just now';
+      if (diffMinutes < 60) return `${diffMinutes} min ago`;
+      if (diffMinutes < 1440) return `${Math.floor(diffMinutes / 60)} h ago`;
+      return `${Math.floor(diffMinutes / 1440)} d ago`;
+    }
 
-        // Function to fetch updated invitations
-        const fetchUpdatedInvitations = (page = 1) => {
-            const perPage = 5; // Items per page
+    // Function to fetch updated invitations
+    const fetchUpdatedInvitations = (page = 1) => {
+      const perPage = 7; // Items per page
 
-            $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
-                method: 'GET',
-                data: { page, perPage }, // Pass pagination parameters
-                dataType: 'json',
-                success: function (response) {
-                    const tbody = $('.select-table tbody');
-                    const pagination = $('#pagination-updated-invitations');
-                    tbody.empty(); // Clear existing rows
-                    pagination.empty(); // Clear pagination controls
+      $.ajax({
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+        url: 'http://localhost:8080/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+        method: 'GET',
+        data: {
+          page,
+          perPage
+        }, // Pass pagination parameters
+        dataType: 'json',
+        success: function(response) {
+          const tbody = $('#updated-invitations-table tbody');
+          const pagination = $('#pagination-updated-invitations');
+          tbody.empty(); // Clear existing rows
+          pagination.empty(); // Clear pagination controls
 
-                    // Populate table rows
-                    response.data.forEach(invitation => {
-                        const tableRow = `
-                            <tr>
-                                <td>${invitation.fullname}</td>
-                                <td>${invitation.position}</td>
-                                <td>${invitation.institution}</td>
-                                <td>
-                                    <div class="badge badge-opacity-${getStatusBadge(invitation.status)}">
-                                        ${invitation.status}
+          // Populate table rows
+          response.data.forEach(invitation => {
+            const tableRow = `
+                            <tr>                                        
+                              <td>
+                                  <div class="d-flex ">                                    
+                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
+                                    &nbsp;&nbsp;
+                                    <div class="ml-2">
+                                      <h6 class="font-bold">${invitation.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
                                     </div>
-                                </td>
+                                  </div>
+                              </td>
+                              <td>
+                                <h6>${invitation.institution}</h6>
+                                <p>-</p>
+                              </td>
+                              <td>
+                                <div class="badge badge-opacity-${getStatusBadge(invitation.status)}">
+                                    ${invitation.status}
+                                </div>
+                              </td>
+                              <td>${invitation.additional_information}</td>
                             </tr>`;
-                        tbody.append(tableRow);
-                    });
+            tbody.append(tableRow);
+          });
 
-                    // Generate pagination controls
-                    for (let i = 1; i <= response.pagination.totalPages; i++) {
-                        pagination.append(`
-                            <li class="page-item ${i === response.pagination.currentPage ? 'active' : ''}">
-                                <a class="page-link" href="#">${i}</a>
-                            </li>
-                        `);
-                    }
+          // Generate Tailwind CSS-based pagination controls
+          const {
+            currentPage,
+            totalPages,
+            totalItems,
+            perPage
+          } = response.pagination;
+          const startItem = (currentPage - 1) * perPage + 1;
+          const endItem = Math.min(currentPage * perPage, totalItems);
 
-                    // Add click event for pagination links
-                    $('.page-link').on('click', function (e) {
-                        e.preventDefault();
-                        const page = $(this).text();
-                        fetchUpdatedInvitations(page);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Failed to fetch updated invitations:', error);
-                }
-            });
-        };
+          // Generate pagination controls
+          pagination.append(`              
+              <div class="mt-auto d-flex flex-column align-items-center">
+                  <span class="text-muted small"> Showing <span class="fw-semibold">${startItem}</span> to 
+                  <span class="fw-semibold">${endItem}</span> of 
+                  <span class="fw-semibold">${totalItems}</span> Entries </span>
+                <div class="btn-group mt-2">
+                  <button class="btn btn-dark btn-sm ${currentPage === 1 ? 'disabled' : ''}" ${currentPage == 1 ? 'disabled' : ''} id="prev-updated-invitations">Prev</button>
+                  <button class="btn btn-dark btn-sm ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage == totalPages ? 'disabled' : ''} id="next-updated-invitations">Next</button>
+                </div>
+              </div>
+            `);
 
-        
-
-      // Function to fetch updated invitations
-      const fetchAllInvitations = (page = 1) => {
-            const perPage = 20; // Items per page
-
-            $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
-                method: 'GET',
-                data: { page, perPage }, // Pass pagination parameters
-                dataType: 'json',
-                success: function (response) {
-                    const tbody = $('.table-hover tbody');
-                    const pagination = $('#pagination-invitations');
-                    tbody.empty(); // Clear existing rows
-                    pagination.empty(); // Clear pagination controls
-
-                    console.log(response);
-
-                    // Populate table rows
-                    response.data.forEach(invitation => {
-                        const tableRow = `
-                            <tr>
-                                <td>${invitation.fullname}</td>
-                                <td>${invitation.position}</td>
-                                <td>${invitation.institution}</td>
-                                <td>
-                                    <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
-                                      ${invitation.status || 'unconfirmed'}
-                                    </div>
-                                </td>
-                            </tr>`;
-                        tbody.append(tableRow);
-                    });
-
-                    // Generate pagination controls
-                    for (let i = 1; i <= response.pagination.totalPages; i++) {
-                        pagination.append(`
-                            <li class="page-item ${i === response.pagination.currentPage ? 'active' : ''}">
-                                <a class="page-link" href="#">${i}</a>
-                            </li>
-                        `);
-                    }
-
-                    // Add click event for pagination links
-                    $('.page-link').on('click', function (e) {
-                        e.preventDefault();
-                        const page = $(this).text();
-                        fetchAllInvitations(page);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Failed to fetch updated invitations:', error);
-                }
-            });
-        };
-
-        const fetchInvitationGuests = (page = 1) => {
-            const perPage = 20; // Items per page
-
-            $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationGuests', // Replace with your API endpoint
-                method: 'GET',
-                data: { page, perPage }, // Pass pagination parameters
-                dataType: 'json',
-                success: function (response) {
-                    const tbody = $('.table-hover tbody');
-                    const pagination = $('#pagination-guests');
-                    tbody.empty(); // Clear existing rows
-                    pagination.empty(); // Clear pagination controls
-
-                    console.log(response);
-
-                    // Populate table rows
-                    response.data.forEach(invitation => {
-                        const tableRow = `
-                            <tr>
-                                <td>${invitation.fullname}</td>
-                                <td>${invitation.position}</td>
-                                <td>${invitation.attendee_name}</td>                                
-                            </tr>`;
-                        tbody.append(tableRow);
-                    });
-
-                    // Generate pagination controls
-                    for (let i = 1; i <= response.pagination.totalPages; i++) {
-                        pagination.append(`
-                            <li class="page-item ${i === response.pagination.currentPage ? 'active' : ''}">
-                                <a class="page-link" href="#">${i}</a>
-                            </li>
-                        `);
-                    }
-
-                    // Add click event for pagination links
-                    $('.page-link').on('click', function (e) {
-                        e.preventDefault();
-                        const page = $(this).text();
-                        fetchInvitationGuests(page);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Failed to fetch updated invitations:', error);
-                }
-            });
-        };
-
-        const fetchInvitationDelegation = (page = 1) => {
-            const perPage = 20; // Items per page
-
-            $.ajax({
-                url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationDelegation', // Replace with your API endpoint
-                method: 'GET',
-                data: { page, perPage }, // Pass pagination parameters
-                dataType: 'json',
-                success: function (response) {
-                    const tbody = $('.table-hover tbody');
-                    const pagination = $('#pagination-delegations');
-                    tbody.empty(); // Clear existing rows
-                    pagination.empty(); // Clear pagination controls
-
-                    console.log(response);
-
-                    // Populate table rows
-                    response.data.forEach(invitation => {
-                        const tableRow = `
-                            <tr>
-                                <td>${invitation.fullname}</td>
-                                <td>${invitation.position}</td>
-                                <td>${invitation.attendee_name}</td>                                
-                            </tr>`;
-                        tbody.append(tableRow);
-                    });
-
-                    // Generate pagination controls
-                    for (let i = 1; i <= response.pagination.totalPages; i++) {
-                        pagination.append(`
-                            <li class="page-item ${i === response.pagination.currentPage ? 'active' : ''}">
-                                <a class="page-link" href="#">${i}</a>
-                            </li>
-                        `);
-                    }
-
-                    // Add click event for pagination links
-                    $('.page-link').on('click', function (e) {
-                        e.preventDefault();
-                        const page = $(this).text();
-                        fetchInvitationDelegation(page);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Failed to fetch updated invitations:', error);
-                }
-            });
-        };
-
-        // Helper function to determine badge style
-        const getStatusBadge = (status) => {
-            switch (status.toLowerCase()) {
-                case 'attend':
-                    return 'success';
-                case 'attend with guests':
-                    return 'info';
-                case 'delegate':
-                    return 'warning';
-                case 'inattend':
-                    return 'danger';
-                default:
-                    return 'warning';
+          $('#prev-updated-invitations').on('click', function() {
+            if (currentPage > 1) {
+              fetchUpdatedInvitations(currentPage - 1);
             }
-        };
+          });
 
+          $('#next-updated-invitations').on('click', function() {
+            if (currentPage < totalPages) {
+              fetchUpdatedInvitations(currentPage + 1);
+            }
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to fetch updated invitations:', error);
+        }
+      });
+    };
 
-    $(document).ready(function () {
-        // Initial call to update statistics
-        updateStatistics();
-        // Fetch activities on load
-        fetchRecentActivities();
-        // Fetch updated invitations on page load
-        fetchUpdatedInvitations();
+    // Function to fetch all invitations
+    const fetchAllInvitations = (page = 1) => {
+      const perPage = 20; // Items per page
+      var invitations_type;
 
+      $.ajax({
+        url: 'http://localhost:8080/backstage/api/getAllInvitations', // Replace with your API endpoint
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
+        method: 'GET',
+        data: {
+          page,
+          perPage
+        }, // Pass pagination parameters
+        dataType: 'json',
+        success: function(response) {
+          const tbody = $('#all-invitations-table tbody');
+          const pagination = $('#pagination-invitations');
+          tbody.empty(); // Clear existing rows
+          pagination.empty(); // Clear pagination controls          
 
-        // Set interval to refresh data every 3 minutes
-        setInterval(updateStatistics, 180000); // 180000 ms = 3 minutes
-        // Set interval to refresh activities every 3 minutes
-        setInterval(fetchRecentActivities, 180000); // 180000 ms = 3 minutes
-        // Set interval to refresh activities every 3 minutes
-        setInterval(fetchUpdatedInvitations, 300000); // 300000 ms = 5 minutes
+          response.data.forEach(invitation => {
+            let starCount = 0;
 
-        // Add the new script here
-        document.querySelectorAll('.nav-link').forEach(tab => {
-            tab.addEventListener('click', function (event) {
-                const contentTarget = this.getAttribute('data-content-target');
-                const url = this.getAttribute('href');
-                const id = this.getAttribute('id');
+            if (invitation.additional_information === null) {
+              invitations_type = "biasa bri"
+            } else {
+              invitations_type = invitation.additional_information
+            }
 
-                if (contentTarget && url) {
-                    fetch(url)
-                        .then(response => {                          
-                            if (response.ok) {
-                                return response.text();
-                            } else {
-                                throw new Error('Failed to load content');
-                            }
-                        })
-                        .then(html => {
-                            document.querySelector(contentTarget).innerHTML = html;
-                            // Reinitialize functionality for the loaded content
-                            handleTabSwitch(id);
-                        })
-                        .catch(error => {
-                            console.error('Error loading content:', error);
-                            document.querySelector(contentTarget).innerHTML = `<p class="text-danger">Error loading content</p>`;
-                        });
-                }
-                event.preventDefault();
+            if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
+              starCount = 5; // 5 stars for VVIP
+            } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
+              starCount = 4; // 4 stars for VIP
+            } else if (invitations_type === 'biasa bri') {
+              starCount = 3; // 4 stars for VIP
+            }
+
+            // Generate star icons as a string
+            let starsHTML = '';
+            for (let i = 0; i < starCount; i++) {
+              starsHTML += '<i class="mdi mdi-star text-warning"></i>'; // Material Design Icon (mdi) star class
+            }
+
+            const tableRow = `                            
+                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-info="Some additional info">                                        
+                              <td>
+                                  <div class="d-flex ">                                    
+                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
+                                    &nbsp;&nbsp;
+                                    <div class="ml-2">
+                                      <h6 class="font-bold">${invitation.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <h6>${invitation.institution}</h6>
+                                <p>-</p>
+                              </td>
+                              <td>
+                                <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
+                                    ${invitation.status || 'unconfirmed'}
+                                </div>
+                              </td>
+                              <td>
+                                  <div id="invitations-star">
+                                    ${starsHTML}
+                                  </div>
+                              </td>
+                            </tr>`;
+            tbody.append(tableRow);
+          });
+
+          // Add event listeners to rows for modal handling
+          document.querySelectorAll('tr[data-bs-toggle="modal"]').forEach(row => {
+            row.addEventListener('click', function() {
+              const invitationId = row.getAttribute('data-invitation-id');
+              const imageSrc = row.getAttribute('data-image');
+              const fullname = row.getAttribute('data-fullname');
+              const position = row.getAttribute('data-position');
+              const company = row.getAttribute('data-company');
+              const status = row.getAttribute('data-status');
+              const info = row.getAttribute('data-info');
+
+              // Update the modal content                            
+              document.querySelector('#invitationModal #invitations-invitation-id').value = invitationId;
+              document.querySelector('#invitationModal #invitations-image').src = imageSrc;
+              document.querySelector('#invitationModal #modal-fullname').textContent = fullname;
+              document.querySelector('#invitationModal #invitations-position').value = position; // You may need to add this span in the modal
+              document.querySelector('#invitationModal #invitations-company').value = company;
+              document.querySelector('#invitationModal #invitations-status-button').textContent = status;
+              // document.querySelector('#invitationModal #invitations-type').value = invitations_type;              
+
+              if (status === 'check-in') {
+                document.querySelector('#invitationModal #invitations-checkInBtn').disabled = true;
+              } else {
+                document.querySelector('#invitationModal #invitations-checkInBtn').disabled = false;
+              }
+
+              const vipStarsElement = document.querySelector('#invitationModal #vip-stars');
+              if (vipStarsElement) {
+                vipStarsElement.innerHTML = ''; // Clear existing stars                
+              } else {
+                console.log('vipStarsElement is null');
+              }
+
+              let starCount = 0;
+              if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
+                starCount = 5; // 5 stars for VVIP
+              } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
+                starCount = 4; // 4 stars for VIP
+              } else if (invitations_type === 'biasa bri') {
+                starCount = 3; // 4 stars for VIP
+              }
+
+              for (let i = 0; i < starCount; i++) {
+                const starIcon = document.createElement('i');
+                starIcon.className = 'mdi mdi-star'; // MDI star icon class
+                vipStarsElement.appendChild(starIcon);
+              }
+
+              const br = document.createElement('br');
+              vipStarsElement.appendChild(br);
+              vipStarsElement.appendChild(br);
+
+              // Add a label after the stars
+              const label = document.createElement('span');
+              label.className = 'ml-2 text-sm text-black'; // Optional class for spacing
+              label.textContent = "[" + invitations_type + "]"; // Use the invitation type as the label text
+              vipStarsElement.appendChild(label);
             });
+          });
+
+          // Generate Tailwind CSS-based pagination controls
+          const {
+            currentPage,
+            totalPages,
+            totalItems,
+            perPage
+          } = response.pagination;
+          const startItem = (currentPage - 1) * perPage + 1;
+          const endItem = Math.min(currentPage * perPage, totalItems);
+
+          // Generate pagination controls
+          pagination.append(`
+                <div class="mt-auto d-flex flex-column align-items-center">
+                  <span class="text-muted small"> Showing <span class="fw-semibold">${startItem}</span> to 
+                  <span class="fw-semibold">${endItem}</span> of 
+                  <span class="fw-semibold">${totalItems}</span> Entries </span>
+                  <div class="btn-group mt-2">
+                    <button class="btn btn-dark btn-sm ${currentPage === 1 ? 'disabled' : ''}" ${currentPage == 1 ? 'disabled' : ''} id="all-invitations-prev-btn">Prev</button>
+                    <button class="btn btn-dark btn-sm ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage == totalPages ? 'disabled' : ''} id="all-invitations-next-btn">Next</button>
+                  </div>
+                </div>
+            `);
+
+          $('#all-invitations-prev-btn').on('click', function() {
+            if (currentPage > 1) {
+              fetchAllInvitations(currentPage - 1);
+            }
+          });
+
+          $('#all-invitations-next-btn').on('click', function() {
+            if (currentPage < totalPages) {
+              fetchAllInvitations(currentPage + 1);
+            }
+          });
+
+          const invitationsCheckIn = document.querySelector('#invitationModal #invitations-checkInBtn');      
+          invitationsCheckIn.addEventListener('click', function() {
+            const invitationID = document.querySelector('#invitationModal #invitations-invitation-id');
+            CheckIn(invitationID.value);
+
+            if (currentPage < totalPages) {
+              fetchAllInvitations(currentPage + 1);
+            }
+
+            if (currentPage > 1) {
+              fetchAllInvitations(currentPage - 1);
+            }
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to fetch all invitations:', error);
+        }
+      });
+    };
+
+    // Fetch invitation guests
+    const fetchInvitationGuests = (page = 1) => {
+      const perPage = 20; // Items per page
+
+      $.ajax({
+        url: 'http://localhost:8080/backstage/api/getInvitationGuests', // Replace with your API endpoint
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationGuests', // Replace with your API endpoint
+        method: 'GET',
+        data: {
+          page,
+          perPage
+        }, // Pass pagination parameters
+        dataType: 'json',
+        success: function(response) {
+          const tbody = $('#guests-invitations-table tbody');
+          const pagination = $('#pagination-guests');
+          tbody.empty(); // Clear existing rows
+          pagination.empty(); // Clear pagination controls
+
+          // Populate table rows
+          response.data.forEach(invitation => {
+            const tableRow = `
+                            <tr>                                        
+                              <td>
+                                  <div class="d-flex ">                                    
+                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
+                                    &nbsp;&nbsp;
+                                    <div class="ml-2">
+                                      <h6 class="font-bold">${invitation.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <h6>${invitation.institution}</h6>
+                                <p>-</p>
+                              </td>
+                              <td>
+                                <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
+                                    ${invitation.status || 'unconfirmed'}
+                                </div>
+                              </td>
+                              <td>${invitation.attendee_name}</td>
+                            </tr>`;
+            tbody.append(tableRow);
+          });
+
+          // Generate Tailwind CSS-based pagination controls
+          const {
+            currentPage,
+            totalPages,
+            totalItems,
+            perPage
+          } = response.pagination;
+          const startItem = (currentPage - 1) * perPage + 1;
+          const endItem = Math.min(currentPage * perPage, totalItems);
+
+          // Generate pagination controls
+          pagination.append(`
+                <div class="mt-auto d-flex flex-column align-items-center">
+                  <span class="text-muted small"> Showing <span class="fw-semibold">${startItem}</span> to 
+                  <span class="fw-semibold">${endItem}</span> of 
+                  <span class="fw-semibold">${totalItems}</span> Entries </span>
+                  <div class="btn-group mt-2">
+                    <button class="btn btn-dark btn-sm ${currentPage === 1 ? 'disabled' : ''}" ${currentPage == 1 ? 'disabled' : ''} id="guests-invitations-prev-btn">Prev</button>
+                    <button class="btn btn-dark btn-sm ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage == totalPages ? 'disabled' : ''} id="guests-invitations-next-btn">Next</button>
+                  </div>
+                </div>
+            `);
+
+          $('#guests-invitations-prev-btn').on('click', function() {
+            if (currentPage > 1) {
+              fetchInvitationGuests(currentPage - 1);
+            }
+          });
+
+          $('#guests-invitations-next-btn').on('click', function() {
+            if (currentPage < totalPages) {
+              fetchInvitationGuests(currentPage + 1);
+            }
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to fetch guests invitations:', error);
+        }
+      });
+    };
+
+    // Fetch invitation delegation
+    const fetchInvitationDelegation = (page = 1) => {
+      const perPage = 20; // Items per page
+
+      $.ajax({
+        url: 'http://localhost:8080/backstage/api/getInvitationDelegation', // Replace with your API endpoint
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationDelegation', // Replace with your API endpoint
+        method: 'GET',
+        data: {
+          page,
+          perPage
+        }, // Pass pagination parameters
+        dataType: 'json',
+        success: function(response) {
+          const tbody = $('#delegations-invitations-table tbody');
+          const pagination = $('#pagination-delegations');
+          tbody.empty(); // Clear existing rows
+          pagination.empty(); // Clear pagination controls
+
+          // Populate table rows
+          response.data.forEach(invitation => {
+            const tableRow = `
+                            <tr>                                        
+                              <td>
+                                  <div class="d-flex ">                                    
+                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
+                                    &nbsp;&nbsp;
+                                    <div class="ml-2">
+                                      <h6 class="font-bold">${invitation.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <h6>${invitation.institution}</h6>
+                                <p>-</p>
+                              </td>
+                              <td>
+                                <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
+                                    ${invitation.status || 'unconfirmed'}
+                                </div>
+                              </td>
+                              <td>${invitation.attendee_name}</td>
+                            </tr>`;
+            tbody.append(tableRow);
+          });
+
+          // Generate Tailwind CSS-based pagination controls
+          const {
+            currentPage,
+            totalPages,
+            totalItems,
+            perPage
+          } = response.pagination;
+          const startItem = (currentPage - 1) * perPage + 1;
+          const endItem = Math.min(currentPage * perPage, totalItems);
+
+          // Generate pagination controls
+          pagination.append(`
+                <div class="mt-auto d-flex flex-column align-items-center">
+                  <span class="text-muted small"> Showing <span class="fw-semibold">${startItem}</span> to 
+                  <span class="fw-semibold">${endItem}</span> of 
+                  <span class="fw-semibold">${totalItems}</span> Entries </span>
+                  <div class="btn-group mt-2">
+                    <button class="btn btn-dark btn-sm ${currentPage === 1 ? 'disabled' : ''}" ${currentPage == 1 ? 'disabled' : ''} id="delegations-invitations-prev-btn">Prev</button>
+                    <button class="btn btn-dark btn-sm ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage == totalPages ? 'disabled' : ''} id="delegations-invitations-next-btn">Next</button>
+                  </div>
+                </div>
+            `);
+
+          $('#delegations-invitations-prev-btn').on('click', function() {
+            if (currentPage > 1) {
+              fetchInvitationDelegation(currentPage - 1);
+            }
+          });
+
+          $('#delegations-invitations-next-btn').on('click', function() {
+            if (currentPage < totalPages) {
+              fetchInvitationDelegation(currentPage + 1);
+            }
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to fetch delegations invitations:', error);
+        }
+      });
+    };
+
+    // Search API
+    const searchAllInvitations = (query, page = 1) => {
+      const perPage = 20; // Items per page
+      var invitations_type;
+
+      $.ajax({
+        url: 'http://localhost:8080/backstage/api/invitations/search', // Replace with your API endpoint
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
+        method: 'GET',
+        data: {
+          query,
+          page,
+          perPage
+        }, // Pass pagination parameters
+        dataType: 'json',
+        success: function(response) {
+          const tbody = $('#all-invitations-table tbody');
+          const pagination = $('#pagination-invitations');
+          tbody.empty(); // Clear existing rows
+          pagination.empty(); // Clear pagination controls          
+
+          response.data.forEach(invitation => {
+            if (invitation.additional_information === null) {
+              invitations_type = "standard"
+            } else {
+              invitations_type = invitation.additional_information
+            }
+
+            const tableRow = `                            
+                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${invitation.status || 'unconfirmed'}" data-info="Some additional info">                                        
+                              <td>
+                                  <div class="d-flex ">                                    
+                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
+                                    &nbsp;&nbsp;
+                                    <div class="ml-2">
+                                      <h6 class="font-bold">${invitation.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <h6>${invitation.institution}</h6>
+                                <p>-</p>
+                              </td>
+                              <td>
+                                <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
+                                    ${invitation.status || 'unconfirmed'}
+                                </div>
+                              </td>
+                              <td>${invitations_type}</td>
+                            </tr>`;
+            tbody.append(tableRow);
+          });
+
+          // Add event listeners to rows for modal handling
+          document.querySelectorAll('tr[data-bs-toggle="modal"]').forEach(row => {
+            row.addEventListener('click', function() {
+              const imageSrc = row.getAttribute('data-image');
+              const fullname = row.getAttribute('data-fullname');
+              const position = row.getAttribute('data-position');
+              const company = row.getAttribute('data-company');
+              const status = row.getAttribute('data-status');
+              const info = row.getAttribute('data-info');
+
+              // Update the modal content              
+              // updateStars(invitations_type);
+              document.querySelector('#invitationModal #invitations-image').src = imageSrc;
+              document.querySelector('#invitationModal #modal-fullname').textContent = fullname;
+              document.querySelector('#invitationModal #invitations-position').value = position; // You may need to add this span in the modal
+              document.querySelector('#invitationModal #invitations-company').value = company;
+              document.querySelector('#invitationModal #invitations-status-button').value = status;
+              //document.querySelector('#invitationModal #modal-info').textContent = info;
+
+              const vipStarsElement = document.querySelector('#invitationModal #vip-stars');
+              if (vipStarsElement) {
+                vipStarsElement.innerHTML = '';
+              } else {
+                console.log('vipStarsElement is null');
+              }
+
+              let starCount = 0;
+              if (invitations_type === 'vvip') {
+                starCount = 5; // 5 stars for VVIP
+              } else if (invitations_type === 'vip') {
+                starCount = 4; // 4 stars for VIP
+              } else if (invitations_type === 'standard') {
+                starCount = 3; // 4 stars for VIP
+              }
+
+              console.log(vipStarsElement);
+
+              for (let i = 0; i < starCount; i++) {
+                const starIcon = document.createElement('i');
+                starIcon.className = 'mdi mdi-star'; // MDI star icon class
+                vipStarsElement.appendChild(starIcon);
+              }
+            });
+          });
+
+          // Generate Tailwind CSS-based pagination controls
+          const {
+            currentPage,
+            totalPages,
+            totalItems,
+            perPage
+          } = response.pagination;
+          const startItem = (currentPage - 1) * perPage + 1;
+          const endItem = Math.min(currentPage * perPage, totalItems);
+
+          // Generate pagination controls
+          pagination.append(`
+                <div class="mt-auto d-flex flex-column align-items-center">
+                  <span class="text-muted small"> Showing <span class="fw-semibold">${startItem}</span> to 
+                  <span class="fw-semibold">${endItem}</span> of 
+                  <span class="fw-semibold">${totalItems}</span> Entries </span>
+                  <div class="btn-group mt-2">
+                    <button class="btn btn-dark btn-sm ${currentPage === 1 ? 'disabled' : ''}" ${currentPage == 1 ? 'disabled' : ''} id="all-invitations-prev-btn">Prev</button>
+                    <button class="btn btn-dark btn-sm ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage == totalPages ? 'disabled' : ''} id="all-invitations-next-btn">Next</button>
+                  </div>
+                </div>
+            `);
+
+          $('#all-invitations-prev-btn').on('click', function() {
+            if (currentPage > 1) {
+              searchAllInvitations(query, currentPage - 1);
+            }
+          });
+
+          $('#all-invitations-next-btn').on('click', function() {
+            if (currentPage < totalPages) {
+              searchAllInvitations(query, currentPage + 1);
+            }
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to search invitations:', error);
+        }
+      });
+    };
+
+
+    // Search API
+    const searchGuests = (query, page = 1) => {
+      const perPage = 20; // Items per page
+      var invitations_type;
+
+      $.ajax({
+        url: 'http://localhost:8080/backstage/api/invitations/guests-search', // Replace with your API endpoint
+        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
+        method: 'GET',
+        data: {
+          query,
+          page,
+          perPage
+        }, // Pass pagination parameters
+        dataType: 'json',
+        success: function(response) {
+          const tbody = $('#guests-invitations-table tbody');
+          const pagination = $('#pagination-guests');
+          tbody.empty(); // Clear existing rows
+          pagination.empty(); // Clear pagination controls
+
+          // Populate table rows
+          response.data.forEach(invitation => {
+            const tableRow = `
+                            <tr>                                        
+                              <td>
+                                  <div class="d-flex ">                                    
+                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
+                                    &nbsp;&nbsp;
+                                    <div class="ml-2">
+                                      <h6 class="font-bold">${invitation.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <h6>${invitation.institution}</h6>
+                                <p>-</p>
+                              </td>
+                              <td>
+                                <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
+                                    ${invitation.status || 'unconfirmed'}
+                                </div>
+                              </td>
+                              <td>${invitation.additional_information}</td>
+                            </tr>`;
+            tbody.append(tableRow);
+          });
+
+          // Generate Tailwind CSS-based pagination controls
+          const {
+            currentPage,
+            totalPages,
+            totalItems,
+            perPage
+          } = response.pagination;
+          const startItem = (currentPage - 1) * perPage + 1;
+          const endItem = Math.min(currentPage * perPage, totalItems);
+
+          // Generate pagination controls
+          pagination.append(`
+                <div class="mt-auto d-flex flex-column align-items-center">
+                  <span class="text-muted small"> Showing <span class="fw-semibold">${startItem}</span> to 
+                  <span class="fw-semibold">${endItem}</span> of 
+                  <span class="fw-semibold">${totalItems}</span> Entries </span>
+                  <div class="btn-group mt-2">
+                    <button class="btn btn-dark btn-sm ${currentPage === 1 ? 'disabled' : ''}" ${currentPage == 1 ? 'disabled' : ''} id="guests-invitations-prev-btn">Prev</button>
+                    <button class="btn btn-dark btn-sm ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage == totalPages ? 'disabled' : ''} id="guests-invitations-next-btn">Next</button>
+                  </div>
+                </div>
+            `);
+
+          $('#guests-invitations-prev-btn').on('click', function() {
+            if (currentPage > 1) {
+              fetchInvitationGuests(currentPage - 1);
+            }
+          });
+
+          $('#guests-invitations-next-btn').on('click', function() {
+            if (currentPage < totalPages) {
+              fetchInvitationGuests(currentPage + 1);
+            }
+          });      
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to search invitations:', error);
+        }
+      });
+    };
+
+
+    const getTitle = (title) => {
+      switch (title) {
+        case 'Bapak':
+        case 'Mr':
+          return '/assets/images/faces/man_icon.png';
+        default:
+          return '/assets/images/faces/women_icon.png';
+      }
+    }
+
+    const getInvitationStatus = (title) => {
+      if (title === null) {
+        return 'unconfirmed';
+      }
+
+      return title;
+    }
+
+    // Helper function to determine badge style
+    const getStatusBadge = (status) => {
+      switch (status.toLowerCase()) {
+        case 'attend':
+          return 'success';
+        case 'attend with guests':
+          return 'info';
+        case 'delegate':
+          return 'warning';
+        case 'inattend':
+          return 'danger';
+        default:
+          return 'warning';
+      }
+    };
+
+    $(document).ready(function() {
+      // Initial call to update statistics
+      updateStatistics();
+      // Fetch activities on load
+      fetchRecentActivities();
+      // Fetch updated invitations on page load
+      fetchUpdatedInvitations();
+
+
+      // Set interval to refresh data every 3 minutes
+      setInterval(updateStatistics, 180000); // 180000 ms = 3 minutes
+      // Set interval to refresh activities every 3 minutes
+      setInterval(fetchRecentActivities, 180000); // 180000 ms = 3 minutes
+      // Set interval to refresh activities every 3 minutes
+      setInterval(fetchUpdatedInvitations, 300000); // 300000 ms = 5 minutes
+
+      // Add the new script here
+      document.querySelectorAll('.nav-link').forEach(tab => {
+        tab.addEventListener('click', function(event) {
+          const contentTarget = this.getAttribute('data-content-target');
+          const url = this.getAttribute('href');
+          const id = this.getAttribute('id');
+
+          if (contentTarget && url) {
+            fetch(url)
+              .then(response => {
+                if (response.ok) {
+                  return response.text();
+                } else {
+                  throw new Error('Failed to load content');
+                }
+              })
+              .then(html => {
+                document.querySelector(contentTarget).innerHTML = html;
+                // Reinitialize functionality for the loaded content
+                handleTabSwitch(id);
+              })
+              .catch(error => {
+                console.error('Error loading content:', error);
+                document.querySelector(contentTarget).innerHTML = `<p class="text-danger">Error loading content</p>`;
+              });
+          }
+          event.preventDefault();
         });
+      });
+
+      // Add search functionality
+      $(document).on('click', '#all-invitations-search-button', function() {
+        console.log('search button clicked');
+        const query = $('#all-invitations-search-input').val().trim();
+        if (query !== '') {
+          searchAllInvitations(query);
+        } else {
+          fetchAllInvitations();
+        }
+      });
+      
+      // Add search functionality
+      $(document).on('click', '#guests-search-button', function() {
+        console.log('search button clicked');
+        const query = $('#guests-search-input').val().trim();
+        if (query !== '') {
+          searchGuests(query);
+        } else {
+          fetchInvitationGuests();
+        }
+      });
     });
-</script>
+  </script>
 </body>
 
-</html> 
+</html>

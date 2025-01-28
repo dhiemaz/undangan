@@ -29,3 +29,6 @@ $routes->get('/backstage/api/getAllInvitations', 'BackstageController::getAllInv
 $routes->get('/backstage/api/getInvitationGuests', 'BackstageController::getInvitationGuests');
 $routes->get('/backstage/api/getInvitationDelegation', 'BackstageController::getInvitationDelegation');
 $routes->get('/backstage/api/getInvitationData/(:any)', 'BackstageController::getInvitationData/$1');
+$routes->get('/backstage/api/invitations/search', 'BackstageController::searchInvitations');
+$routes->get('/backstage/api/invitations/guests-search', 'BackstageController::searchGuests');
+$routes->post('/backstage/api/invitations/checkIn', 'BackstageController::invitationCheckIn');

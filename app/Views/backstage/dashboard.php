@@ -953,24 +953,22 @@
           success: function(response) {
             if (response.success) {
               console.log(response.message);
+              alert(response.message);
               // Optionally update UI elements
-              message = response.message;
-
-              // $('#checkin-manual-fullname').val('');
-              // $('#checkin-manual-position').val('');
-              // $('#checkin-manual-institution').val('');
-            } else {
-              message = response.message;
-              console.error(response.message);              
+            
+              $('#checkin-manual-fullname').val('');
+              $('#checkin-manual-position').val('');
+              $('#checkin-manual-institution').val('');
+            } else {              
+              console.error(response.message);     
+              alert(response.message);         
             }
           },
           error: function(xhr, status, error) {
             console.error('Failed to process check-in:', error);
             message = 'Failed to process registration & check-in. Please try again.';
           }
-        });
-
-        alert(message);
+        });        
       }
     }
 

@@ -293,7 +293,7 @@
                                         <th>Fullname</th>
                                         <th>Company</th>
                                         <th>Status</th>
-                                        <th>Type</th>
+                                        <th>Invitation Type</th>
                                       </tr>
                                     </thead>
                                     <tbody>

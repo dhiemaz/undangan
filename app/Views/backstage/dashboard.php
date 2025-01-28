@@ -865,8 +865,7 @@
 
 
     function QRCheckIn() {
-      const id = document.getElementById('checkin-invitation-id');
-      alert(id);
+      const id = document.getElementById('checkin-invitation-id').value;      
       const status = 'check-in';
 
       if (id) {

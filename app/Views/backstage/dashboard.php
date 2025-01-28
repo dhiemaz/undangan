@@ -741,10 +741,10 @@
         success: function(response) {
           console.log(response);
 
-          if (response.data.additional_information === null) {
+          if (response.data.type === null) {
             invitations_type = "standard";
           } else {
-            invitations_type = response.data.additional_information;
+            invitations_type = response.data.type;
           }
 
           document.getElementById('user-image').src = getTitle(response.data.title);
@@ -955,7 +955,7 @@
                                     ${invitation.status}
                                 </div>
                               </td>
-                              <td>${invitation.additional_information}</td>
+                              <td>${invitation.type}</td>
                             </tr>`;
             tbody.append(tableRow);
           });
@@ -1024,10 +1024,10 @@
           response.data.forEach(invitation => {
             let starCount = 0;
 
-            if (invitation.additional_information === null) {
+            if (invitation.type === null) {
               invitations_type = "biasa bri"
             } else {
-              invitations_type = invitation.additional_information
+              invitations_type = invitation.type
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1387,10 +1387,10 @@
           pagination.empty(); // Clear pagination controls          
 
           response.data.forEach(invitation => {
-            if (invitation.additional_information === null) {
+            if (invitation.type === null) {
               invitations_type = "standard"
             } else {
-              invitations_type = invitation.additional_information
+              invitations_type = invitation.type
             }
 
             const tableRow = `                            
@@ -1550,7 +1550,7 @@
                                     ${invitation.status || 'unconfirmed'}
                                 </div>
                               </td>
-                              <td>${invitation.additional_information}</td>
+                              <td>${invitation.type}</td>
                             </tr>`;
             tbody.append(tableRow);
           });

@@ -79,7 +79,7 @@
             <img src="../../assets/images/BRI_MFO_2025.png" alt="logo" />
           </a>
           <a class="navbar-brand brand-logo-mini" href="#">
-            <img src="../../assets/images/BRI_MFO_2025.png" alt="logo" />
+            <img src="../../assets/images/Logo-Bank-BRI.png" alt="logo" />
           </a>
         </div>
       </div>

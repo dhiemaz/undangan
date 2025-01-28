@@ -734,8 +734,8 @@
       let invitations_type = '';
 
       $.ajax({
-        url: 'http://localhost:8080/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -823,9 +823,9 @@
         };
 
         console.log(requestData);
-
         $.ajax({
-          url: 'http://localhost:8080/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          // url: 'http://localhost:8080/backstage/api/invitations/checkIn', // Replace with your API endpoint
           method: 'POST',
           dataType: 'json',
           contentType: 'application/json', // Ensure the content type matches the cURL
@@ -853,8 +853,8 @@
     // Function to fetch and update statistics
     function updateStatistics() {
       $.ajax({
-        url: 'http://localhost:8080/backstage/api/getSummaryCount', // Replace with your API endpoint
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getSummaryCount', // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/getSummaryCount', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getSummaryCount', // Replace with your API endpoint
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -875,8 +875,8 @@
 
     function fetchRecentActivities() {
       $.ajax({
-        url: 'http://localhost:8080/backstage/api/getRecentActivities', // Replace with your API endpoint
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getRecentActivities', // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/getRecentActivities', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getRecentActivities', // Replace with your API endpoint
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -918,8 +918,8 @@
       const perPage = 7; // Items per page
 
       $.ajax({
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
-        url: 'http://localhost:8080/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/getUpdatedInvitations', // Replace with your API endpoint
         method: 'GET',
         data: {
           page,
@@ -1007,8 +1007,8 @@
       var invitations_type;
 
       $.ajax({
-        url: 'http://localhost:8080/backstage/api/getAllInvitations', // Replace with your API endpoint
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/getAllInvitations', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
         method: 'GET',
         data: {
           page,
@@ -1194,8 +1194,8 @@
       const perPage = 20; // Items per page
 
       $.ajax({
-        url: 'http://localhost:8080/backstage/api/getInvitationGuests', // Replace with your API endpoint
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationGuests', // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/getInvitationGuests', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationGuests', // Replace with your API endpoint
         method: 'GET',
         data: {
           page,
@@ -1282,8 +1282,8 @@
       const perPage = 20; // Items per page
 
       $.ajax({
-        url: 'http://localhost:8080/backstage/api/getInvitationDelegation', // Replace with your API endpoint
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationDelegation', // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/getInvitationDelegation', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationDelegation', // Replace with your API endpoint
         method: 'GET',
         data: {
           page,
@@ -1371,8 +1371,8 @@
       var invitations_type;
 
       $.ajax({
-        url: 'http://localhost:8080/backstage/api/invitations/search', // Replace with your API endpoint
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/invitations/search', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/search', // Replace with your API endpoint
         method: 'GET',
         data: {
           query,
@@ -1512,8 +1512,8 @@
       var invitations_type;
 
       $.ajax({
-        url: 'http://localhost:8080/backstage/api/invitations/guests-search', // Replace with your API endpoint
-        //url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getAllInvitations', // Replace with your API endpoint
+        // url: 'http://localhost:8080/backstage/api/invitations/guests-search', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/guests-search', // Replace with your API endpoint
         method: 'GET',
         data: {
           query,

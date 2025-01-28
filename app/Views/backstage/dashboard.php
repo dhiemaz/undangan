@@ -1540,11 +1540,20 @@
             CheckIn(invitationID.value);
 
             if (currentPage < totalPages) {
-              fetchAllInvitations(currentPage + 1);
+              if (query !== null) {
+                searchAllInvitations(query, currentPage + 1);
+              } else {
+                fetchAllInvitations(currentPage + 1);
+              }
+              
             }
 
             if (currentPage > 1) {
-              fetchAllInvitations(currentPage - 1);
+              if (query !== null) {                
+                  searchAllInvitations(query, currentPage - 1);
+              }else{
+                  fetchAllInvitations(currentPage - 1);
+              }              
             }
           });
         },

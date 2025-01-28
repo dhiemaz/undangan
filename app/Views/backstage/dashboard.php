@@ -293,7 +293,7 @@
                                         <th>Fullname</th>
                                         <th>Company</th>
                                         <th>Status</th>
-                                        <th>Additional Information</th>
+                                        <th>Type</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -955,7 +955,7 @@
                                     ${invitation.status}
                                 </div>
                               </td>
-                              <td>${invitation.type}</td>
+                              <td>${getInvitationStatus(invitation.type)}</td>
                             </tr>`;
             tbody.append(tableRow);
           });
@@ -1386,13 +1386,7 @@
           tbody.empty(); // Clear existing rows
           pagination.empty(); // Clear pagination controls          
 
-          response.data.forEach(invitation => {
-            if (invitation.type === null) {
-              invitations_type = "standard"
-            } else {
-              invitations_type = invitation.type
-            }
-
+          response.data.forEach(invitation => {          
             const tableRow = `                            
                             <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${invitation.status || 'unconfirmed'}" data-info="Some additional info">                                        
                               <td>
@@ -1414,7 +1408,7 @@
                                     ${invitation.status || 'unconfirmed'}
                                 </div>
                               </td>
-                              <td>${invitations_type}</td>
+                              <td>${getInvitationStatus(invitation.type)}</td>
                             </tr>`;
             tbody.append(tableRow);
           });
@@ -1550,7 +1544,7 @@
                                     ${invitation.status || 'unconfirmed'}
                                 </div>
                               </td>
-                              <td>${invitation.type}</td>
+                              <td>${getInvitationStatus(invitation.type)}</td>
                             </tr>`;
             tbody.append(tableRow);
           });

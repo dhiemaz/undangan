@@ -804,7 +804,7 @@
             vipStarsElement.appendChild(starIcon);
           }
 
-          checkInButton.addEventListener("click", CheckIn(response.data.id));
+          checkInButton.addEventListener("click", QRCheckIn);
           resetButton.addEventListener("click", resetQRCheckIn);
         },
         error: function(xhr, status, error) {
@@ -817,6 +817,45 @@
 
     function CheckIn(id) {
       // const id = document.getElementById('checkin-invitation-id');
+      const status = 'check-in';
+
+      if (id) {
+        const requestData = {
+          id: id,
+          status: status
+        };
+
+        console.log(requestData);
+        $.ajax({
+          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          // url: 'http://localhost:8080/backstage/api/invitations/checkIn', // Replace with your API endpoint
+          method: 'POST',
+          dataType: 'json',
+          contentType: 'application/json', // Ensure the content type matches the cURL
+          data: JSON.stringify(requestData), // Convert data to JSON string
+          success: function(response) {
+            if (response.success) {
+              console.log(response.message);
+              // Optionally update UI elements
+              alert('Check-In Successful: ' + response.message);
+            } else {
+              console.error('Check-In Failed:', response.message);
+              alert('Error: ' + response.message);
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error('Failed to process check-in:', error);
+            alert('Failed to process check-in. Please try again.');
+          }
+        });
+      } else {
+        alert('Invitation ID is required.');
+      }
+    }
+
+
+    function QRCheckIn() {
+      const id = document.getElementById('checkin-invitation-id');
       const status = 'check-in';
 
       if (id) {

@@ -715,7 +715,7 @@ class BackStageController extends BaseController
             // Find the row with matching "Nama" and update Column M
             $updated = false;
             foreach ($values as $rowIndex => $row) {
-                if (isset($row[2]) && $row[2] === $attendee["fullname"]) { // Column C = Index 2 (Name)
+                if (isset($row[0]) && $row[0] === (int)($attendee["id"])) { // Column A = Index 0 (ID)
                     $updateRange = "$sheetName!F" . ($rowIndex + 1); // Column F (RSVP Status)
     
                     $updateValues = [[$status]]; // New value

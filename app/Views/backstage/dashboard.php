@@ -186,7 +186,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#datasheet" aria-expanded="false" aria-controls="datasheet">
               <i class="menu-icon mdi mdi-google-spreadsheet"></i>
               <span class="menu-title">Attendees List</span>
@@ -194,10 +194,10 @@
             </a>
             <div class="collapse" id="datasheet">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="https://docs.google.com/spreadsheets/d/1yrYbzNa6bzlDp6gsr6YGFfrwz3vU5E4oVci96M-BpR0/edit?usp=sharing" target="_blank"> Google Sheet </a></li>
+                <li class="nav-item"><a class="nav-link" href="https://docs.google.com/spreadsheets/d/1yrYbzNa6bzlDp6gsr6YGFfrwz3vU5E4oVci96M-BpR0/edit?usp=sharing"> Google Sheet </a></li>
               </ul>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
@@ -235,8 +235,8 @@
                   </ul>
                   <div>
                     <div class="btn-wrapper">
-                      <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
-                      <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
+                      <!-- <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a> -->
+                      <a href="https://docs.google.com/spreadsheets/d/1yrYbzNa6bzlDp6gsr6YGFfrwz3vU5E4oVci96M-BpR0/edit?gid=0#gid=0" class="btn btn-primary text-white me-0"><i class="mdi mdi-google-spreadsheet"></i> Google Sheet</a>
                     </div>
                   </div>
                 </div>

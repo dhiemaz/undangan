@@ -719,17 +719,18 @@ class BackStageController extends BaseController
             // Find the row with matching "Nama" and update Column M
             $updated = false;
             foreach ($values as $rowIndex => $row) {
-                if (isset($row[2]) && $row[2] === $name) { // Column D = Index 3
-                    $updateRange = "$sheetName!F" . ($rowIndex + 1); // Column M, 1-based index
+                if (isset($row[2]) && $row[2] === $name) { // Column C = Index 2 (Nama)
+                    $updateRange = "$sheetName!F" . ($rowIndex + 1); // Column F (RSVP Status)
+    
                     $updateValues = [[$status]]; // New value
-
+    
                     // Prepare update request
                     $body = new ValueRange([
                         'values' => $updateValues
                     ]);
-
+    
                     $params = ['valueInputOption' => 'USER_ENTERED'];
-
+    
                     // Execute update
                     $service->spreadsheets_values->update(
                         $spreadsheetId,
@@ -737,9 +738,10 @@ class BackStageController extends BaseController
                         $body,
                         $params
                     );
-                    $updated = true;
 
-                    log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "Updated row " . ($rowIndex + 1) . " in column M with " . $status . ""]), ['id' => $id, 'fullname' => $name, 'status' => $status]);
+                    $updated = true;
+    
+                    log_message('info', 'BackstageController::updateGoogleSheetAttendee - Updated row ' . ($rowIndex + 1) . ' in column F with ' . $status);
                     return true;
                 }
             }

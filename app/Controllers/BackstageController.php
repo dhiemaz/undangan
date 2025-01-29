@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-require __DIR__ . '../vendor/autoload.php'; // Load Google API Client
+require __DIR__ . '../../vendor/autoload.php'; // Load Google API Client
 
 use Google\Client;
 use Google\Service\Sheets;

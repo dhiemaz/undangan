@@ -424,7 +424,7 @@ class BackStageController extends BaseController
             $attendeeModel->update($id ,['status' => $status,'updated_at' => $updatedAt]);
         
             // update google sheet
-            $this->updateGoogleSheetAttendee($id, $attendee->fullname, $status);            
+            //$this->updateGoogleSheetAttendee($id, $attendee->fullname, $status);            
             return $this->response
                 ->setStatusCode(200) // OK
                 ->setJSON([
@@ -693,6 +693,7 @@ class BackStageController extends BaseController
 
     private function updateGoogleSheetAttendee($id, $name, $status)
     {
+        log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
         // Google Sheets Setup
         $client = getClient();
         $service = new Sheets($client);
@@ -706,9 +707,7 @@ class BackStageController extends BaseController
 
         // Name to find and new Kehadiran status
         // $namaToFind = "Yulianto Setiawan"; // Name to search in Column D (Index 3)
-        // $newStatus = "TRUE"; // Update Kehadiran to TRUE in Column M (Index 12)
-
-        log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
+        // $newStatus = "TRUE"; // Update Kehadiran to TRUE in Column M (Index 12)        
 
         // Check if data exists
         if (empty($values)) {

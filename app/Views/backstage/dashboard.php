@@ -858,9 +858,8 @@
           data: JSON.stringify(requestData), // Convert data to JSON string
           success: function(response) {
             if (response.success) {
-              console.log(response.message);
-              // Optionally update UI elements
-              alert('Check-In Successful: ' + response.message);
+              console.log('Check-In Successful: ', response.message);
+              // Optionally update UI elements              
             } else {
               console.error('Check-In Failed:', response.message);
               alert('Error: ' + response.message);
@@ -897,8 +896,7 @@
           success: function(response) {
             if (response.success) {
               console.log(response.message);
-              // Optionally update UI elements
-              alert('Check-In Successful: ' + response.message);
+              // Optionally update UI elements              
             } else {
               console.error('Check-In Failed:', response.message);
               alert('Error: ' + response.message);
@@ -936,8 +934,7 @@
           success: function(response) {
             if (response.success) {
               console.log(response.message);
-              // Optionally update UI elements
-              alert(response.message);
+              // Optionally update UI elements              
             } else {
               console.error(response.message);
               alert('Error: ' + response.message);
@@ -975,11 +972,10 @@
           success: function(response) {
             if (response.success) {
               console.log(response.message);
-              // Optionally update UI elements
-              alert(response.message);
+              // Optionally update UI elements              
             } else {
               console.error('Check-In Failed:', response.message);
-              alert('Error: ' + response.message);
+              alert('Check-In Failed: ' + response.message);
             }
           },
           error: function(xhr, status, error) {

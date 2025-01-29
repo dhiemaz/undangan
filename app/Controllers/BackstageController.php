@@ -628,7 +628,7 @@ class BackStageController extends BaseController
         $jsonPayload = $this->request->getBody(); // Get raw input stream
         $requestData = json_decode($jsonPayload, true); // Decode JSON to an associative array
 
-        log_message('info', 'BackstageController::show attendee by invitationID');
+        log_message('info', 'BackstageController::show attendee by invitationID', $requestData);
 
         // Validate input
         if (!isset($requestData['data'])) {

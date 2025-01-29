@@ -431,8 +431,8 @@ class BackStageController extends BaseController
                     'success' => true,
                     'message' => 'Invitation successfully check-in.',
                 ]);
-        } catch (\Exception $e) {
-            log_message('error', 'BackstageController::findAttendeeByID' . ' - ' . json_encode(['error' => $e]), ['id' => $id, 'status' => $status]);
+        } catch (\Exception $th) {
+            log_message('error', 'BackstageController::findAttendeeByID' . ' - ' . json_encode(['error' => $th->getMessage()]), ['id' => $id, 'status' => $status]);
             return $this->response
                 ->setStatusCode(500) // Internal Server Error
                 ->setJSON([
@@ -751,7 +751,8 @@ class BackStageController extends BaseController
             }
         } catch (\Throwable $th) {
             log_message('error', '' . $th->getMessage(), ['id' => $id, 'fullname' => $name, 'status' => $status]);
-            return false;
+            //return false;
+            throw $th;
         }        
     }
 
@@ -761,7 +762,7 @@ class BackStageController extends BaseController
             $client = new Client();
             $client->setApplicationName('BRI Microfinance 2025 Google Sheet API');
             $client->setScopes([Sheets::SPREADSHEETS]);
-            $client->setAuthConfig('./../../pikobar-dev-4580b-46ee917f71ef.json'); // Your Google API credentials
+            $client->setAuthConfig(ROOTPATH . 'pikobar-dev-4580b-46ee917f71ef.json'); // Your Google API credentials
             $client->setAccessType('offline');
             return $client;
         } catch (\Throwable $th) {

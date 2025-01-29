@@ -800,6 +800,8 @@
             checkInButton.disabled = false;
           }
 
+          
+
           const vipStarsElement = document.getElementById('invitation-type');
           if (vipStarsElement) {
             vipStarsElement.innerHTML = ''; // Clear existing stars
@@ -808,12 +810,6 @@
           }
 
           let starCount = 0;
-
-          if (invitation.type === null) {
-            invitations_type = "biasa bri"
-          } else {
-            invitations_type = invitation.type
-          }
 
           if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
             starCount = 5; // 5 stars for VVIP

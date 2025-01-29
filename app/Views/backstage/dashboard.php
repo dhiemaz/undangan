@@ -1882,6 +1882,8 @@
               } else {
                 fetchAllInvitations(currentPage - 1);
               }
+            } else {
+              searchAllInvitations(query, currentPage);
             }
           });
         },

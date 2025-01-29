@@ -641,7 +641,8 @@
       // Extract the token from the pathname
       const pathSegments = urlObj.pathname.split("/");
       console.log(pathSegments)
-      const token = pathSegments[3];
+      //const token = pathSegments[3];
+      const token = pathSegments[pathSegments.length - 1];
 
       let clearToken = token.replace(/\+/g, " ");
 

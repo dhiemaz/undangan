@@ -642,7 +642,10 @@ class BackStageController extends BaseController
 
         $data = $requestData['data'];
         $parts = explode("/", $data);        
-        $token = $parts[0]; // Get the first part
+        $rawToken = $parts[0]; // Get the first part
+
+        // Remove leading "/" and replace "+" with " "
+        $token = str_replace("+", " ", ltrim($rawToken, "/"));
 
         log_message('info', 'BackstageController::show attendee by invitationID'. ' - ' . json_encode(['token' => $token]), ['token' => $token]);
             

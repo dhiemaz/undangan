@@ -808,17 +808,24 @@
           }
 
           let starCount = 0;
-          if (invitations_type === 'vvip') {
+
+          if (invitation.type === null) {
+            invitations_type = "biasa bri"
+          } else {
+            invitations_type = invitation.type
+          }
+
+          if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
             starCount = 5; // 5 stars for VVIP
-          } else if (invitations_type === 'vip') {
+          } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
             starCount = 4; // 4 stars for VIP
-          } else if (invitations_type === 'standard') {
-            starCount = 3; // 4 stars for standard
+          } else if (invitations_type === 'biasa bri') {
+            starCount = 3; // 4 stars for VIP
           }
 
           for (let i = 0; i < starCount; i++) {
             const starIcon = document.createElement('i');
-            starIcon.className = 'mdi mdi-star'; // MDI star icon class
+            starIcon.className = 'mdi mdi-star text-warning'; // MDI star icon class
             vipStarsElement.appendChild(starIcon);
           }
 
@@ -1601,7 +1608,7 @@
                 document.querySelector('#delegationsModal #delegation-checkInBtn').disabled = false;
               }
             });
-          });    
+          });
 
           // Generate Tailwind CSS-based pagination controls
           const {
@@ -2090,7 +2097,7 @@
                 document.querySelector('#delegationsModal #delegation-checkInBtn').disabled = false;
               }
             });
-          });    
+          });
 
           // Generate Tailwind CSS-based pagination controls
           const {
@@ -2254,9 +2261,9 @@
       document.getElementById('doughnut-chart-legend').innerHTML = doughnutChart.generateLegend();
 
       // Function to fetch data and update the chart
-      function updateDoughnutChart() {        
+      function updateDoughnutChart() {
         fetch('https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/eventChart') // Replace with your API endpoint
-        // fetch('http://localhost:8080/backstage/api/invitations/eventChart') // Replace with your API endpoint
+          // fetch('http://localhost:8080/backstage/api/invitations/eventChart') // Replace with your API endpoint
           .then(response => response.json())
           .then(data => {
             // Assuming the API returns an object with `data` and `labels` arrays

@@ -445,9 +445,9 @@
         recentActivityInterval = setInterval(fetchUpdatedInvitations, 300000); // Every 5 minutes
       }
 
-      if (!updateChartInterval) {
-        updateChartInterval = setInterval(updateDoughnutChart, 50000); // Every 1 seconds
-      }
+      // if (!updateChartInterval) {
+      //   updateChartInterval = setInterval(updateDoughnutChart, 50000); // Every 1 seconds
+      // }
     }
 
     function initializeInvitationsIntervals() {
@@ -464,7 +464,7 @@
 
     function initializeInvitationDelegationIntervals() {
       if (!fetchInvitationGuestsInterval) {
-        fetchInvitationGuestsInterval = setInterval(fetchInvitationGuests, 300000); // Every 5 minutes
+        fetchInvitationGuestsInterval = setInterval(fetchInvitationDelegation, 300000); // Every 5 minutes
       }
     }
 
@@ -635,19 +635,20 @@
 
       //https://brimicrofinanceoutlook.id/bri-microfinance-2025/invitation/WpNRCRmdntxINbSNZWuK6ZIuw
 
-      // Create a URL object
-      const urlObj = new URL(decodedResult.decodedText);
+      //Create a URL object
+      // const urlObj = new URL(decodedResult.decodedText);      
+      const token = decodedResult.decodedText.split("https://brimicrofinanceoutlook.id/bri-microfinance-2025/invitation/")[1];
 
-      // Extract the token from the pathname
-      const pathSegments = urlObj.pathname.split("/");
-      console.log(pathSegments)
-      //const token = pathSegments[3];
-      const token = pathSegments[pathSegments.length - 1];
+      //Extract the token from the pathname
+      // const pathSegments = urlObj.pathname.split("/");
+      console.log('token = ', token)
+      // const token = pathSegments[3];
+      // const token = pathSegments[pathSegments.length - 1];
 
-      let clearToken = token.replace(/\+/g, " ");
+      // let clearToken = token.replace(/\+/g, " ");
 
-      console.log("Decoded result:", clearToken);
-      getInvitationDetail(clearToken);
+      // console.log("Decoded result:", clearToken);
+      getInvitationDetail(token);
 
       // Optionally stop scanning after successful detection 
       stopScanning();
@@ -676,7 +677,7 @@
         // Fetch updated invitations
         fetchUpdatedInvitations();
 
-        updateDoughnutChart();
+        //updateDoughnutChart();
       }
 
       if (id === 'invitations-tab') {
@@ -753,11 +754,19 @@
     function getInvitationDetail(token) {
       let invitations_type = '';
 
+
+      const requestData = {          
+          data: token
+        };
+
+      console.log(requestData);
       $.ajax({
-        // url: 'http://localhost:8080/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
-        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData/'.concat(token), // Replace with your API endpoint
-        method: 'GET',
+        // url: 'http://localhost:8080/backstage/api/getInvitationData', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/getInvitationData', // Replace with your API endpoint
+        method: 'POST',
         dataType: 'json',
+        contentType: 'application/json', // Ensure the content type matches the cURL
+        data: JSON.stringify(requestData), // Convert data to JSON string
         success: function(response) {
           console.log(response);
 

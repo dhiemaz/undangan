@@ -648,7 +648,7 @@
       }
 
       // Call fetchAndUpdateChart every 5 seconds
-      setInterval(updateDoughnutChart, 2000);
+      // setInterval(updateDoughnutChart, 2000);
 
       // Call the update function when needed
       updateDoughnutChart();

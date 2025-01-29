@@ -622,41 +622,45 @@ class BackStageController extends BaseController
     }
 
     // API to get invitation data
-    public function getInvitationData($id = null){
-        $invitationID = preg_replace_callback(
-            '/[^a-zA-Z0-9_\-\.]/',
-            function ($matches) {
-                return '%' . strtoupper(dechex(ord($matches[0])));
-            },
-            $id
-        );
-        
-        $invitationID = rawurldecode($invitationID);
+    public function getInvitationData(){
 
-        log_message('info', 'BackstageController::show attendee by invitationID'. ' - ' . json_encode(['invitationID' => $invitationID]), ['id' => $invitationID]);
-            
-        if ($id == null) {    
-            log_message('error', 'BackstageController::show - invitation ID is required.', ['invitationID' => $invitationID]);
-            return $this->response->setJSON([
-                    'data' => null,
-            ],400);
-        } else {
-            $model = new AttendeeModel();
+        // Decode the JSON payload
+        $jsonPayload = $this->request->getBody(); // Get raw input stream
+        $requestData = json_decode($jsonPayload, true); // Decode JSON to an associative array
 
-            //$decodedInvitationID = urldecode($encodedInvitationID);
-            $attendee = $model->getAttendee(  rawurldecode($invitationID));  
-            log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['invitationID' => $invitationID,'attendee' => $attendee]), ['$invitationID' => $invitationID,'attendee' => $attendee]);          
-            if ($attendee == null) {
-                log_message('error', 'InvitationController::show - attendee not found.', ['invitationID' => $invitationID]);
+        log_message('info', 'BackstageController::show attendee by invitationID');
 
-                return $this->response->setStatusCode(404)->setJSON(['data' => null,
-                    'message' => 'Invitations not found',
+        // Validate input
+        if (!isset($requestData['data'])) {
+            return $this->response
+                ->setStatusCode(400) // Bad Request
+                ->setJSON([
+                    'success' => false,
+                    'message' => 'request payload are required.',
                 ]);
-            }
-            
-            return $this->response->setStatusCode(200)->setJSON([
-                'data' => $attendee,
-            ]);  
         }
+
+        $data = $requestData['data'];
+        $parts = explode("/", $data);        
+        $token = $parts[0]; // Get the first part
+
+        log_message('info', 'BackstageController::show attendee by invitationID'. ' - ' . json_encode(['token' => $token]), ['token' => $token]);
+            
+        $model = new AttendeeModel();
+        //$decodedInvitationID = urldecode($encodedInvitationID);
+        $attendee = $model->getAttendee($token);
+        log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['token' => $token, 'attendee' => $attendee]), ['$token' => $token, 'attendee' => $attendee]);
+        if ($attendee == null) {
+            log_message('error', 'InvitationController::show - attendee not found.', ['token' => $token]);
+
+            return $this->response->setStatusCode(404)->setJSON([
+                'data' => null,
+                'message' => 'Invitations not found',
+            ]);
+        }
+
+        return $this->response->setStatusCode(200)->setJSON([
+            'data' => $attendee,
+        ]); 
     }
 }

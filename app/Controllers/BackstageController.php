@@ -424,7 +424,7 @@ class BackStageController extends BaseController
             $attendeeModel->update($id ,['status' => $status,'updated_at' => $updatedAt]);
         
             // update google sheet
-            $this->updateGoogleSheetAttendee($id, $status);            
+            $this->updateGoogleSheetAttendee($attendee, $status);            
             return $this->response
                 ->setStatusCode(200) // OK
                 ->setJSON([
@@ -691,9 +691,9 @@ class BackStageController extends BaseController
         ]);
     }
 
-    private function updateGoogleSheetAttendee($id, $status)
+    private function updateGoogleSheetAttendee($attendee, $status)
     {
-        log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'status' => $status]), ['id' => $id, 'status'=> $status]);
+        log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $attendee["id"], 'fullname' => $attendee["fullname"], 'status' => $status]), ['id' => $attendee["id"], 'fullname' => $attendee["fullname"], 'status'=> $status]);
         try {
             // Google Sheets Setup        
             $client = $this->getClient();
@@ -708,14 +708,14 @@ class BackStageController extends BaseController
 
             // Check if data exists
             if (empty($values)) {
-                log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'status' => $status, 'result' => "No data found in the Google Sheet"]), ['id' => $id, 'status' => $status]);
+                log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $attendee["id"], 'fullname' => $attendee["id"], 'status' => $status, 'result' => "No data found in the Google Sheet"]), ['id' => $attendee["id"], 'fullname' => $attendee["fullname"], 'status' => $status]);
                 return false;
             }
 
             // Find the row with matching "Nama" and update Column M
             $updated = false;
             foreach ($values as $rowIndex => $row) {
-                if (isset($row[0]) && $row[0] === $id) { // Column A = Index 0 (ID)
+                if (isset($row[2]) && $row[2] === $attendee["fullname"]) { // Column C = Index 2 (Name)
                     $updateRange = "$sheetName!F" . ($rowIndex + 1); // Column F (RSVP Status)
     
                     $updateValues = [[$status]]; // New value
@@ -744,11 +744,11 @@ class BackStageController extends BaseController
 
             // If no match found
             if (!$updated) {
-                log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'status' => $status, 'result' => "No match found for ID '$id'"]), ['id' => $id, 'status' => $status]);
+                log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $attendee["id"], 'fullname' => $attendee["fullname"], 'status' => $status, 'result' => "No match found for fullname '$attendee'"]), ['id' => $attendee["id"], 'fullname' => $attendee["fullname"], 'status' => $status]);
                 return false;
             }
         } catch (\Throwable $th) {
-            log_message('error', '' . $th->getMessage(), ['id' => $id, 'status' => $status]);
+            log_message('error', '' . $th->getMessage(), ['id' => $attendee["id"], 'fullname' => $attendee["fullname"], 'status' => $status]);
             //return false;
             throw $th;
         }        

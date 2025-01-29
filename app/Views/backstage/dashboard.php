@@ -933,7 +933,7 @@
 
         console.log(requestData);
         $.ajax({
-          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/guestCheckIn', // Replace with your API endpoint
+          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/delegationCheckIn', // Replace with your API endpoint
           // url: 'http://localhost:8080/backstage/api/invitations/delegationCheckIn', // Replace with your API endpoint
           method: 'POST',
           dataType: 'json',

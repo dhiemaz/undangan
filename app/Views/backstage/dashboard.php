@@ -771,9 +771,9 @@
           console.log(response);
 
           if (response.data.type === null) {
-            invitations_type = "standard";
+            invitations_type = "biasa bri";
           } else {
-            invitations_type = response.data.type;
+            invitations_type = response.data.type.toLowerCase();
           }
 
           document.getElementById('user-image').src = getTitle(response.data.title);
@@ -1229,7 +1229,7 @@
             if (invitation.type === null) {
               invitations_type = "biasa bri"
             } else {
-              invitations_type = invitation.type
+              invitations_type = invitation.type.toLowerCase();              
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1310,6 +1310,8 @@
               }
 
               let starCount = 0;
+              invitations_type = invitations_type.toLowerCase();
+
               if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
                 starCount = 5; // 5 stars for VVIP
               } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
@@ -1704,7 +1706,7 @@
             if (invitation.type === null) {
               invitations_type = "biasa bri"
             } else {
-              invitations_type = invitation.type
+              invitations_type = invitation.type.toLowerCase();
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1785,6 +1787,8 @@
               }
 
               let starCount = 0;
+              invitations_type = invitations_type.toLowerCase();
+
               if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
                 starCount = 5; // 5 stars for VVIP
               } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {

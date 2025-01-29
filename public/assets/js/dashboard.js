@@ -633,7 +633,7 @@
 
       // Function to fetch data and update the chart
       function updateDoughnutChart() {
-        fetch('http://localhost:8080/backstage/api/invitations/eventChart') // Replace with your API endpoint
+        fetch('https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/eventChart') // Replace with your API endpoint
           .then(response => response.json())
           .then(data => {
             // Assuming the API returns an object with `data` and `labels` arrays

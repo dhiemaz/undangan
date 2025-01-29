@@ -147,7 +147,7 @@ class BackStageController extends BaseController
 
         // Fetch paginated data
         $invitations = $attendeeModel
-            ->select('title, fullname, position, institution, status, type')
+            ->select('id, title, fullname, position, institution, status, type')
             ->like('fullname', $searchQuery)
             ->orderBy('fullname', 'ASC')
             ->paginate($perPage, 'default', $page);

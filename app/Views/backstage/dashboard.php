@@ -1382,14 +1382,8 @@
           invitationsCheckIn.addEventListener('click', function() {
             const invitationID = document.querySelector('#invitationModal #invitations-invitation-id');
             CheckIn(invitationID.value);
-
-            if (currentPage < totalPages) {
-              fetchAllInvitations(currentPage + 1);
-            }
-
-            if (currentPage > 1) {
-              fetchAllInvitations(currentPage - 1);
-            }
+            // refresh current page
+            fetchAllInvitations(currentPage);            
           });
         },
         error: function(xhr, status, error) {

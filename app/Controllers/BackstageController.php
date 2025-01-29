@@ -406,9 +406,9 @@ class BackStageController extends BaseController
         log_message('info', 'BackstageController::invitationCheckIn' . ' - ' . json_encode(['id' => $id, 'status' => $status]));
 
         // Check if the record exists
-        $invitation = $attendeeModel->find($id);
-        if (!$invitation) {
-            log_message('error', 'BackstageController::findAttendeeByID' . ' - ' . json_encode(['attendee' => $invitation]), ['id' => $id, 'status' => $status]);
+        $attendee = $attendeeModel->where('id', $id)->first();        
+        if (!$attendee) {
+            log_message('error', 'BackstageController::findAttendeeByID' . ' - ' . json_encode(['attendee' => $attendee]), ['id' => $id, 'status' => $status]);
             return $this->response
                 ->setStatusCode(404) // Not Found
                 ->setJSON([
@@ -418,11 +418,13 @@ class BackStageController extends BaseController
         }
 
         try {
+            log_message('info', 'BackstageController::invitationCheckIn' . ' - ' . json_encode(['id' => $id, 'status' => $status, 'attendee'=> $attendee]));
+
             $updatedAt = Time::now('Asia/Jakarta', 'en_US');
             $attendeeModel->update($id ,['status' => $status,'updated_at' => $updatedAt]);
         
             // update google sheet
-            $this->updateGoogleSheetAttendee($id, $invitation->fullname, $status);            
+            $this->updateGoogleSheetAttendee($id, $attendee->fullname, $status);            
             return $this->response
                 ->setStatusCode(200) // OK
                 ->setJSON([

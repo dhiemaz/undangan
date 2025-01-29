@@ -814,11 +814,10 @@
           }
 
           let starCount = 0;
+          let invitations_type = '-';
 
           if (response.data.type !== null) {
             invitations_type = response.data.type.toLowerCase();
-          } else {
-            invitations_type = 'no-stars';            
           }
 
           if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1225,11 +1224,10 @@
 
           response.data.forEach(invitation => {
             let starCount = 0;
+            let invitations_type = '-';
 
             if (invitation.type !== null) {
               invitations_type = invitation.type.toLowerCase();
-            } else {
-              invitations_type = 'no-stars';              
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1341,7 +1339,7 @@
               // Add a label after the stars
               const label = document.createElement('span');
               label.className = 'ml-2 text-sm text-black'; // Optional class for spacing
-              label.textContent = "[" + invitations_type + "]"; // Use the invitation type as the label text
+              label.textContent = "- " + invitations_type + " -"; // Use the invitation type as the label text
               vipStarsElement.appendChild(label);
             });
           });
@@ -1710,11 +1708,10 @@
 
           response.data.forEach(invitation => {
             let starCount = 0;
+            let invitations_type = '-';
 
             if (invitation.type !== null) {
               invitations_type = invitation.type.toLowerCase();
-            } else {
-              invitations_type = 'no-stars';
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1783,8 +1780,7 @@
               document.querySelector('#invitationModal #modal-fullname').textContent = fullname;
               document.querySelector('#invitationModal #invitations-position').value = position; // You may need to add this span in the modal
               document.querySelector('#invitationModal #invitations-company').value = company;
-              document.querySelector('#invitationModal #invitations-status-button').textContent = status;
-              // document.querySelector('#invitationModal #invitations-type').value = invitations_type;              
+              document.querySelector('#invitationModal #invitations-status-button').textContent = status;                        
 
               if (status === 'check-in') {
                 document.querySelector('#invitationModal #invitations-checkInBtn').disabled = true;
@@ -1810,6 +1806,8 @@
                 starCount = 3; // 4 stars for VIP
               } else if (invitations_type === 'biasa') {
                 starCount = 2;
+              } else {
+                starCount = 1;
               }
 
               for (let i = 0; i < starCount; i++) {
@@ -1825,7 +1823,7 @@
               // Add a label after the stars
               const label = document.createElement('span');
               label.className = 'ml-2 text-sm text-black'; // Optional class for spacing
-              label.textContent = "[" + invitations_type + "]"; // Use the invitation type as the label text
+              label.textContent = "- " + invitations_type + " -"; // Use the invitation type as the label text
               vipStarsElement.appendChild(label);
             });
           });

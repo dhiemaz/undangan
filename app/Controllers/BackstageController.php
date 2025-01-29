@@ -640,6 +640,8 @@ class BackStageController extends BaseController
         }
 
         $data = $requestData['data'];
+        log_message('info', 'BackstageController::getAttendee' . ' - ' . json_encode(['data' => $data]));
+
         $parts = explode("/", $data);        
         $rawToken = $parts[0]; // Get the first part
 

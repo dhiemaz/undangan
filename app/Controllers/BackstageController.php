@@ -540,7 +540,7 @@ class BackStageController extends BaseController
         try {
             // Update the status
             $updatedAt = Time::now('Asia/Jakarta', 'en_US');
-            $result = $delegationModel->where('id', $id)->set(['status' => $status, 'updated_at'=> $updatedAt])->update(['status'=> $status]);
+            $result = $delegationModel->where('id', $id)->set(['status' => $status, 'updated_at'=> $updatedAt])->update();
             log_message('info', 'BackstageController::delegationCheckIn - Status updated: ' . json_encode($result));
 
             return $this->response

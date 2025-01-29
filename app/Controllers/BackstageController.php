@@ -424,7 +424,7 @@ class BackStageController extends BaseController
             $attendeeModel->update($id ,['status' => $status,'updated_at' => $updatedAt]);
         
             // update google sheet
-            //$this->updateGoogleSheetAttendee($id, $attendee->fullname, $status);            
+            $this->updateGoogleSheetAttendee($id, $attendee->fullname, $status);            
             return $this->response
                 ->setStatusCode(200) // OK
                 ->setJSON([
@@ -695,7 +695,7 @@ class BackStageController extends BaseController
     {
         log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
         // Google Sheets Setup
-        $client = getClient();
+        $client = $this->getClient();
         $service = new Sheets($client);
         $spreadsheetId = "1cy0DIQFvGdgwBUWIAh4k0cSxhiRxOa7Xi3wJFzTKWAM"; // Replace with your actual Sheet ID
         $sheetName = "Attendees"; // Replace with your actual Sheet Name
@@ -755,7 +755,7 @@ class BackStageController extends BaseController
         $client = new Client();
         $client->setApplicationName('BRI Microfinance 2025 Google Sheet API');
         $client->setScopes([Sheets::SPREADSHEETS]);
-        $client->setAuthConfig('../pikobar-dev-4580b-46ee917f71ef.json'); // Your Google API credentials
+        $client->setAuthConfig('./../../pikobar-dev-4580b-46ee917f71ef.json'); // Your Google API credentials
         $client->setAccessType('offline');
         return $client;
     }

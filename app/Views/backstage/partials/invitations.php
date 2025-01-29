@@ -51,7 +51,7 @@
                 <!-- Form with Single Column Design -->
                 <form class="forms-sample">
                   <div class="form-group">
-                    <input type="hidden" id="invitations-invitation-id" value="">
+                    <input type="hidden" id="invitations-invitation-id">
                     <label for="invitations-position" class="text-start w-100">Position</label>
                     <input type="text" class="form-control text-left" id="invitations-position" placeholder="-">
                   </div>

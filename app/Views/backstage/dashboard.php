@@ -27,7 +27,6 @@
   <!-- Plugin css for this page -->
   <link href="https://cdn.datatables.net/v/bs4/dt-2.2.1/sl-3.0.0/datatables.min.css" rel="stylesheet">
   <!-- End plugin css for this page -->
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../../assets/css/vertical-layout-light/style.css">
   <!-- endinject -->
@@ -1296,7 +1295,7 @@
               document.querySelector('#invitationModal #modal-fullname').textContent = fullname;
               document.querySelector('#invitationModal #invitations-position').value = position; // You may need to add this span in the modal
               document.querySelector('#invitationModal #invitations-company').value = company;
-              document.querySelector('#invitationModal #invitations-status-button').textContent = status;                          
+              document.querySelector('#invitationModal #invitations-status-button').textContent = status;
 
               if (status === 'check-in') {
                 document.querySelector('#invitationModal #invitations-checkInBtn').disabled = true;
@@ -1780,7 +1779,7 @@
               document.querySelector('#invitationModal #modal-fullname').textContent = fullname;
               document.querySelector('#invitationModal #invitations-position').value = position; // You may need to add this span in the modal
               document.querySelector('#invitationModal #invitations-company').value = company;
-              document.querySelector('#invitationModal #invitations-status-button').textContent = status;                        
+              document.querySelector('#invitationModal #invitations-status-button').textContent = status;
 
               if (status === 'check-in') {
                 document.querySelector('#invitationModal #invitations-checkInBtn').disabled = true;
@@ -1866,6 +1865,7 @@
           const invitationsCheckIn = document.querySelector('#invitationModal #invitations-checkInBtn');
           invitationsCheckIn.addEventListener('click', function() {
             const invitationID = document.querySelector('#invitationModal #invitations-invitation-id');
+            alert(invitationID.value);
             CheckIn(invitationID.value);
 
             if (currentPage < totalPages) {

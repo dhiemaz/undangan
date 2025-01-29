@@ -83,7 +83,7 @@ class BackStageController extends BaseController
             ->select('fullname, status, updated_at') // Select relevant fields
             ->where('status IS NOT NULL', null, false) // Ensure status is updated
             ->orderBy('updated_at', 'DESC') // Order by most recent
-            ->limit(5) // Limit to last 5 activities
+            ->limit(6) // Limit to last 5 activities
             ->findAll();
 
         // Return JSON response

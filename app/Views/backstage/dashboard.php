@@ -1864,8 +1864,7 @@
 
           const invitationsCheckIn = document.querySelector('#invitationModal #invitations-checkInBtn');
           invitationsCheckIn.addEventListener('click', function() {
-            const invitationID = document.querySelector('#invitationModal #invitations-invitation-id');
-            alert(invitationID.value);
+            const invitationID = document.querySelector('#invitationModal #invitations-invitation-id');            
             CheckIn(invitationID.value);
 
             if (currentPage < totalPages) {

@@ -694,69 +694,78 @@ class BackStageController extends BaseController
     private function updateGoogleSheetAttendee($id, $name, $status)
     {
         log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
-        // Google Sheets Setup
-        $client = $this->getClient();
-        $service = new Sheets($client);
-        $spreadsheetId = "1cy0DIQFvGdgwBUWIAh4k0cSxhiRxOa7Xi3wJFzTKWAM"; // Replace with your actual Sheet ID
-        $sheetName = "Attendees"; // Replace with your actual Sheet Name
+        try {
+            // Google Sheets Setup        
+            $client = $this->getClient();
+            $service = new Sheets($client);
+            $spreadsheetId = "1cy0DIQFvGdgwBUWIAh4k0cSxhiRxOa7Xi3wJFzTKWAM"; // Replace with your actual Sheet ID
+            $sheetName = "Attendees"; // Replace with your actual Sheet Name
 
-        // Fetch Data from Google Sheet
-        $range = "$sheetName!A:G"; // Get all columns (A to M)
-        $response = $service->spreadsheets_values->get($spreadsheetId, $range);
-        $values = $response->getValues(); // Convert response to array
+            // Fetch Data from Google Sheet
+            $range = "$sheetName!A:G"; // Get all columns (A to M)
+            $response = $service->spreadsheets_values->get($spreadsheetId, $range);
+            $values = $response->getValues(); // Convert response to array
 
-        // Name to find and new Kehadiran status
-        // $namaToFind = "Yulianto Setiawan"; // Name to search in Column D (Index 3)
-        // $newStatus = "TRUE"; // Update Kehadiran to TRUE in Column M (Index 12)        
+            // Name to find and new Kehadiran status
+            // $namaToFind = "Yulianto Setiawan"; // Name to search in Column D (Index 3)
+            // $newStatus = "TRUE"; // Update Kehadiran to TRUE in Column M (Index 12)        
 
-        // Check if data exists
-        if (empty($values)) {
-            log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "No data found in the Google Sheet"]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
-            return false;
-        }
-
-        // Find the row with matching "Nama" and update Column M
-        $updated = false;
-        foreach ($values as $rowIndex => $row) {
-            if (isset($row[2]) && $row[2] === $name) { // Column D = Index 3
-                $updateRange = "$sheetName!F" . ($rowIndex + 1); // Column M, 1-based index
-                $updateValues = [[$status]]; // New value
-
-                // Prepare update request
-                $body = new ValueRange([
-                    'values' => $updateValues
-                ]);
-
-                $params = ['valueInputOption' => 'USER_ENTERED'];
-
-                // Execute update
-                $service->spreadsheets_values->update(
-                    $spreadsheetId,
-                    $updateRange,
-                    $body,
-                    $params
-                );                                
-                $updated = true;
-
-                log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "Updated row " . ($rowIndex + 1) . " in column M with " . $status. ""]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
-                return true;                
+            // Check if data exists
+            if (empty($values)) {
+                log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "No data found in the Google Sheet"]), ['id' => $id, 'fullname' => $name, 'status' => $status]);
+                return false;
             }
-        }
 
-        // If no match found
-        if (!$updated) {
-            log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "No match found for '$name'"]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
+            // Find the row with matching "Nama" and update Column M
+            $updated = false;
+            foreach ($values as $rowIndex => $row) {
+                if (isset($row[2]) && $row[2] === $name) { // Column D = Index 3
+                    $updateRange = "$sheetName!F" . ($rowIndex + 1); // Column M, 1-based index
+                    $updateValues = [[$status]]; // New value
+
+                    // Prepare update request
+                    $body = new ValueRange([
+                        'values' => $updateValues
+                    ]);
+
+                    $params = ['valueInputOption' => 'USER_ENTERED'];
+
+                    // Execute update
+                    $service->spreadsheets_values->update(
+                        $spreadsheetId,
+                        $updateRange,
+                        $body,
+                        $params
+                    );
+                    $updated = true;
+
+                    log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "Updated row " . ($rowIndex + 1) . " in column M with " . $status . ""]), ['id' => $id, 'fullname' => $name, 'status' => $status]);
+                    return true;
+                }
+            }
+
+            // If no match found
+            if (!$updated) {
+                log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "No match found for '$name'"]), ['id' => $id, 'fullname' => $name, 'status' => $status]);
+                return false;
+            }
+        } catch (\Throwable $th) {
+            log_message('error', '' . $th->getMessage(), ['id' => $id, 'fullname' => $name, 'status' => $status]);
             return false;
-        }
+        }        
     }
 
     private function getClient()
     {
-        $client = new Client();
-        $client->setApplicationName('BRI Microfinance 2025 Google Sheet API');
-        $client->setScopes([Sheets::SPREADSHEETS]);
-        $client->setAuthConfig('./../../pikobar-dev-4580b-46ee917f71ef.json'); // Your Google API credentials
-        $client->setAccessType('offline');
-        return $client;
+        try {
+            $client = new Client();
+            $client->setApplicationName('BRI Microfinance 2025 Google Sheet API');
+            $client->setScopes([Sheets::SPREADSHEETS]);
+            $client->setAuthConfig('./../../pikobar-dev-4580b-46ee917f71ef.json'); // Your Google API credentials
+            $client->setAccessType('offline');
+            return $client;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

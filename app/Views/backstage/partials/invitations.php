@@ -56,7 +56,7 @@
                     <input type="text" class="form-control text-left" id="invitations-position" placeholder="-">
                   </div>
                   <div class="form-group">
-                    <label for="InputCompany" class="text-start w-100">Company</label>
+                    <label for="invitations-company" class="text-start w-100">Company</label>
                     <input type="text" class="form-control text-left" id="invitations-company" placeholder="-">
                   </div>
 
@@ -87,7 +87,6 @@
           </div>
         </div>
       </div>
-
       <!-- Modal End -->
     </div>
   </div>

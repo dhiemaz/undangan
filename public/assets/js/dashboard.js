@@ -554,27 +554,24 @@
       var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
       var doughnutPieData = {
         datasets: [{
-          data: [566, 20, 30, 10],
+          data: [566, 20, 30],
           backgroundColor: [
             "#1F3BB3",
             "#FDD0C7",
-            "#52CDFF",
-            "#81DADA"
+            "#52CDFF",            
           ],
           borderColor: [
             "#1F3BB3",
             "#FDD0C7",
-            "#52CDFF",
-            "#81DADA"
+            "#52CDFF"
           ],
         }],
   
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
           'Total',
-          'Attend',
-          'Delegate',
-          'Guest',
+          'Check-In',
+          'Confirmed',          
         ]
       };
       var doughnutPieOptions = {
@@ -633,6 +630,28 @@
         options: doughnutPieOptions
       });
       document.getElementById('doughnut-chart-legend').innerHTML = doughnutChart.generateLegend();
+
+      // Function to fetch data and update the chart
+      function updateDoughnutChart() {
+        fetch('http://localhost:8080/backstage/api/invitations/eventChart') // Replace with your API endpoint
+          .then(response => response.json())
+          .then(data => {
+            // Assuming the API returns an object with `data` and `labels` arrays
+            doughnutChart.data.datasets[0].data = data.values; // Update data
+            doughnutChart.data.labels = data.labels; // Update labels
+
+            doughnutChart.update(); // Update the chart to reflect changes
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+      }
+
+      // Call fetchAndUpdateChart every 5 seconds
+      setInterval(updateDoughnutChart, 2000);
+
+      // Call the update function when needed
+      updateDoughnutChart();
     }
     if ($("#leaveReport").length) {
       var leaveReportChart = document.getElementById("leaveReport").getContext('2d');

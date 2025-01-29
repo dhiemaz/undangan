@@ -430,6 +430,7 @@
     let fetchAllInvitationsInterval;
     let fetchInvitationGuestsInterval;
     let fetchInvitationDelegationInterval;
+    let updateChartInterval;
 
     function initializeOverviewIntervals() {
       if (!updateStatisticsInterval) {
@@ -443,6 +444,10 @@
       if (!fetchUpdatedInvitationsInterval) {
         recentActivityInterval = setInterval(fetchUpdatedInvitations, 300000); // Every 5 minutes
       }
+
+      if (!updateChartInterval) {
+        updateChartInterval = setInterval(updateDoughnutChart, 50000); // Every 1 seconds
+      }
     }
 
     function initializeInvitationsIntervals() {
@@ -453,7 +458,7 @@
 
     function initializeInvitationGuestsIntervals() {
       if (!fetchInvitationGuestsInterval) {
-        fetchInvitationGuestsInterval = setInterval(fetchInvitationGuests, 300000); // Every 5 minutes
+        fetchInvitationGuestsInterval = setInterval(fetchInvitationGuests, 300000); // Every 5 minutes        
       }
     }
 
@@ -468,6 +473,11 @@
       if (updateStatisticsInterval) {
         clearInterval(updateStatisticsInterval);
         updateStatisticsInterval = null; // Reset the interval ID
+      }
+
+      if (updateChartInterval) {
+        clearInterval(updateChartInterval);
+        updateChartInterval = null; // Reset the interval ID
       }
 
       if (recentActivityInterval) {
@@ -631,7 +641,7 @@
       // Extract the token from the pathname
       const pathSegments = urlObj.pathname.split("/");
       console.log(pathSegments)
-      const token = pathSegments[3]; 
+      const token = pathSegments[3];
 
       console.log("Decoded result:", token);
       getInvitationDetail(token);
@@ -662,6 +672,8 @@
         fetchRecentActivities();
         // Fetch updated invitations
         fetchUpdatedInvitations();
+
+        updateDoughnutChart();
       }
 
       if (id === 'invitations-tab') {
@@ -684,28 +696,6 @@
         initializeInvitationGuestsIntervals();
         // fetchAllInvitations
         fetchInvitationGuests();
-      }
-
-      if (id === 'delegations-tab') {
-        if (isScannerStart) {
-          stopScanning();
-          isScannerStart = false;
-        }
-        // reinitialize intervals
-        initializeInvitationDelegationIntervals();
-        // fetchAllInvitations
-        fetchInvitationDelegation();
-      }
-
-      if (id === 'delegations-tab') {
-        if (isScannerStart) {
-          stopScanning();
-          isScannerStart = false;
-        }
-        // reinitialize intervals
-        initializeInvitationDelegationIntervals();
-        // fetchAllInvitations
-        fetchInvitationDelegation();
       }
 
       if (id === 'delegations-tab') {
@@ -840,7 +830,7 @@
             alert('Invitation not found');
           } else {
             console.error('Failed to fetch invitation detail:', error);
-          }          
+          }
         }
       });
     }
@@ -883,7 +873,84 @@
       }
     }
 
+    function GuestCheckIn(id) {
+      // const id = document.getElementById('checkin-invitation-id').value;
+      const status = 'check-in';
 
+      if (id) {
+        const requestData = {
+          id: id,
+          status: status
+        };
+
+        console.log(requestData);
+        $.ajax({
+          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/guestCheckIn', // Replace with your API endpoint
+          // url: 'http://localhost:8080/backstage/api/invitations/guestCheckIn', // Replace with your API endpoint
+          method: 'POST',
+          dataType: 'json',
+          contentType: 'application/json', // Ensure the content type matches the cURL
+          data: JSON.stringify(requestData), // Convert data to JSON string
+          success: function(response) {
+            if (response.success) {
+              console.log(response.message);
+              // Optionally update UI elements
+              alert('Check-In Successful: ' + response.message);
+            } else {
+              console.error('Check-In Failed:', response.message);
+              alert('Error: ' + response.message);
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error('Failed to process check-in:', error);
+            alert('Failed to process check-in. Please try again.');
+          }
+        });
+      } else {
+        alert('Guest ID is required.');
+      }
+    }
+
+    // Delegation Check In
+    function DelegationCheckIn(id) {
+      // const id = document.getElementById('checkin-invitation-id').value;
+      const status = 'check-in';
+
+      if (id) {
+        const requestData = {
+          id: id,
+          status: status
+        };
+
+        console.log(requestData);
+        $.ajax({
+          url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/guestCheckIn', // Replace with your API endpoint
+          // url: 'http://localhost:8080/backstage/api/invitations/delegationCheckIn', // Replace with your API endpoint
+          method: 'POST',
+          dataType: 'json',
+          contentType: 'application/json', // Ensure the content type matches the cURL
+          data: JSON.stringify(requestData), // Convert data to JSON string
+          success: function(response) {
+            if (response.success) {
+              console.log(response.message);
+              // Optionally update UI elements
+              alert(response.message);
+            } else {
+              console.error(response.message);
+              alert('Error: ' + response.message);
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error('Failed to process check-in:', error);
+            alert('Failed to process check-in. Please try again.');
+          }
+        });
+      } else {
+        alert('Guest ID is required.');
+      }
+    }
+
+    // QR Code Check In
     function QRCheckIn() {
       const id = document.getElementById('checkin-invitation-id').value;
       const status = 'check-in';
@@ -906,7 +973,7 @@
             if (response.success) {
               console.log(response.message);
               // Optionally update UI elements
-              alert('Check-In Successful: ' + response.message);
+              alert(response.message);
             } else {
               console.error('Check-In Failed:', response.message);
               alert('Error: ' + response.message);
@@ -922,11 +989,11 @@
       }
     }
 
+    // Generate Hash
     function generateHash(data) {
       // Generate SHA-256 hash synchronously
       return CryptoJS.SHA256(data).toString(CryptoJS.enc.Hex);
     }
-
 
     // Function to register and check in
     function RegisterAndCheckIn(fullname, position, company) {
@@ -960,20 +1027,20 @@
               console.log(response.message);
               alert(response.message);
               // Optionally update UI elements
-            
+
               $('#checkin-manual-fullname').val('');
               $('#checkin-manual-position').val('');
               $('#checkin-manual-institution').val('');
-            } else {              
-              console.error(response.message);     
-              alert(response.message);         
+            } else {
+              console.error(response.message);
+              alert(response.message);
             }
           },
           error: function(xhr, status, error) {
             console.error('Failed to process check-in:', error);
             message = 'Failed to process registration & check-in. Please try again.';
           }
-        });        
+        });
       }
     }
 
@@ -1335,31 +1402,62 @@
           pagination.empty(); // Clear pagination controls
 
           // Populate table rows
-          response.data.forEach(invitation => {
+          response.data.forEach(guest => {
             const tableRow = `
-                            <tr>                                        
+                            <tr data-bs-toggle="modal" data-bs-target="#guestsModal" data-guest-id="${guest.id}" data-guest-image="${getTitle(guest.title)}" data-guest-fullname="${guest.fullname}" data-guest-position="${guest.position}" data-guest-company="${guest.institution}" data-guest-status="${getInvitationStatus(guest.status)}" data-guest-invitation-name="${guest.attendee_name}" data-info="Some additional info">                                                                   
                               <td>
                                   <div class="d-flex ">                                    
-                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
+                                    <img src="${getTitle(guest.title)}" alt="" loading="lazy">
                                     &nbsp;&nbsp;
                                     <div class="ml-2">
-                                      <h6 class="font-bold">${invitation.fullname}</h6>
-                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
+                                      <h6 class="font-bold">${guest.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${guest.position}</p>
                                     </div>
                                   </div>
                               </td>
                               <td>
-                                <h6>${invitation.institution}</h6>
+                                <h6>${guest.institution}</h6>
                                 <p>-</p>
                               </td>
                               <td>
-                                <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
-                                    ${invitation.status || 'unconfirmed'}
+                                <div class="badge badge-opacity-${getStatusBadge(guest.status || 'unconfirmed')}">
+                                    ${guest.status || 'unconfirmed'}
                                 </div>
                               </td>
-                              <td>${invitation.attendee_name}</td>
+                              <td>${guest.attendee_name}</td>
                             </tr>`;
             tbody.append(tableRow);
+          });
+
+          // Add event listeners to rows for modal handling
+          document.querySelectorAll('tr[data-bs-toggle="modal"]').forEach(row => {
+            row.addEventListener('click', function() {
+              const guestId = row.getAttribute('data-guest-id');
+              const imageSrc = row.getAttribute('data-guest-image');
+              const fullname = row.getAttribute('data-guest-fullname');
+              const position = row.getAttribute('data-guest-position');
+              const company = row.getAttribute('data-guest-company');
+              const status = row.getAttribute('data-guest-status');
+              const info = row.getAttribute('data-info');
+              const attendee_name = row.getAttribute('data-guest-invitation-name');
+
+              // Update the modal content                            
+              document.querySelector('#guestsModal #guests-invitation-id').value = guestId;
+              document.querySelector('#guestsModal #guests-image').src = imageSrc;
+              document.querySelector('#guestsModal #guest-fullname').textContent = fullname;
+              document.querySelector('#guestsModal #guest-position').value = position; // You may need to add this span in the modal
+              document.querySelector('#guestsModal #guest-company').value = company;
+              document.querySelector('#guestsModal #invitation-guest-fullname').textContent = attendee_name;
+              document.querySelector('#guestsModal #invitation-guest-image').src = imageSrc;
+              document.querySelector('#guestsModal #invitation-guest-institution').textContent = company;
+              document.querySelector('#guestsModal #guests-status-button').textContent = status;
+
+              if (status === 'check-in') {
+                document.querySelector('#guestsModal #guest-checkInBtn').disabled = true;
+              } else {
+                document.querySelector('#guestsModal #guest-checkInBtn').disabled = false;
+              }
+            });
           });
 
           // Generate Tailwind CSS-based pagination controls
@@ -1396,6 +1494,30 @@
               fetchInvitationGuests(currentPage + 1);
             }
           });
+
+          const guestsCheckIn = document.querySelector('#guestsModal #guest-checkInBtn');
+          guestsCheckIn.addEventListener('click', function() {
+            const guestID = document.querySelector('#guestsModal #guests-invitation-id');
+            GuestCheckIn(guestID.value);
+
+            if (currentPage < totalPages) {
+              if (query !== null) {
+                searchGuests(query, currentPage + 1);
+              } else {
+                fetchInvitationGuests(currentPage + 1);
+              }
+            }
+
+            if (currentPage > 1) {
+              if (query !== null) {
+                searchGuests(query, currentPage - 1);
+              } else {
+                fetchInvitationGuests(currentPage - 1);
+              }
+            } else {
+              fetchInvitationGuests(currentPage);
+            }
+          });
         },
         error: function(xhr, status, error) {
           console.error('Failed to fetch guests invitations:', error);
@@ -1423,32 +1545,63 @@
           pagination.empty(); // Clear pagination controls
 
           // Populate table rows
-          response.data.forEach(invitation => {
+          response.data.forEach(delegation => {
             const tableRow = `
-                            <tr>                                        
+                            <tr data-bs-toggle="modal" data-bs-target="#delegationsModal" data-delegation-id="${delegation.id}" data-delegation-image="${getTitle(delegation.title)}" data-delegation-fullname="${delegation.fullname}" data-delegation-position="${delegation.position}" data-delegation-company="${delegation.institution}" data-delegation-status="${getInvitationStatus(delegation.status)}" data-delegation-invitation-name="${delegation.attendee_name}" data-info="Some additional info">                                                                                                          
                               <td>
                                   <div class="d-flex ">                                    
-                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
+                                    <img src="${getTitle(delegation.title)}" alt="" loading="lazy">
                                     &nbsp;&nbsp;
                                     <div class="ml-2">
-                                      <h6 class="font-bold">${invitation.fullname}</h6>
-                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
+                                      <h6 class="font-bold">${delegation.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${delegation.position}</p>
                                     </div>
                                   </div>
                               </td>
                               <td>
-                                <h6>${invitation.institution}</h6>
+                                <h6>${delegation.institution}</h6>
                                 <p>-</p>
                               </td>
                               <td>
-                                <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
-                                    ${invitation.status || 'unconfirmed'}
+                                <div class="badge badge-opacity-${getStatusBadge(delegation.status || 'unconfirmed')}">
+                                    ${delegation.status || 'unconfirmed'}
                                 </div>
                               </td>
-                              <td>${invitation.attendee_name}</td>
+                              <td>${delegation.attendee_name}</td>
                             </tr>`;
             tbody.append(tableRow);
           });
+
+          // Add event listeners to rows for modal handling
+          document.querySelectorAll('tr[data-bs-toggle="modal"]').forEach(row => {
+            row.addEventListener('click', function() {
+              const delegationId = row.getAttribute('data-delegation-id');
+              const imageSrc = row.getAttribute('data-delegation-image');
+              const fullname = row.getAttribute('data-delegation-fullname');
+              const position = row.getAttribute('data-delegation-position');
+              const company = row.getAttribute('data-delegation-company');
+              const status = row.getAttribute('data-delegation-status');
+              const info = row.getAttribute('data-info');
+              const attendee_name = row.getAttribute('data-delegation-invitation-name');
+
+              // Update the modal content                            
+              document.querySelector('#delegationsModal #delegation-invitation-id').value = delegationId;
+              document.querySelector('#delegationsModal #delegations-image').src = imageSrc;
+              document.querySelector('#delegationsModal #delegation-fullname').textContent = fullname;
+              document.querySelector('#delegationsModal #delegation-position').value = position; // You may need to add this span in the modal
+              document.querySelector('#delegationsModal #delegation-company').value = company;
+              document.querySelector('#delegationsModal #invitation-delegation-fullname').textContent = attendee_name;
+              document.querySelector('#delegationsModal #invitation-delegation-image').src = imageSrc;
+              document.querySelector('#delegationsModal #invitation-delegation-institution').textContent = company;
+              document.querySelector('#delegationsModal #delegation-status-button').textContent = status;
+
+              if (status === 'check-in') {
+                document.querySelector('#delegationsModal #delegation-checkInBtn').disabled = true;
+              } else {
+                document.querySelector('#delegationsModal #delegation-checkInBtn').disabled = false;
+              }
+            });
+          });    
 
           // Generate Tailwind CSS-based pagination controls
           const {
@@ -1482,6 +1635,30 @@
           $('#delegations-invitations-next-btn').on('click', function() {
             if (currentPage < totalPages) {
               fetchInvitationDelegation(currentPage + 1);
+            }
+          });
+
+          const delegationCheckIn = document.querySelector('#delegationsModal #delegation-checkInBtn');
+          delegationCheckIn.addEventListener('click', function() {
+            const delegationId = document.querySelector('#delegationsModal #delegation-invitation-id');
+            DelegationCheckIn(delegationId.value);
+
+            if (currentPage < totalPages) {
+              if (query !== null) {
+                searchDelegations(query, currentPage + 1);
+              } else {
+                fetchInvitationDelegation(currentPage + 1);
+              }
+            }
+
+            if (currentPage > 1) {
+              if (query !== null) {
+                searchDelegations(query, currentPage - 1);
+              } else {
+                fetchInvitationDelegation(currentPage - 1);
+              }
+            } else {
+              fetchInvitationDelegation(currentPage);
             }
           });
         },
@@ -1712,31 +1889,62 @@
           pagination.empty(); // Clear pagination controls
 
           // Populate table rows
-          response.data.forEach(invitation => {
+          response.data.forEach(guest => {
             const tableRow = `
-                            <tr>                                        
-                              <td>
-                                  <div class="d-flex ">                                    
-                                    <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
-                                    &nbsp;&nbsp;
-                                    <div class="ml-2">
-                                      <h6 class="font-bold">${invitation.fullname}</h6>
-                                      <p class="text-gray-600 text-ellipsis">${invitation.position}</p>
-                                    </div>
-                                  </div>
-                              </td>
-                              <td>
-                                <h6>${invitation.institution}</h6>
-                                <p>-</p>
-                              </td>
-                              <td>
-                                <div class="badge badge-opacity-${getStatusBadge(invitation.status || 'unconfirmed')}">
-                                    ${invitation.status || 'unconfirmed'}
-                                </div>
-                              </td>
-                              <td>${getInvitationStatus(invitation.type)}</td>
-                            </tr>`;
+                      <tr data-bs-toggle="modal" data-bs-target="#guestsModal" data-guest-id="${guest.id}" data-guest-image="${getTitle(guest.title)}" data-guest-fullname="${guest.fullname}" data-guest-position="${guest.position}" data-guest-company="${guest.institution}" data-guest-status="${getInvitationStatus(guest.status)}" data-guest-invitation-name="${guest.attendee_name}" data-info="Some additional info">                                                                   
+                        <td>
+                            <div class="d-flex ">                                    
+                              <img src="${getTitle(guest.title)}" alt="" loading="lazy">
+                              &nbsp;&nbsp;
+                              <div class="ml-2">
+                                <h6 class="font-bold">${guest.fullname}</h6>
+                                <p class="text-gray-600 text-ellipsis">${guest.position}</p>
+                              </div>
+                            </div>
+                        </td>
+                        <td>
+                          <h6>${guest.institution}</h6>
+                          <p>-</p>
+                        </td>
+                        <td>
+                          <div class="badge badge-opacity-${getStatusBadge(guest.status || 'unconfirmed')}">
+                              ${guest.status || 'unconfirmed'}
+                          </div>
+                        </td>
+                        <td>${guest.attendee_name}</td>
+                      </tr>`;
             tbody.append(tableRow);
+          });
+
+          // Add event listeners to rows for modal handling
+          document.querySelectorAll('tr[data-bs-toggle="modal"]').forEach(row => {
+            row.addEventListener('click', function() {
+              const guestId = row.getAttribute('data-guest-id');
+              const imageSrc = row.getAttribute('data-guest-image');
+              const fullname = row.getAttribute('data-guest-fullname');
+              const position = row.getAttribute('data-guest-position');
+              const company = row.getAttribute('data-guest-company');
+              const status = row.getAttribute('data-guest-status');
+              const info = row.getAttribute('data-info');
+              const attendee_name = row.getAttribute('data-guest-invitation-name');
+
+              // Update the modal content                            
+              document.querySelector('#guestsModal #guests-invitation-id').value = guestId;
+              document.querySelector('#guestsModal #guests-image').src = imageSrc;
+              document.querySelector('#guestsModal #guest-fullname').textContent = fullname;
+              document.querySelector('#guestsModal #guest-position').value = position; // You may need to add this span in the modal
+              document.querySelector('#guestsModal #guest-company').value = company;
+              document.querySelector('#guestsModal #invitation-guest-fullname').textContent = attendee_name;
+              document.querySelector('#guestsModal #invitation-guest-image').src = imageSrc;
+              document.querySelector('#guestsModal #invitation-guest-institution').textContent = company;
+              document.querySelector('#guestsModal #guests-status-button').textContent = status;
+
+              if (status === 'check-in') {
+                document.querySelector('#guestsModal #guest-checkInBtn').disabled = true;
+              } else {
+                document.querySelector('#guestsModal #guest-checkInBtn').disabled = false;
+              }
+            });
           });
 
           // Generate Tailwind CSS-based pagination controls
@@ -1764,13 +1972,182 @@
 
           $('#guests-invitations-prev-btn').on('click', function() {
             if (currentPage > 1) {
-              fetchInvitationGuests(currentPage - 1);
+              searchGuests(query, currentPage - 1);
             }
           });
 
           $('#guests-invitations-next-btn').on('click', function() {
             if (currentPage < totalPages) {
-              fetchInvitationGuests(currentPage + 1);
+              searchGuests(query, currentPage + 1);
+            }
+          });
+
+          const guestsCheckIn = document.querySelector('#guestsModal #guests-checkInBtn');
+          guestsCheckIn.addEventListener('click', function() {
+            const guestID = document.querySelector('#guestsModal #guests-invitation-id');
+            GuestCheckIn(guestID.value);
+
+            if (currentPage < totalPages) {
+              if (query !== null) {
+                searchGuests(query, currentPage + 1);
+              } else {
+                fetchInvitationGuests(currentPage + 1);
+              }
+            }
+
+            if (currentPage > 1) {
+              if (query !== null) {
+                searchGuests(query, currentPage - 1);
+              } else {
+                fetchInvitationGuests(currentPage - 1);
+              }
+            } else {
+              fetchInvitationGuests(currentPage);
+            }
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error('Failed to search invitations:', error);
+        }
+      });
+    };
+
+
+    const searchDelegations = (query, page = 1) => {
+      const perPage = 20; // Items per page
+      var invitations_type;
+
+      $.ajax({
+        // url: 'http://localhost:8080/backstage/api/invitations/delegations-search', // Replace with your API endpoint
+        url: 'https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/delegations-search', // Replace with your API endpoint
+        method: 'GET',
+        data: {
+          query,
+          page,
+          perPage
+        }, // Pass pagination parameters
+        dataType: 'json',
+        success: function(response) {
+          const tbody = $('#delegations-invitations-table tbody');
+          const pagination = $('#pagination-delegations');
+          tbody.empty(); // Clear existing rows
+          pagination.empty(); // Clear pagination controls
+
+          // Populate table rows
+          response.data.forEach(delegation => {
+            const tableRow = `
+                            <tr data-bs-toggle="modal" data-bs-target="#delegationsModal" data-delegation-id="${delegation.id}" data-delegation-image="${getTitle(delegation.title)}" data-delegation-fullname="${delegation.fullname}" data-delegation-position="${delegation.position}" data-delegation-company="${delegation.institution}" data-delegation-status="${getInvitationStatus(delegation.status)}" data-delegation-invitation-name="${delegation.attendee_name}" data-info="Some additional info">                                                                                                          
+                              <td>
+                                  <div class="d-flex ">                                    
+                                    <img src="${getTitle(delegation.title)}" alt="" loading="lazy">
+                                    &nbsp;&nbsp;
+                                    <div class="ml-2">
+                                      <h6 class="font-bold">${delegation.fullname}</h6>
+                                      <p class="text-gray-600 text-ellipsis">${delegation.position}</p>
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <h6>${delegation.institution}</h6>
+                                <p>-</p>
+                              </td>
+                              <td>
+                                <div class="badge badge-opacity-${getStatusBadge(delegation.status || 'unconfirmed')}">
+                                    ${delegation.status || 'unconfirmed'}
+                                </div>
+                              </td>
+                              <td>${delegation.attendee_name}</td>
+                            </tr>`;
+            tbody.append(tableRow);
+          });
+
+          // Add event listeners to rows for modal handling
+          document.querySelectorAll('tr[data-bs-toggle="modal"]').forEach(row => {
+            row.addEventListener('click', function() {
+              const delegationId = row.getAttribute('data-delegation-id');
+              const imageSrc = row.getAttribute('data-delegation-image');
+              const fullname = row.getAttribute('data-delegation-fullname');
+              const position = row.getAttribute('data-delegation-position');
+              const company = row.getAttribute('data-delegation-company');
+              const status = row.getAttribute('data-delegation-status');
+              const info = row.getAttribute('data-info');
+              const attendee_name = row.getAttribute('data-delegation-invitation-name');
+
+              // Update the modal content                            
+              document.querySelector('#delegationsModal #delegation-invitation-id').value = delegationId;
+              document.querySelector('#delegationsModal #delegations-image').src = imageSrc;
+              document.querySelector('#delegationsModal #delegation-fullname').textContent = fullname;
+              document.querySelector('#delegationsModal #delegation-position').value = position; // You may need to add this span in the modal
+              document.querySelector('#delegationsModal #delegation-company').value = company;
+              document.querySelector('#delegationsModal #invitation-delegation-fullname').textContent = attendee_name;
+              document.querySelector('#delegationsModal #invitation-delegation-image').src = imageSrc;
+              document.querySelector('#delegationsModal #invitation-delegation-institution').textContent = company;
+              document.querySelector('#delegationsModal #delegation-status-button').textContent = status;
+
+              if (status === 'check-in') {
+                document.querySelector('#delegationsModal #delegation-checkInBtn').disabled = true;
+              } else {
+                document.querySelector('#delegationsModal #delegation-checkInBtn').disabled = false;
+              }
+            });
+          });    
+
+          // Generate Tailwind CSS-based pagination controls
+          const {
+            currentPage,
+            totalPages,
+            totalItems,
+            perPage
+          } = response.pagination;
+          const startItem = (currentPage - 1) * perPage + 1;
+          const endItem = Math.min(currentPage * perPage, totalItems);
+
+          // Generate pagination controls
+          pagination.append(`
+                <div class="mt-auto d-flex flex-column align-items-center">
+                  <span class="text-muted small"> Showing <span class="fw-semibold">${startItem}</span> to 
+                  <span class="fw-semibold">${endItem}</span> of 
+                  <span class="fw-semibold">${totalItems}</span> Entries </span>
+                  <div class="btn-group mt-2">
+                    <button class="btn btn-dark btn-sm ${currentPage === 1 ? 'disabled' : ''}" ${currentPage == 1 ? 'disabled' : ''} id="delegations-invitations-prev-btn">Prev</button>
+                    <button class="btn btn-dark btn-sm ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage == totalPages ? 'disabled' : ''} id="delegations-invitations-next-btn">Next</button>
+                  </div>
+                </div>
+            `);
+
+          $('#delegations-invitations-prev-btn').on('click', function() {
+            if (currentPage > 1) {
+              searchDelegations(query, currentPage - 1);
+            }
+          });
+
+          $('#delegations-invitations-next-btn').on('click', function() {
+            if (currentPage < totalPages) {
+              searchDelegations(query, currentPage + 1);
+            }
+          });
+
+          const delegationCheckIn = document.querySelector('#delegationsModal #delegation-checkInBtn');
+          delegationCheckIn.addEventListener('click', function() {
+            const delegationID = document.querySelector('#delegationsModal #delegation-invitation-id');
+            DelegationCheckIn(delegationID.value);
+
+            if (currentPage < totalPages) {
+              if (query !== null) {
+                searchDelegations(query, currentPage + 1);
+              } else {
+                fetchInvitationDelegation(currentPage + 1);
+              }
+            }
+
+            if (currentPage > 1) {
+              if (query !== null) {
+                searchDelegations(query, currentPage - 1);
+              } else {
+                fetchInvitationDelegation(currentPage - 1);
+              }
+            } else {
+              fetchInvitationDelegation(currentPage);
             }
           });
         },
@@ -1795,21 +2172,110 @@
       });
     }
 
+    if ($("#doughnutChart").length) {
+      var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+      var doughnutPieData = {
+        datasets: [{
+          data: [566, 20, 30],
+          backgroundColor: [
+            "#1F3BB3",
+            "#FDD0C7",
+            "#52CDFF",
+          ],
+          borderColor: [
+            "#1F3BB3",
+            "#FDD0C7",
+            "#52CDFF"
+          ],
+        }],
 
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+          'Total',
+          'Check-In',
+          'Confirmed',
+        ]
+      };
+      var doughnutPieOptions = {
+        cutoutPercentage: 50,
+        animationEasing: "easeOutBounce",
+        animateRotate: true,
+        animateScale: false,
+        responsive: true,
+        maintainAspectRatio: true,
+        showScale: true,
+        legend: false,
+        legendCallback: function(chart) {
+          var text = [];
+          text.push('<div class="chartjs-legend"><ul class="justify-content-center">');
+          for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
+            text.push('<li><span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">');
+            text.push('</span>');
+            if (chart.data.labels[i]) {
+              text.push(chart.data.labels[i]);
+            }
+            text.push('</li>');
+          }
+          text.push('</div></ul>');
+          return text.join("");
+        },
 
+        layout: {
+          padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+          }
+        },
+        tooltips: {
+          callbacks: {
+            title: function(tooltipItem, data) {
+              return data['labels'][tooltipItem[0]['index']];
+            },
+            label: function(tooltipItem, data) {
+              return data['datasets'][0]['data'][tooltipItem['index']];
+            }
+          },
 
-    // $(document).on('click', '#registerAndCheckInButton', function() {
-    //   console.log('register and check-in button clicked');
-    //   const fullname = $('#checkin-manual-fullname').val().trim();
-    //   const position = $('#checkin-manual-position').val().trim();
-    //   const company = $('#checkin-manual-institution').val().trim();
+          backgroundColor: '#fff',
+          titleFontSize: 14,
+          titleFontColor: '#0B0F32',
+          bodyFontColor: '#737F8B',
+          bodyFontSize: 11,
+          displayColors: false
+        }
+      };
+      var doughnutChart = new Chart(doughnutChartCanvas, {
+        type: 'doughnut',
+        data: doughnutPieData,
+        options: doughnutPieOptions
+      });
+      document.getElementById('doughnut-chart-legend').innerHTML = doughnutChart.generateLegend();
 
-    //   if (fullname === null || position === null || company === null) {
-    //     alert('Please fill in all fields');
-    //   } else {
-    //     RegisterAndCheckIn(fullname, position, company);
-    //   }
-    // });
+      // Function to fetch data and update the chart
+      function updateDoughnutChart() {        
+        fetch('https://brimicrofinanceoutlook.id/bri-microfinance-2025/backstage/api/invitations/eventChart') // Replace with your API endpoint
+        // fetch('http://localhost:8080/backstage/api/invitations/eventChart') // Replace with your API endpoint
+          .then(response => response.json())
+          .then(data => {
+            // Assuming the API returns an object with `data` and `labels` arrays
+            doughnutChart.data.datasets[0].data = data.values; // Update data
+            doughnutChart.data.labels = data.labels; // Update labels
+
+            doughnutChart.update(); // Update the chart to reflect changes
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+      }
+
+      // Call fetchAndUpdateChart every 5 seconds
+      setInterval(updateDoughnutChart, 10000);
+
+      // Call the update function when needed
+      updateDoughnutChart();
+    }
 
     const getTitle = (title) => {
       switch (title) {
@@ -1827,7 +2293,7 @@
       }
 
       return title;
-    }
+    };
 
     // Helper function to determine badge style
     const getStatusBadge = (status) => {
@@ -1904,7 +2370,7 @@
 
       // Add search functionality
       $(document).on('click', '#guests-search-button', function() {
-        console.log('search button clicked');
+        console.log('guest search button clicked');
         const query = $('#guests-search-input').val().trim();
         if (query !== '') {
           searchGuests(query);
@@ -1913,15 +2379,15 @@
         }
       });
 
-      // $(document).on('click', '#delegations-search-button', function() {
-      //   console.log('search button clicked');
-      //   const query = $('#guests-search-input').val().trim();
-      //   if (query !== '') {
-      //     searchDelegations(query);
-      //   } else {
-      //     fetchInvitationDelegation();
-      //   }
-      // });
+      $(document).on('click', '#delegations-search-button', function() {
+        console.log('delegation search button clicked');
+        const query = $('#delegations-search-input').val().trim();
+        if (query !== '') {
+          searchDelegations(query);
+        } else {
+          fetchInvitationDelegation();
+        }
+      });
 
       $(document).on('click', '#resetManualCheckInButton', function() {
         console.log('reset register and check-in button clicked');
@@ -1929,6 +2395,10 @@
         $('#checkin-manual-position').val('');
         $('#checkin-manual-institution').val('');
       });
+
+      // $(document).on('shown.bs.modal', '#guestsModal', function() {
+      //   populateGuestInvitationTable();
+      // });
     });
   </script>
 </body>

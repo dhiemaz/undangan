@@ -34,3 +34,7 @@ $routes->get('/backstage/api/invitations/search', 'BackstageController::searchIn
 $routes->get('/backstage/api/invitations/guests-search', 'BackstageController::searchGuests');
 $routes->post('/backstage/api/invitations/checkIn', 'BackstageController::invitationCheckIn');
 $routes->post('/backstage/api/invitations/registrationAndCheckIn', 'BackstageController::invitationRegistrationAndCheckIn');
+$routes->get('/backstage/api/invitations/eventChart', 'BackstageController::getEventChart');
+$routes->post('/backstage/api/invitations/guestCheckIn', 'BackstageController::guestCheckIn');
+$routes->get('/backstage/api/invitations/delegations-search', 'BackstageController::searchDelegations');
+$routes->post('/backstage/api/invitations/delegationCheckIn', 'BackstageController::delegationCheckIn');

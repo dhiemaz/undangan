@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 class GuestModel extends Model {
     protected $table = 'guests';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['id', 'attendee_id', 'fullname', 'position'];
+    protected $allowedFields = ['id', 'attendee_id', 'fullname', 'position', 'status'];
     protected $useTimestamps = false;
 
     public function getGuestById($id)

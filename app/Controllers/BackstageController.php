@@ -309,7 +309,7 @@ class BackStageController extends BaseController
     $updatedInvitations = $attendeeModel
         ->select('title, fullname, position, institution, status, type')
         ->where('status IS NOT NULL', null, false)
-        ->orderBy('updated_at', 'ASC')
+        ->orderBy('updated_at', 'DESC')
         ->paginate($perPage, 'default', $page);
 
     // Calculate total records for pagination

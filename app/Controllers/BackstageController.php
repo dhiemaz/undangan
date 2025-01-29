@@ -424,7 +424,7 @@ class BackStageController extends BaseController
             $attendeeModel->update($id ,['status' => $status,'updated_at' => $updatedAt]);
         
             // update google sheet
-            $this->updateGoogleSheetAttendee($attendee, $status);            
+            $this->updateGoogleSheetAttendee($id,$attendee, $status);            
             return $this->response
                 ->setStatusCode(200) // OK
                 ->setJSON([
@@ -691,7 +691,7 @@ class BackStageController extends BaseController
         ]);
     }
 
-    private function updateGoogleSheetAttendee($attendee, $status)
+    private function updateGoogleSheetAttendee(int $id, $attendee, $status)
     {
         log_message('info', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $attendee["id"], 'fullname' => $attendee["fullname"], 'status' => $status]), ['id' => $attendee["id"], 'fullname' => $attendee["fullname"], 'status'=> $status]);
         try {
@@ -715,7 +715,7 @@ class BackStageController extends BaseController
             // Find the row with matching "Nama" and update Column M
             $updated = false;
             foreach ($values as $rowIndex => $row) {
-                if (isset($row[0]) && $row[0] === (int)($attendee["id"])) { // Column A = Index 0 (ID)
+                if (isset($row[0]) && $row[0] === $id) { // Column A = Index 0 (ID)
                     $updateRange = "$sheetName!F" . ($rowIndex + 1); // Column F (RSVP Status)
     
                     $updateValues = [[$status]]; // New value

@@ -642,9 +642,13 @@ class BackStageController extends BaseController
         $data = $requestData['data'];
         log_message('info', 'BackstageController::getAttendee' . ' - ' . json_encode(['data' => $data]));
 
-        $parts = explode("/", $data);        
-        $rawToken = $parts[0]; // Get the first part
-
+        $parts = explode("/", $data);    
+        if (isset($parts[0]) && strlen($parts[0]) > 2) {
+            $rawToken = $parts[0]; 
+        } else {
+            $rawToken = $parts[1]; 
+        }
+            
         // Remove leading "/" and replace "+" with " "
         $token = str_replace("+", " ", ltrim($rawToken, "/"));
 

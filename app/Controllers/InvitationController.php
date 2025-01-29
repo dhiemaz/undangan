@@ -1,6 +1,12 @@
 <?php
 namespace App\Controllers;
 
+require __DIR__ . '/vendor/autoload.php'; // Load Google API Client
+
+use Google\Client;
+use Google\Service\Sheets;
+use Google\Service\Sheets\ValueRange;
+
 use  App\Models\AttendeeModel;
 use App\Models\DelegateModel;
 use App\Models\GuestModel;
@@ -162,6 +168,8 @@ class InvitationController extends BaseController
                         'updated_at' => $updatedAt,
                     ]);
 
+                    $this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
+
                     log_message(
                     'info', 
                 'InvitationController::confirm - '. $attendee['fullname'] . ' status successfully updated.' . ' - status = ' . $status . ' - updated_at = ' . $updatedAt
@@ -228,6 +236,8 @@ class InvitationController extends BaseController
                         'updated_at' => $updatedAt,
                     ]);
 
+                    $this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
+
                     log_message(
                         'info', 
                         'InvitationController::confirm - '. $attendee['fullname'] . ' status successfully updated.' . ' - status = ' . $status . ' - updated_at = ' . $updatedAt
@@ -275,6 +285,8 @@ class InvitationController extends BaseController
                     'status'=> $status,
                     'updated_at' => $updatedAt,
                 ]);
+
+                $this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
     
                 log_message(
             'info', 
@@ -315,5 +327,75 @@ class InvitationController extends BaseController
                 return $this->response->setJSON($response); 
             }
         }
-    }    
+    }   
+
+    private function updateGoogleSheetAttendee($id, $name, $status)
+    {
+        // Google Sheets Setup
+        $client = getClient();
+        $service = new Sheets($client);
+        $spreadsheetId = "1cy0DIQFvGdgwBUWIAh4k0cSxhiRxOa7Xi3wJFzTKWAM"; // Replace with your actual Sheet ID
+        $sheetName = "Attendees"; // Replace with your actual Sheet Name
+
+        // Fetch Data from Google Sheet
+        $range = "$sheetName!A:G"; // Get all columns (A to M)
+        $response = $service->spreadsheets_values->get($spreadsheetId, $range);
+        $values = $response->getValues(); // Convert response to array
+
+        // Name to find and new Kehadiran status
+        // $namaToFind = "Yulianto Setiawan"; // Name to search in Column D (Index 3)
+        // $newStatus = "TRUE"; // Update Kehadiran to TRUE in Column M (Index 12)
+
+        log_message('info', 'InvitationController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
+
+        // Check if data exists
+        if (empty($values)) {
+            log_message('error', 'InvitationController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "No data found in the Google Sheet"]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
+            return false;
+        }
+
+        // Find the row with matching "Nama" and update Column M
+        $updated = false;
+        foreach ($values as $rowIndex => $row) {
+            if (isset($row[2]) && $row[2] === $name) { // Column D = Index 3
+                $updateRange = "$sheetName!F" . ($rowIndex + 1); // Column M, 1-based index
+                $updateValues = [[$status]]; // New value
+
+                // Prepare update request
+                $body = new ValueRange([
+                    'values' => $updateValues
+                ]);
+
+                $params = ['valueInputOption' => 'USER_ENTERED'];
+
+                // Execute update
+                $service->spreadsheets_values->update(
+                    $spreadsheetId,
+                    $updateRange,
+                    $body,
+                    $params
+                );                                
+                $updated = true;
+
+                log_message('info', 'InvitationController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "Updated row " . ($rowIndex + 1) . " in column M with " . $status. ""]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
+                return true;                
+            }
+        }
+
+        // If no match found
+        if (!$updated) {
+            log_message('error', 'InvitationController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "No match found for '$name'"]), ['id' => $id, 'fullname' => $name, 'status'=> $status]);
+            return false;
+        }
+    }
+
+    private function getClient()
+    {
+        $client = new Client();
+        $client->setApplicationName('BRI Microfinance 2025 Google Sheet API');
+        $client->setScopes([Sheets::SPREADSHEETS]);
+        $client->setAuthConfig('../pikobar-dev-4580b-46ee917f71ef.json'); // Your Google API credentials
+        $client->setAccessType('offline');
+        return $client;
+    }
 }

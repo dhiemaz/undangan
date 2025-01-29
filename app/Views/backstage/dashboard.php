@@ -770,12 +770,6 @@
         success: function(response) {
           console.log(response);
 
-          if (response.data.type === null) {
-            invitations_type = "biasa bri";
-          } else {
-            invitations_type = response.data.type.toLowerCase();
-          }
-
           document.getElementById('user-image').src = getTitle(response.data.title);
           document.getElementById("checkin-invitation-id").value = response.data.id;
           document.getElementById("checkin-fullname").value = response.data.fullname;
@@ -821,6 +815,12 @@
 
           let starCount = 0;
 
+          if (response.data.type) {
+            invitations_type = response.data.type.toLowerCase();
+          } else {
+            starCount = 1;
+          }
+
           if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
             starCount = 5; // 5 stars for VVIP
           } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
@@ -829,8 +829,6 @@
             starCount = 3; // 3 stars for biasa bri
           } else if (invitations_type === 'biasa') {
             starCount = 2; // 2 stars for biasa
-          } else {
-            starCount = 1;
           }
 
           for (let i = 0; i < starCount; i++) {
@@ -843,11 +841,7 @@
           resetButton.addEventListener("click", resetQRCheckIn);
         },
         error: function(xhr, status, error) {
-          if (status === 404) {
-            alert('Invitation not found');
-          } else {
-            console.error('Failed to fetch invitation detail:', error);
-          }
+          alert('Invitation not found');
         }
       });
     }
@@ -1230,10 +1224,10 @@
           response.data.forEach(invitation => {
             let starCount = 0;
 
-            if (invitation.type === null) {
-              invitations_type = "biasa bri"
-            } else {
+            if (invitation.type) {
               invitations_type = invitation.type.toLowerCase();
+            } else {
+              starCount = 1;
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1244,8 +1238,6 @@
               starCount = 3; // 4 stars for VIP
             } else if (invitations_type === 'biasa') {
               starCount = 2;
-            } else {
-              starCount = 1;
             }
 
             // Generate star icons as a string
@@ -1255,7 +1247,7 @@
             }
 
             const tableRow = `                            
-                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-info="Some additional info">                                        
+                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-type=${invitation.type} data-info="Some additional info">                                        
                               <td>
                                   <div class="d-flex ">                                    
                                     <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
@@ -1293,6 +1285,7 @@
               const position = row.getAttribute('data-position');
               const company = row.getAttribute('data-company');
               const status = row.getAttribute('data-status');
+              const dataType = row.getAttribute('data-type');
               const info = row.getAttribute('data-info');
 
               // Update the modal content                            
@@ -1301,8 +1294,7 @@
               document.querySelector('#invitationModal #modal-fullname').textContent = fullname;
               document.querySelector('#invitationModal #invitations-position').value = position; // You may need to add this span in the modal
               document.querySelector('#invitationModal #invitations-company').value = company;
-              document.querySelector('#invitationModal #invitations-status-button').textContent = status;
-              // document.querySelector('#invitationModal #invitations-type').value = invitations_type;              
+              document.querySelector('#invitationModal #invitations-status-button').textContent = status;                          
 
               if (status === 'check-in') {
                 document.querySelector('#invitationModal #invitations-checkInBtn').disabled = true;
@@ -1318,7 +1310,11 @@
               }
 
               let starCount = 0;
-              invitations_type = invitations_type.toLowerCase();
+              if (dataType) {
+                invitations_type = dataType.toLowerCase();
+              } else {
+                starCount = 1;
+              }
 
               if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
                 starCount = 5; // 5 stars for VVIP
@@ -1328,8 +1324,6 @@
                 starCount = 3; // 4 stars for VIP
               } else if (invitations_type === 'biasa') {
                 starCount = 2;
-              } else {
-                starCount = 1;
               }
 
               for (let i = 0; i < starCount; i++) {
@@ -1715,10 +1709,10 @@
           response.data.forEach(invitation => {
             let starCount = 0;
 
-            if (invitation.type === null) {
-              invitations_type = "biasa bri"
-            } else {
+            if (invitation.type) {
               invitations_type = invitation.type.toLowerCase();
+            } else {
+              starCount = 1;
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1726,11 +1720,9 @@
             } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
               starCount = 4; // 4 stars for VIP
             } else if (invitations_type === 'biasa bri') {
-              starCount = 3; // 4 stars for VIP
+              starCount = 3; // 3 stars for biasa bri
             } else if (invitations_type === 'biasa') {
-              starCount = 2;
-            } else {
-              starCount = 1;
+              starCount = 2; // 2 stars for biasa
             }
 
             // Generate star icons as a string
@@ -1740,7 +1732,7 @@
             }
 
             const tableRow = `  
-                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-info="Some additional info">                                                                                       
+                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-type="${invitation.type}" data-info="Some additional info">                                                                                       
                               <td>
                                   <div class="d-flex ">                                    
                                     <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
@@ -1778,6 +1770,7 @@
               const position = row.getAttribute('data-position');
               const company = row.getAttribute('data-company');
               const status = row.getAttribute('data-status');
+              const dataType = row.getAttribute('data-type');
               const info = row.getAttribute('data-info');
 
               // Update the modal content                            
@@ -1803,7 +1796,11 @@
               }
 
               let starCount = 0;
-              invitations_type = invitations_type.toLowerCase();
+              if (dataType) {
+                invitations_type = dataType.toLowerCase();
+              } else {
+                starCount = 1;
+              }
 
               if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
                 starCount = 5; // 5 stars for VVIP
@@ -1813,8 +1810,6 @@
                 starCount = 3; // 4 stars for VIP
               } else if (invitations_type === 'biasa') {
                 starCount = 2;
-              } else {
-                starCount = 1;
               }
 
               for (let i = 0; i < starCount; i++) {
@@ -1881,7 +1876,6 @@
               } else {
                 fetchAllInvitations(currentPage + 1);
               }
-
             }
 
             if (currentPage > 1) {

@@ -643,8 +643,10 @@
       console.log(pathSegments)
       const token = pathSegments[3];
 
-      console.log("Decoded result:", token);
-      getInvitationDetail(token);
+      let clearToken = token.replace(/\+/g, " ");
+
+      console.log("Decoded result:", clearToken);
+      getInvitationDetail(clearToken);
 
       // Optionally stop scanning after successful detection 
       stopScanning();
@@ -799,8 +801,6 @@
           } else {
             checkInButton.disabled = false;
           }
-
-          
 
           const vipStarsElement = document.getElementById('invitation-type');
           if (vipStarsElement) {

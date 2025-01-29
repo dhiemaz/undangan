@@ -698,18 +698,14 @@ class BackStageController extends BaseController
             // Google Sheets Setup        
             $client = $this->getClient();
             $service = new Sheets($client);
-            $spreadsheetId = "1cy0DIQFvGdgwBUWIAh4k0cSxhiRxOa7Xi3wJFzTKWAM"; // Replace with your actual Sheet ID
+            $spreadsheetId = "1yrYbzNa6bzlDp6gsr6YGFfrwz3vU5E4oVci96M-BpR0"; // Replace with your actual Sheet ID
             $sheetName = "Attendees"; // Replace with your actual Sheet Name
 
             // Fetch Data from Google Sheet
             $range = "$sheetName!A:G"; // Get all columns (A to M)
             $response = $service->spreadsheets_values->get($spreadsheetId, $range);
             $values = $response->getValues(); // Convert response to array
-
-            // Name to find and new Kehadiran status
-            // $namaToFind = "Yulianto Setiawan"; // Name to search in Column D (Index 3)
-            // $newStatus = "TRUE"; // Update Kehadiran to TRUE in Column M (Index 12)        
-
+                        
             // Check if data exists
             if (empty($values)) {
                 log_message('error', 'BackstageController::updateGoogleSheetAttendee' . ' - ' . json_encode(['id' => $id, 'fullname' => $name, 'status' => $status, 'result' => "No data found in the Google Sheet"]), ['id' => $id, 'fullname' => $name, 'status' => $status]);

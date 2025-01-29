@@ -422,7 +422,7 @@ class BackStageController extends BaseController
             $attendeeModel->update($id ,['status' => $status,'updated_at' => $updatedAt]);
         
             // update google sheet
-            //$this->updateGoogleSheetAttendee($id, $invitation->fullname, $status);            
+            $this->updateGoogleSheetAttendee($id, $invitation->fullname, $status);            
             return $this->response
                 ->setStatusCode(200) // OK
                 ->setJSON([

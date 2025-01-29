@@ -420,11 +420,9 @@ class BackStageController extends BaseController
         try {
             $updatedAt = Time::now('Asia/Jakarta', 'en_US');
             $attendeeModel->update($id ,['status' => $status,'updated_at' => $updatedAt]);
-            // Update the status
-            // $attendeeModel->update($id, ['status' => $status]);
-
+        
             // update google sheet
-            $this->updateGoogleSheetAttendee($id, $invitation->fullname, $status);            
+            //$this->updateGoogleSheetAttendee($id, $invitation->fullname, $status);            
             return $this->response
                 ->setStatusCode(200) // OK
                 ->setJSON([

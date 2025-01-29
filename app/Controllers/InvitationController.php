@@ -168,7 +168,7 @@ class InvitationController extends BaseController
                         'updated_at' => $updatedAt,
                     ]);
 
-                    $this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
+                    //$this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
 
                     log_message(
                     'info', 
@@ -236,7 +236,7 @@ class InvitationController extends BaseController
                         'updated_at' => $updatedAt,
                     ]);
 
-                    $this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
+                    //$this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
 
                     log_message(
                         'info', 
@@ -286,7 +286,7 @@ class InvitationController extends BaseController
                     'updated_at' => $updatedAt,
                 ]);
 
-                $this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
+                //$this->updateGoogleSheetAttendee($attendee['id'], $attendee['fullname'], $status);            
     
                 log_message(
             'info', 

@@ -627,8 +627,7 @@ class BackStageController extends BaseController
         // Decode the JSON payload
         $jsonPayload = $this->request->getBody(); // Get raw input stream
         $requestData = json_decode($jsonPayload, true); // Decode JSON to an associative array
-
-        log_message('info', 'BackstageController::show attendee by invitationID', $requestData);
+        log_message('info', 'BackstageController::getAttendee' . ' - ' . json_encode(['request' => $requestData]));
 
         // Validate input
         if (!isset($requestData['data'])) {
@@ -652,9 +651,9 @@ class BackStageController extends BaseController
         $model = new AttendeeModel();
         //$decodedInvitationID = urldecode($encodedInvitationID);
         $attendee = $model->getAttendee($token);
-        log_message('info', 'InvitationController::getAttendee' . ' - ' . json_encode(['token' => $token, 'attendee' => $attendee]), ['$token' => $token, 'attendee' => $attendee]);
+        log_message('info', 'BackstageController::getAttendee' . ' - ' . json_encode(['token' => $token, 'attendee' => $attendee]), ['$token' => $token, 'attendee' => $attendee]);
         if ($attendee == null) {
-            log_message('error', 'InvitationController::show - attendee not found.', ['token' => $token]);
+            log_message('error', 'BackstageController::show - attendee not found.', ['token' => $token]);
 
             return $this->response->setStatusCode(404)->setJSON([
                 'data' => null,

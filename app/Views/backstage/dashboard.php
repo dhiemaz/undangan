@@ -815,10 +815,10 @@
 
           let starCount = 0;
 
-          if (response.data.type) {
+          if (response.data.type !== null) {
             invitations_type = response.data.type.toLowerCase();
           } else {
-            starCount = 1;
+            invitations_type = 'no-stars';            
           }
 
           if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -829,6 +829,8 @@
             starCount = 3; // 3 stars for biasa bri
           } else if (invitations_type === 'biasa') {
             starCount = 2; // 2 stars for biasa
+          } else {
+            starCount = 1;
           }
 
           for (let i = 0; i < starCount; i++) {
@@ -1224,10 +1226,10 @@
           response.data.forEach(invitation => {
             let starCount = 0;
 
-            if (invitation.type) {
+            if (invitation.type !== null) {
               invitations_type = invitation.type.toLowerCase();
             } else {
-              starCount = 1;
+              invitations_type = 'no-stars';              
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1238,6 +1240,8 @@
               starCount = 3; // 4 stars for VIP
             } else if (invitations_type === 'biasa') {
               starCount = 2;
+            } else {
+              starCount = 1;
             }
 
             // Generate star icons as a string
@@ -1247,7 +1251,7 @@
             }
 
             const tableRow = `                            
-                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-type=${invitation.type} data-info="Some additional info">                                        
+                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-type=${invitations_type} data-info="Some additional info">                                        
                               <td>
                                   <div class="d-flex ">                                    
                                     <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
@@ -1310,11 +1314,7 @@
               }
 
               let starCount = 0;
-              if (dataType) {
-                invitations_type = dataType.toLowerCase();
-              } else {
-                starCount = 1;
-              }
+              const invitations_type = dataType.toLowerCase();
 
               if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
                 starCount = 5; // 5 stars for VVIP
@@ -1324,6 +1324,8 @@
                 starCount = 3; // 4 stars for VIP
               } else if (invitations_type === 'biasa') {
                 starCount = 2;
+              } else {
+                starCount = 1;
               }
 
               for (let i = 0; i < starCount; i++) {
@@ -1709,10 +1711,10 @@
           response.data.forEach(invitation => {
             let starCount = 0;
 
-            if (invitation.type) {
+            if (invitation.type !== null) {
               invitations_type = invitation.type.toLowerCase();
             } else {
-              starCount = 1;
+              invitations_type = 'no-stars';
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1723,6 +1725,8 @@
               starCount = 3; // 3 stars for biasa bri
             } else if (invitations_type === 'biasa') {
               starCount = 2; // 2 stars for biasa
+            } else {
+              starCount = 1;
             }
 
             // Generate star icons as a string
@@ -1732,7 +1736,7 @@
             }
 
             const tableRow = `  
-                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-type="${invitation.type}" data-info="Some additional info">                                                                                       
+                            <tr data-bs-toggle="modal" data-bs-target="#invitationModal" data-invitation-id="${invitation.id}" data-image="${getTitle(invitation.title)}" data-fullname="${invitation.fullname}" data-position="${invitation.position}" data-company="${invitation.institution}" data-status="${getInvitationStatus(invitation.status)}" data-type="${invitations_type}" data-info="Some additional info">                                                                                       
                               <td>
                                   <div class="d-flex ">                                    
                                     <img src="${getTitle(invitation.title)}" alt="" loading="lazy">
@@ -1796,11 +1800,7 @@
               }
 
               let starCount = 0;
-              if (dataType) {
-                invitations_type = dataType.toLowerCase();
-              } else {
-                starCount = 1;
-              }
+              const invitations_type = dataType.toLowerCase();
 
               if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
                 starCount = 5; // 5 stars for VVIP

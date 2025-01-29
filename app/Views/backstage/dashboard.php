@@ -755,9 +755,9 @@
       let invitations_type = '';
 
 
-      const requestData = {          
-          data: token
-        };
+      const requestData = {
+        data: token
+      };
 
       console.log(requestData);
       $.ajax({
@@ -826,7 +826,11 @@
           } else if (invitations_type === 'vip bri' || invitations_type === 'vip a' || invitations_type === 'vip') {
             starCount = 4; // 4 stars for VIP
           } else if (invitations_type === 'biasa bri') {
-            starCount = 3; // 4 stars for VIP
+            starCount = 3; // 3 stars for biasa bri
+          } else if (invitations_type === 'biasa') {
+            starCount = 2; // 2 stars for biasa
+          } else {
+            starCount = 1;
           }
 
           for (let i = 0; i < starCount; i++) {
@@ -1229,7 +1233,7 @@
             if (invitation.type === null) {
               invitations_type = "biasa bri"
             } else {
-              invitations_type = invitation.type.toLowerCase();              
+              invitations_type = invitation.type.toLowerCase();
             }
 
             if (invitations_type === 'vvip bri' || invitations_type === 'vvip a' || invitations_type === 'vvip') {
@@ -1238,6 +1242,10 @@
               starCount = 4; // 4 stars for VIP
             } else if (invitations_type === 'biasa bri') {
               starCount = 3; // 4 stars for VIP
+            } else if (invitations_type === 'biasa') {
+              starCount = 2;
+            } else {
+              starCount = 1;
             }
 
             // Generate star icons as a string
@@ -1318,6 +1326,10 @@
                 starCount = 4; // 4 stars for VIP
               } else if (invitations_type === 'biasa bri') {
                 starCount = 3; // 4 stars for VIP
+              } else if (invitations_type === 'biasa') {
+                starCount = 2;
+              } else {
+                starCount = 1;
               }
 
               for (let i = 0; i < starCount; i++) {
@@ -1715,6 +1727,10 @@
               starCount = 4; // 4 stars for VIP
             } else if (invitations_type === 'biasa bri') {
               starCount = 3; // 4 stars for VIP
+            } else if (invitations_type === 'biasa') {
+              starCount = 2;
+            } else {
+              starCount = 1;
             }
 
             // Generate star icons as a string
@@ -1795,6 +1811,10 @@
                 starCount = 4; // 4 stars for VIP
               } else if (invitations_type === 'biasa bri') {
                 starCount = 3; // 4 stars for VIP
+              } else if (invitations_type === 'biasa') {
+                starCount = 2;
+              } else {
+                starCount = 1;
               }
 
               for (let i = 0; i < starCount; i++) {

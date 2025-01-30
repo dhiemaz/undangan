@@ -607,6 +607,9 @@ class BackStageController extends BaseController
             ]);
 
             if ($attendeeId) {
+                // Insert data into Google Sheets
+                $insertResult = $this->insertIntoGoogleSheet($attendeeId, $fullname, $position, $company, $status);
+
                 return $this->response
                     ->setStatusCode(201) // Created
                     ->setJSON([
@@ -619,6 +622,7 @@ class BackStageController extends BaseController
                             'company' => $company,
                             'status' => $status,
                         ],
+                        'google_sheet' => $insertResult
                     ]);
             } else {
                 return $this->response
@@ -753,6 +757,48 @@ class BackStageController extends BaseController
             throw $th;
         }        
     }
+
+/**
+ * Inserts attendee data into Google Sheets
+ */
+    function insertIntoGoogleSheet($id, $fullname, $position, $company, $status) {
+        try {
+            $client = $this->getClient();
+            $service = new Sheets($client);
+            $spreadsheetId = "1yrYbzNa6bzlDp6gsr6YGFfrwz3vU5E4oVci96M-BpR0"; // Replace with your actual Sheet ID
+            $sheetName = "Attendees"; // Replace with your ac
+
+            // Initialize Sheets Service
+            $service = new Sheets($client);
+            $range = "$sheetName"; // Sheet name
+
+            // Prepare new row data
+            $values = [[$id, 'Bapak', $fullname, $position, $company, $status]];
+
+            $body = new ValueRange([
+                'values' => $values
+            ]);
+
+            $params = [
+                'valueInputOption' => 'RAW',
+                'insertDataOption' => 'INSERT_ROWS'
+            ];
+
+            // Append data to Google Sheets
+            $service->spreadsheets_values->append(
+                $spreadsheetId,
+                $range,
+                $body,
+                $params
+            );
+
+            return "Inserted into Google Sheets";
+        } catch (\Exception $e) {
+            log_message('error', 'Google Sheets Error: ' . $e->getMessage());
+            return "Failed to insert into Google Sheets";
+        }
+    }
+
 
     private function getClient()
     {

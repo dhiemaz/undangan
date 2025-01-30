@@ -1011,8 +1011,9 @@
       if (fullname == '' || position == '' || company == '') {
         alert('Please fill in all fields');
       } else {
-        hashData = generateHash(fullname.concat(position, company));
-        const shortHash = hashData.substring(0, 12)
+        const timestamp = Date.now().toString(); // Get current timestamp as string
+        const hashData = generateHash(fullname.concat(position, company, timestamp)).replace(/[\/+]/g, ''); // Remove "/" and "+"
+        const shortHash = hashData.substring(0, 12);
         const requestData = {
           hash: shortHash,
           fullname: fullname,

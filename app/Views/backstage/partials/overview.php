@@ -116,13 +116,13 @@
             </div>
             <ul class="bullet-line-list" id="activity-list">
             </ul>
-            <div class="list align-items-center pt-3">
+            <!-- <div class="list align-items-center pt-3">
               <div class="wrapper w-100">
                 <p class="mb-0">
                   <a class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
                 </p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

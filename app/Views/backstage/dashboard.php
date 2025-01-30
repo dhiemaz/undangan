@@ -1046,7 +1046,7 @@
           },
           error: function(xhr, status, error) {
             console.error('Failed to process check-in:', error);
-            message = 'Failed to process registration & check-in. Please try again.';
+            alert('Failed to process registration & check-in. Please try again.');
           }
         });
       }
